@@ -8,7 +8,11 @@ class Pegawai extends Model
 {
     protected $table = 'pegawai';
     protected $fillable = [
-        'nama_pegawai', 'nip', 'id_jabatan', 'id_golongan', 'unit_kerja'
+        'nama_pegawai',
+        'nip',
+        'id_jabatan',
+        'id_golongan',
+        'unit_kerja'
     ];
 
     // Relasi ke Jabatan
@@ -41,4 +45,3 @@ class Pegawai extends Model
         return $this->hasMany(KnpPegawai::class, 'id_pegawai');
     }
 }
-
