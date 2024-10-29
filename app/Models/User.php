@@ -10,14 +10,20 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
+    use HasApiTokens, HasFactory, Notifiable;
     protected $table = 'user';
     protected $fillable = ['nip', 'password', 'role', 'foto'];
-
+    protected $primaryKey = 'id_user';
+    protected $keyType = 'int';
     // Relasi ke Pegawai
     public function pegawai()
     {
         return $this->belongsTo(Pegawai::class, 'nip', 'nip');
     }
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 }
 // {
 //     use HasApiTokens, HasFactory, Notifiable;
@@ -38,10 +44,7 @@ class User extends Authenticatable
 //      *
 //      * @var array<int, string>
 //      */
-//     protected $hidden = [
-//         'password',
-//         'remember_token',
-//     ];
+
 
 //     /**
 //      * The attributes that should be cast.

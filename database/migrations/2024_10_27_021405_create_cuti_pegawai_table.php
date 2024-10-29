@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('jenis_cuti', 255);
             $table->string('alasan_cuti', 255)->nullable();
             $table->string('lama_cuti', 255)->nullable();
+            $table->string('ket_lama_cuti', 255)->nullable();
             $table->string('dari_tanggal', 255)->nullable();
             $table->string('sampai_dengan', 255)->nullable();
             $table->string('panmud_kasubag', 255)->nullable();
@@ -25,6 +26,8 @@ return new class extends Migration
             $table->integer('app_panmud_kasubag')->nullable();
             $table->integer('app_panitera_sekretaris')->nullable();
             $table->integer('app_ketua')->nullable();
+            $table->string('status_cuti', 255)->nullable();
+            $table->string('ket_status_cuti', 255)->nullable();
             $table->timestamps();
 
             // Foreign key

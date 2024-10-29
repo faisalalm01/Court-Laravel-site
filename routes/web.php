@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Dashboard\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,25 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/login', [AuthController::class, 'index'])->name('login')->middleware('guest');
 
-use App\Http\Controllers\XampleController;
+// auth
+Route::post('/auth/login', [AuthController::class, 'login'])->name('auth.login');
+Route::post('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
-Route::get('/login', [XampleController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [XampleController::class, 'login']);
-Route::get('/logout', [XampleController::class, 'logout'])->name('logout');
-
-Route::middleware('auth')->group(function () {
-    Route::get('admin/index', function () {
-        return view('admin.index');
-    });
-    Route::get('user/index', function () {
-        return view('user.index');
-    });
-});
-
-Route::middleware(['auth', 'role:User'])->group(function () {
-    Route::get('/user/index', [XampleController::class, 'index'])->name('user.dashboard');
-});
+// dashboard
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
