@@ -13,6 +13,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+use App\Http\Controllers\XampleController;
+
+Route::get('/login', [XampleController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [XampleController::class, 'login']);
+Route::get('/logout', [XampleController::class, 'logout'])->name('logout');
+
+Route::middleware('auth')->group(function () {
+    Route::get('admin/index', function () {
+        return view('admin.index');
+    });
+    Route::get('user/index', function () {
+        return view('user.index');
+    });
+});
+
+Route::middleware(['auth', 'role:User'])->group(function () {
+    Route::get('/user/index', [XampleController::class, 'index'])->name('user.dashboard');
 });
