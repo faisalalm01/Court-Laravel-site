@@ -16,6 +16,6 @@ class DashboardController extends Controller
         } else {
             $title = 'Dashboard User Page';
         }
-        return view('dashboard.index', ['title' => $title]);
+        return view('dashboard.user.daftar_cuti', ['title' => $title]);
     }
 }

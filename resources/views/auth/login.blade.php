@@ -1,6 +1,6 @@
-@extends('welcome')
+@extends('main')
 
-@section('content')
+@section('main_content')
 <body class="login">
 
     <div>
