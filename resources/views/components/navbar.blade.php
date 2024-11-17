@@ -48,7 +48,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <!-- Tombol Hamburger -->
-        <button class="btn btn-outline-secondary me-3" id="toggleSidebar" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle sidebar">
+        <button class="btn btn-outline-secondary me-3">
             <span class="navbar-toggler-icon"></span>
         </button>
         

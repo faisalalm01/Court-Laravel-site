@@ -8,7 +8,7 @@
     <li><a href=""><i class="fa fa-home"></i> Dashboard</a></li>
   </ul>
   </div>
-      <div class="menu_section">
+      {{-- <div class="menu_section">
       <h3>Menu Khusus</h3>
       <ul class="nav side-menu">
         <li><a href="#"><i class="fa fa-calendar"></i> Approval Cuti <span class="fa fa-chevron-down"></span></a>
@@ -17,7 +17,7 @@
           </ul>
         </li>
       </ul>
-      </div>
+      </div> --}}
 
   
   <div class="menu_section">
