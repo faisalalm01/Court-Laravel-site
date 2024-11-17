@@ -1,19 +1,7 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('main')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>{{ $title }}</title>
-
-    @vite(['resources/js/app.js', 'resources/css/app.css'])
-
-</head>
-
+@section('main_content')
 <body class="login">
-
-
 
     <div>
         <a class="hiddenanchor" id="signup"></a>
@@ -67,5 +55,4 @@
     </div>
 
 </body>
-
-</html>
+@endsection
