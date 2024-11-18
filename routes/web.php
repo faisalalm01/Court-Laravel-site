@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\User\HistoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,3 +24,7 @@ Route::post('/auth/logout', [AuthController::class, 'logout'])->name('auth.logou
 
 // dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
+// dashboard user history
+Route::get('/dashboard/user/daftar-cuti', [HistoryController::class, 'showDaftarCuti'])->name('dashboard.user.daftar-cuti')->middleware('auth');
+Route::get('/dashboard/user/daftar-kgb', [HistoryController::class, 'showDaftarKGB'])->name('dashboard.user.daftar-kgb')->middleware('auth');
+Route::get('/dashboard/user/daftar-knp', [HistoryController::class, 'showDaftarKNP'])->name('dashboard.user.daftar-knp')->middleware('auth');

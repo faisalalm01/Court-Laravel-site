@@ -51,8 +51,9 @@
         <button class="btn btn-outline-secondary me-3">
             <span class="navbar-toggler-icon"></span>
         </button>
-        
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -65,10 +66,12 @@
                     <a class="nav-link" href="#">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Logout</a>
+                    <form method="POST" action="{{ route('auth.logout') }}">
+                        @csrf
+                        <button type="submit" class="nav-link btn btn-link">Logout</button>
+                    </form>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
-
