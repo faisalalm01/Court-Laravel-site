@@ -12,6 +12,6 @@ class Golongan extends Model
     // Relasi ke Pegawai
     public function pegawai()
     {
-        return $this->hasMany(Pegawai::class, 'id_golongan');
+        return $this->hasMany(Pegawai::class, 'id_golongan', 'id_golongan');
     }
 }

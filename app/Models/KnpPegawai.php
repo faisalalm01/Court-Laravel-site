@@ -8,12 +8,17 @@ class KnpPegawai extends Model
 {
     protected $table = 'knp_pegawai';
     protected $fillable = [
-        'id_pegawai', 'knp_terakhir', 'knp_datang', 'keterangan', 'pensiun', 'timestamp'
+        'id_pegawai',
+        'knp_terakhir',
+        'knp_datang',
+        'keterangan',
+        'pensiun',
+        'timestamp'
     ];
 
     // Relasi ke Pegawai
     public function pegawai()
     {
-        return $this->belongsTo(Pegawai::class, 'id_pegawai');
+        return $this->belongsTo(Pegawai::class, 'id_pegawai', 'id_pegawai');
     }
 }
