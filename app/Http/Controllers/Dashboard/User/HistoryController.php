@@ -6,32 +6,35 @@ use App\Http\Controllers\Controller;
 use App\Models\CutiPegawai;
 use App\Models\KgbPegawai;
 use App\Models\KnpPegawai;
+use App\Models\Pegawai;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class HistoryController extends Controller
 {
 
-    public function getUser()
+    public function getPegawai()
     {
-        return Auth::user();
+        $user = Auth::user();
+        return  Pegawai::where('nip', $user->nip)->first();
     }
     public function showDaftarCuti()
     {
-        $user =  $this->getUser();
-        $data =  CutiPegawai::find('id_pegawai', $user->id_user)->get();
+        $pegawai = $this->getPegawai();
+        $data =  CutiPegawai::where('id_pegawai', $pegawai->id_pegawai)->get();
+
         return view('dashboard.user.daftar_cuti', ['title' => 'Dashbaord User | Daftar Cuti', 'data' => $data]);
     }
     public function showDaftarKGB()
     {
-        $user =  $this->getUser();
-        $data =  KgbPegawai::find('id_pegawai', $user->id_user)->get();
+        $pegawai = $this->getPegawai();
+        $data =  KgbPegawai::where('id_pegawai', $pegawai->id_pegawai)->get();
         return view('dashboard.user.daftar_kgb', ['title' => 'Dashbaord User | Daftar KGB', 'data' => $data]);
     }
     public function showDaftarKNP()
     {
-        $user =  $this->getUser();
-        $data =  KnpPegawai::find('id_pegawai', $user->id_user)->get();
+        $pegawai = $this->getPegawai();
+        $data =  KnpPegawai::where('id_pegawai', $pegawai->id_pegawai)->get();
         return view('dashboard.user.daftar_knp', ['title' => 'Dashbaord User | Daftar KNP', 'data' => $data]);
     }
 }

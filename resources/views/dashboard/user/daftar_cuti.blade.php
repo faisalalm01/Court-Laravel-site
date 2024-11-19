@@ -68,12 +68,12 @@
                             @forelse ($data as $d)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ }}<?php echo $row['nama_pegawai']; ?></td>
-                                    <td><?php echo $d['jenis_cuti']; ?></td>
-                                    <td><?php echo $d['alasan_cuti']; ?></td>
-                                    <td><?php echo $d['lama_cuti']; ?> <?php echo $d['ket_lama_cuti']; ?></td>
-                                    <td><?php echo $d['dari_tanggal']; ?></td>
-                                    <td><?php echo $d['sampai_dengan']; ?></td>
+                                    <td>{{ $d->pegawai->nama_pegawai }}</td>
+                                    <td>{{ $d->jenis_cuti }}</td>
+                                    <td>{{ $d->alasan_cuti }}</td>
+                                    <td>{{ $d->lama_cuti }} {{ $d->ket_lama_cuti }}</td>
+                                    <td>{{ $d->dari_tanggal }}</td>
+                                    <td>{{ $d->sampai_dengan }}</td>
                                     <td class="text-center">
                                         <a href="#"
                                             class="btn <?php if ($d->status_cuti == 'Diajukan' || $d->status_cuti == 'Disetujui') {
@@ -94,10 +94,6 @@
                                 </tr>
                             @empty
                                 <p>Data Kosong</p>
-
-
-
-
                                 <div class="modal fade" id="modalviewcuti{{ $d->id_cutipegawai }}">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
