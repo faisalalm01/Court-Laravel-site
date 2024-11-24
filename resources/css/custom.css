@@ -55,11 +55,11 @@
     top: 0;
     left: 0;
     height: 100%;
-    background-color: #343a40;
-    padding-top: 20px;
+    background-color: #0f8a0f;
+    /* padding-top: 20px; */
     transform: translateX(0);
     transition: transform 0.3s ease;
-    z-index: 1040; /* Z-index lebih tinggi daripada navbar */
+    z-index: 1040;
 }
 
 #sidebar.hidden {
@@ -70,23 +70,19 @@
     color: #ffffff;
 }
 
-/* Navbar */
 .navbar {
-    z-index: 1030; /* Z-index lebih rendah daripada sidebar */
+    z-index: 1030;
 }
 
-/* Main content */
 #main-content {
     margin-left: 250px;
     transition: margin-left 0.3s ease;
-    /* padding-top: 60px; */
 }
 
 #main-content.collapsed {
     margin-left: 0;
 }
 
-/* Menghilangkan garis bawah pada sidebar */
 .navbar,
 .menu_section h3,
 .nav.side-menu li a {
@@ -94,12 +90,11 @@
     text-decoration: none;
 }
 
-/* Menghilangkan garis bawah pada link */
 .nav.side-menu li a {
     text-decoration: none;
+    color: #ffffff;
 }
 
-/* Mengubah gaya hover agar tidak ada garis bawah */
 .nav.side-menu li a:hover {
     text-decoration: none;
 }

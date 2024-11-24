@@ -46,7 +46,7 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    <table id="datatable" class="table table-striped table-bordered">
+                    <table id="table-data" class="table table-striped table-bordered">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -74,8 +74,6 @@
                             @empty
                                 <p>Data Kosong</p>
                             @endforelse
-
-
                         </tbody>
                     </table>
 

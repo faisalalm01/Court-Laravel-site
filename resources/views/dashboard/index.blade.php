@@ -8,10 +8,8 @@
 
 <div id="main-content">
         <x-navbar />
-        {{-- <button class="btn btn-primary fixed" id="toggle-sidebar">
-            ☰
-        </button> --}}
-        <div class="content">
+  
+        <div class="content px-4 py-3">
             @yield('content')
         </div>
     </div>

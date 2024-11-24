@@ -4225,11 +4225,7 @@ ul.notifications {
 
    /* CSS3 Checkbox - end */
 /*
-<<<<<<< HEAD
    
-=======
-
->>>>>>> db9628ec0761073b3184899bb9264150b8913f2b
    /*
    .checkbox 																										{ display: block;position:relative;cursor:pointer; }
    .checkbox input 																								{ position:absolute;z-index:-1;opacity:0;left:0;top:0; }

@@ -47,10 +47,9 @@
 <!-- resources/views/components/navbar.blade.php -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <!-- Tombol Hamburger -->
-        <button class="btn btn-outline-secondary me-3" id="toggle-sidebar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <div class="fixed btn" id="toggle-sidebar">
+            ☰
+        </div>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

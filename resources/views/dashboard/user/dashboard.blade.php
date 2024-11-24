@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <div class="ccol-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_content text-center">
                     <div class="flex">
@@ -13,6 +13,8 @@
                                 </a>
                             </li>
                             <li>
+                                <img src="https://st.depositphotos.com/1537427/3571/v/450/depositphotos_35717211-stock-illustration-vector-user-icon.jpg" class="rounded profile_img" alt="img-profile">
+
                                 {{-- <?php
                 include '../database/koneksi.php';
 
@@ -75,7 +77,7 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    <table id="datatable" class="table table-striped table-bordered table-hover">
+                    {{-- <table id="datatable" class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -89,8 +91,6 @@
                                 <th>Keterangan</th>
                             </tr>
                         </thead>
-
-
 
                         <tbody>
 
@@ -115,10 +115,44 @@
                             @empty
                                 <p>Data Kosong</p>
                             @endforelse
+                        </tbody>
+                    </table> --}}
+                    <table id="table-data" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>Jenis Cuti</th>
+                                <th>Alasan Cuti</th>
+                                <th>Lama Cuti</th>
+                                <th>Dari Tanggal</th>
+                                <th>Sampai Dengan</th>
+                                <th>Status</th>
+                                <th>Keterangan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($data as $d)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $d->pegawai->nama_pegawai }}</td>
+                                <td>{{ $d->jenis_cuti }}</td>
+                                <td>{{ $d->alasan_cuti }}</td>
+                                <td>{{ $d->lama_cuti }} {{ $d->ket_lama_cuti }}</td>
+                                <td>{{ $d->dari_tanggal }}</td>
+                                <td>{{ $d->sampai_dengan }}</td>
 
-
-
-
+                                <td class="text-center">
+                                    <a href="#" class="btn btn-success btn-xs "> {{ $d->status_cuti }}</a>
+                                </td>
+                                <td class="text-center">
+                                    <a href="#" class="btn btn-primary btn-xs ">
+                                        {{ $d->ket_status_cuti }}</a>
+                                </td>
+                            </tr>
+                        @empty
+                            <p>Data Kosong</p>
+                        @endforelse
                         </tbody>
                     </table>
                 </div>
