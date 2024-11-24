@@ -97,9 +97,9 @@
               <span class="fa fa-chevron-down"></span>
           </a>
           <ul class="collapse list-unstyled px-5 pb-2" id="dataHistoriSubmenu">
-              <li><a href="index.php?page=daftar_cuti" style="text-decoration: none;">Daftar Cuti</a></li>
-              <li><a href="index.php?page=daftar_knp" style="text-decoration: none;">Daftar KNP</a></li>
-              <li><a href="index.php?page=daftar_kgb" style="text-decoration: none;">Daftar KGB</a></li>
+              <li><a href="daftar_cuti" style="text-decoration: none;">Daftar Cuti</a></li>
+              <li><a href="daftar_knp" style="text-decoration: none;">Daftar KNP</a></li>
+              <li><a href="daftar_kgb" style="text-decoration: none;">Daftar KGB</a></li>
           </ul>
       </li>
   </ul>

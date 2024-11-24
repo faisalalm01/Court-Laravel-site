@@ -45,10 +45,10 @@
 </body> --}}
 
 <!-- resources/views/components/navbar.blade.php -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <!-- Tombol Hamburger -->
-        <button class="btn btn-outline-secondary me-3">
+        <button class="btn btn-outline-secondary me-3" id="toggle-sidebar">
             <span class="navbar-toggler-icon"></span>
         </button>
 

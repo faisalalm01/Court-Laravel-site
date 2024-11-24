@@ -1,0 +1,105 @@
+/* #sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: #343a40;
+    padding-top: 20px;
+    transform: translateX(0);
+    transition: transform 0.3s ease;
+    z-index: 1040;
+}
+
+#sidebar.hidden {
+    transform: translateX(-250px);
+}
+
+#sidebar .nav-link {
+    color: #ffffff;
+}
+
+.navbar {
+    z-index: 1030;
+}
+
+#main-content {
+    margin-left: 250px;
+    transition: margin-left 0.3s ease;
+    padding-top: 60px;
+}
+
+#main-content.collapsed {
+    margin-left: 0;
+}
+
+.navbar,
+.menu_section h3,
+.nav.side-menu li a {
+    border: 0;
+    text-decoration: none;
+}
+
+.nav.side-menu li a {
+    text-decoration: none;
+}
+
+.nav.side-menu li a:hover {
+    text-decoration: none;
+}
+ */
+/* Custom styles for sidebar */
+#sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: #343a40;
+    padding-top: 20px;
+    transform: translateX(0);
+    transition: transform 0.3s ease;
+    z-index: 1040; /* Z-index lebih tinggi daripada navbar */
+}
+
+#sidebar.hidden {
+    transform: translateX(-250px);
+}
+
+#sidebar .nav-link {
+    color: #ffffff;
+}
+
+/* Navbar */
+.navbar {
+    z-index: 1030; /* Z-index lebih rendah daripada sidebar */
+}
+
+/* Main content */
+#main-content {
+    margin-left: 250px;
+    transition: margin-left 0.3s ease;
+    /* padding-top: 60px; */
+}
+
+#main-content.collapsed {
+    margin-left: 0;
+}
+
+/* Menghilangkan garis bawah pada sidebar */
+.navbar,
+.menu_section h3,
+.nav.side-menu li a {
+    border: 0;
+    text-decoration: none;
+}
+
+/* Menghilangkan garis bawah pada link */
+.nav.side-menu li a {
+    text-decoration: none;
+}
+
+/* Mengubah gaya hover agar tidak ada garis bawah */
+.nav.side-menu li a:hover {
+    text-decoration: none;
+}

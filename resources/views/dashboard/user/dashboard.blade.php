@@ -42,7 +42,6 @@
                                 <h3 class="name">Selamat Datang</h3>
 
                                 <h3 class="name">
-                                    Nama Pegawai:
                                     {{ Auth::user()->pegawai->nama_pegawai }}
                                 </h3>
                             </li>

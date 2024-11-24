@@ -1,48 +1,65 @@
 @extends('main')
 
 @section('main_content')
-{{-- <div class="d-flex">
 
-    <div id="sidebar" class="bg-success text-white overflow-y-auto show " style="width: 250px; height: 100vh; position: fixed;">
-        <x-sidebar /> 
-    </div>    
-
-    <div class="flex-grow-1" style="margin-left: 250px;">
-        <x-navbar />
-
-        <div class="container mt-2">
-            @yield('content')
-        </div>
-    </div>
-</div>
-
-<script>
-
-</script> --}}
-<style>
-
-</style>
-<!-- Sidebar -->
 <div id="sidebar">
     <x-sidebar /> 
 </div>
 
-    <!-- Main Content -->
-    <div id="main-content" class="p-4">
-        <!-- Hamburger Button -->
-        <button class="btn btn-primary fixed" id="toggle-sidebar">
+<div id="main-content">
+        <x-navbar />
+        {{-- <button class="btn btn-primary fixed" id="toggle-sidebar">
             ☰
-        </button>
+        </button> --}}
         <div class="content">
             @yield('content')
         </div>
     </div>
     
-    <!-- Bootstrap JS and custom script -->
     <script>
         document.getElementById('toggle-sidebar').addEventListener('click', function() {
             document.getElementById('sidebar').classList.toggle('hidden');
             document.getElementById('main-content').classList.toggle('collapsed');
         });
     </script>
+
+{{-- <div class="sidebar" id="sidebar">
+        <a href="#">Dashboard</a>
+        <a href="#">Settings</a>
+        <a href="#">Profile</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <button class="btn btn-outline-secondary" id="toggleSidebar">
+                    ☰
+                </button>
+                <a class="navbar-brand ms-2" href="#">My App</a>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Content -->
+        <div class="mt-4">
+            @yield('content')
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('toggleSidebar').addEventListener('click', () => {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('collapsed');
+        });
+    </script> --}}
 @endsection
