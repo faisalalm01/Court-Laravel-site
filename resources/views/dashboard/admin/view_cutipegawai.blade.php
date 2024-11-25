@@ -3,16 +3,7 @@
 @section('content')
 <div class="page-title">
     <div class="title_left">
-      <h3>Pengajuan Cuti</h3>
-    </div>
-  
-    <div class="title_right">
-      <div class="col-md-3 col-sm-3 col-xs-12 pull-right">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Pengajuan Cuti</a></li>
-          </ol>
-      </div>
+      <h3>View Cuti Pegawai</h3>
     </div>
   </div>
   
@@ -22,7 +13,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="x_panel">
         <div class="x_title">
-          <h2>Daftar Menunggu Approval <small>Daftar Menunggu approval cuti dari atasan</small></h2>
+          <h2>View Cuti Pegawai <small>Daftar Cuti pegawai</small></h2>
           <ul class="nav navbar-right panel_toolbox">
             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
             </li>
@@ -43,32 +34,36 @@
         <div class="x_content">
           <table id="datatable" class="table table-striped table-bordered">
             <thead>
-                <tr>
-                  <th>No</th>
-                  <th>Nama</th>
-                  <th>Jenis Cuti</th>
-                  <th>Alasan Cuti</th>
-                  <th>Lama Cuti</th>
-                  <th>Dari Tanggal</th>
-                  <th>Sampai Dengan</th>
-                  <th>Status</th>
-                  <th>Keterangan</th>
-                </tr>
+              <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Jenis Cuti</th>
+                <th>Alasan Cuti</th>
+                <th>Lama Cuti</th>
+                <th>Dari Tanggal</th>
+                <th>Sampai Dengan</th>
+                <th>Status</th>
+                <th>Keterangan</th>
+              </tr>
             </thead>
   
   
+  
             <tbody>
-              {{-- <?php
-                include '../database/koneksi.php';
-                $nippegawai = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE nip='$nip'");
-                $rowselect = mysqli_fetch_array($nippegawai);
-                $idpegawai = $rowselect['id_pegawai'];
-                $query = mysqli_query($koneksi,"SELECT * FROM cuti_pegawai cuti, pegawai pg WHERE cuti.id_pegawai = pg.id_pegawai and nip='$nip' and status_cuti='Diajukan'");
+              <?php
+              include "../database/koneksi.php";
+  
+                $nip = $_GET['nip'];
                 $i = 1;
-                while ($row = mysqli_fetch_array($query)) {
-               ?>
-               <tr>
-                 <td><?php echo $i ?></td>
+  
+                $query = mysqli_query($koneksi, "SELECT * FROM cuti_pegawai cuti, pegawai pg, jabatan jb, golongan gl WHERE cuti.id_pegawai = pg.id_pegawai and pg.id_jabatan=jb.id_jabatan and pg.id_golongan=gl.id_golongan and pg.nip='$nip'");
+  
+                while ($row = mysqli_fetch_array($query) ) {
+  
+                  ?>
+  
+                  <tr>
+                    <td><?php echo $i ?></td>
                  <td><?php echo $row['nama_pegawai'] ?></td>
                  <td><?php echo $row['jenis_cuti'] ?></td>
                  <td><?php echo $row['alasan_cuti'] ?></td>
@@ -76,18 +71,26 @@
                  <td><?php echo $row['dari_tanggal']; ?></td>
                  <td><?php echo $row['sampai_dengan']; ?></td>
                  <td class="text-center">
-                   <a href="#" class="btn btn-success btn-xs "> <?php echo $row['status_cuti']; ?></a>
+                  <a href="#" class="btn <?php if ($row['status_cuti'] == 'Diajukan' || $row['status_cuti'] == 'Disetujui') {
+                    ?>
+                    btn-success
+                    <?php
+                  } else {
+                    ?>
+                    btn-danger
+                    <?php
+                  }
+                   ?> btn-xs "> <?php echo $row['status_cuti']; ?></a>
                  </td>
                  <td class="text-center">
                    <a href="#" class="btn btn-primary btn-xs "> <?php echo $row['ket_status_cuti']; ?></a>
                  </td>
-               </tr>
+                  </tr>
   
-  
-               <?php
-               $i++;
-             }
-                ?> --}}
+                  <?php
+                  $i++;
+                }
+              ?>
             </tbody>
           </table>
         </div>
@@ -95,5 +98,4 @@
     </div>
   
   </div>
-  
 @endsection
