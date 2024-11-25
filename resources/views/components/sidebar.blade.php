@@ -121,12 +121,17 @@
                 <i class="fa fa-bell"></i> Data Pengajuan Cuti
                 <span class="fa fa-chevron-down"></span>
             </a>
-            @if (auth()->user()->role === 'Admin')
+            @if (auth()->user()->role !== 'Admin')
                 <ul class="collapse list-unstyled px-5 pb-2" id="dataPengajuanCutiSubmenu">
-                    <li><a href="index.php?page=disetujui" style="text-decoration: none;">Disetujui</a></li>
-                    <li><a href="index.php?page=perubahan" style="text-decoration: none;">Perubahan</a></li>
-                    <li><a href="index.php?page=ditangguhkan" style="text-decoration: none;">Ditangguhkan</a></li>
-                    <li><a href="index.php?page=tidakdisetujui" style="text-decoration: none;">Tidak Disetujui</a></li>
+                    <li><a href="{{ route('dashboard.user.data.cuti.disetujui') }}"
+                            style="text-decoration: none;">Disetujui</a></li>
+                    <li><a href="{{ route('dashboard.user.data.cuti.perubahan') }}"
+                            style="text-decoration: none;">Perubahan</a></li>
+                    <li><a href="{{ route('dashboard.user.data.cuti.ditangguhkan') }}"
+                            style="text-decoration: none;">Ditangguhkan</a></li>
+                    <li><a href="{{ route('dashboard.user.data.cuti.tidak.disetujui') }}"
+                            style="text-decoration: none;">Tidak
+                            Disetujui</a></li>
                 </ul>
             @else
                 <ul class="collapse list-unstyled px-5 pb-2" id="dataPengajuanCutiSubmenu">

@@ -20,7 +20,7 @@ class PengajuanCutiController extends Controller
     {
         $pegawai = $this->getPegawai();
         $data =  CutiPegawai::where('id_pegawai', $pegawai->id_pegawai)->where('status_cuti', 'Diajukan')->get();
-        return view('dashboard.user.daftar_aproval', ['title' => 'Dashbaord User | Daftar Approval', 'data' => $data]);
+        return view('dashboard.user.daftar_aproval', ['title' => 'Dashboard User | Daftar Approval', 'data' => $data]);
     }
     public function showTambahPengajuanCuti()
     {

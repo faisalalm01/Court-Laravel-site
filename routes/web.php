@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\User\DataCutiController;
 use App\Http\Controllers\Dashboard\User\HistoryController;
 use App\Http\Controllers\Dashboard\User\PengajuanCutiController;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,13 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::get('/dashboard/user/pengajuan-cuti', [PengajuanCutiController::class, 'showTambahPengajuanCuti'])->name('dashboard.user.pengajuan-cuti')->middleware('auth');
 Route::get('/dashboard/user/menunggu-approval-cuti', [PengajuanCutiController::class, 'showDaftarApproval'])->name('dashboard.user.daftar-approval')->middleware('auth');
 Route::post('/dashboard/user/tambah-pengajuan-cuti', [PengajuanCutiController::class, 'tambahPengajuanCuti'])->name('dashboard.user.tambah.pengajuan-cuti')->middleware('auth');
+
+// dashboard user pengajuan cuti
+Route::get('/dashboard/user/data-cuti-disetujui', [DataCutiController::class, 'showDataCutiDisetujui'])->name('dashboard.user.data.cuti.disetujui')->middleware('auth');
+Route::get('/dashboard/user/data-cuti-ditangguhkan', [DataCutiController::class, 'showDataCutiDitangguhkan'])->name('dashboard.user.data.cuti.ditangguhkan')->middleware('auth');
+Route::get('/dashboard/user/data-cuti-perubahan', [DataCutiController::class, 'showDataCutiPerubahan'])->name('dashboard.user.data.cuti.perubahan')->middleware('auth');
+Route::get('/dashboard/user/data-cuti-tidak-disetujui', [DataCutiController::class, 'showDataCutiTidakDisetujui'])->name('dashboard.user.data.cuti.tidak.disetujui')->middleware('auth');
+
 
 // dashboard user history
 Route::get('/dashboard/user/daftar-cuti', [HistoryController::class, 'showDaftarCuti'])->name('dashboard.user.daftar-cuti')->middleware('auth');

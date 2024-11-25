@@ -19,7 +19,9 @@ class CutiPegawai extends Model
         'ketua',
         'app_panmud_kasubag',
         'app_panitera_sekretaris',
-        'app_ketua'
+        'app_ketua',
+        'status_cuti',
+        'ket_status_cuti'
     ];
 
     // Relasi ke Pegawai

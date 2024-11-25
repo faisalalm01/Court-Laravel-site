@@ -23,18 +23,18 @@ class HistoryController extends Controller
         $pegawai = $this->getPegawai();
         $data =  CutiPegawai::where('id_pegawai', $pegawai->id_pegawai)->get();
 
-        return view('dashboard.user.daftar_cuti', ['title' => 'Dashbaord User | Daftar Cuti', 'data' => $data]);
+        return view('dashboard.user.daftar_cuti', ['title' => 'Dashboard User | Daftar Cuti', 'data' => $data]);
     }
     public function showDaftarKGB()
     {
         $pegawai = $this->getPegawai();
         $data =  KgbPegawai::where('id_pegawai', $pegawai->id_pegawai)->get();
-        return view('dashboard.user.daftar_kgb', ['title' => 'Dashbaord User | Daftar KGB', 'data' => $data]);
+        return view('dashboard.user.daftar_kgb', ['title' => 'Dashboard User | Daftar KGB', 'data' => $data]);
     }
     public function showDaftarKNP()
     {
         $pegawai = $this->getPegawai();
         $data =  KnpPegawai::where('id_pegawai', $pegawai->id_pegawai)->get();
-        return view('dashboard.user.daftar_knp', ['title' => 'Dashbaord User | Daftar KNP', 'data' => $data]);
+        return view('dashboard.user.daftar_knp', ['title' => 'Dashboard User | Daftar KNP', 'data' => $data]);
     }
 }
