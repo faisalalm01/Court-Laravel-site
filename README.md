@@ -64,3 +64,29 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+
+## How To Run
+
+install dependencies :
+``` 
+npm install
+
+composer install
+```
+
+env :
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=your_db_project
+DB_USERNAME=your_db_username
+DB_PASSWORD=your_db_password
+```
+
+run :
+```
+npm run dev-serve
+```
