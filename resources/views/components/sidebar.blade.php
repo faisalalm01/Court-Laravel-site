@@ -54,6 +54,27 @@
         <span> PN-Purwokerto</span>
     </a>
 </div>
+@if (auth()->user()->pegawai->jabatan->nama_jabatan === 'PANITERA' ||
+        auth()->user()->pegawai->jabatan->nama_jabatan === 'SEKRETARIS' ||
+        auth()->user()->pegawai->jabatan->nama_jabatan === 'KETUA' ||
+        auth()->user()->pegawai->jabatan->nama_jabatan === 'PANMUD HUKUM' ||
+        auth()->user()->pegawai->jabatan->nama_jabatan === 'PANMUD HUKUM GUGATAN' ||
+        auth()->user()->pegawai->jabatan->nama_jabatan === 'PANMUD HUKUM PERMOHONAN' ||
+        auth()->user()->pegawai->jabatan->nama_jabatan === 'KASUBAG KEPEGAWAIAN DAN ORTALA' ||
+        auth()->user()->pegawai->jabatan->nama_jabatan === 'KASUBAG PERNCANAAN, IT DAN PELAPORAN' ||
+        auth()->user()->pegawai->jabatan->nama_jabatan === 'KASUBAG UMUM DAN KEUANGAN')
+    <div class="menu_section">
+        <h3>Menu Khusus</h3>
+        <ul class="nav side-menu">
+            <li><a href="#"><i class="fa fa-calendar"></i> Approval Cuti <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="index.php?page=approve_cuti">Approve Cuti</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+@endif
+
 <div class="menu_section">
     <h3 style="border: 0;">General</h3>
 
