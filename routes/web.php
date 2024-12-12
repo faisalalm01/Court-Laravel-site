@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\User\ApproveCutiController;
 use App\Http\Controllers\Dashboard\User\DataCutiController;
 use App\Http\Controllers\Dashboard\User\HistoryController;
 use App\Http\Controllers\Dashboard\User\PengajuanCutiController;
@@ -26,6 +27,11 @@ Route::post('/auth/logout', [AuthController::class, 'logout'])->name('auth.logou
 
 // dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
+
+// dashboard user approve cuti
+Route::get('/dashboard/user/approve-cuti', [ApproveCutiController::class, 'index'])->name('dashboard.user.daftar-approve-cuti')->middleware('auth');
+Route::get('/dashboard/user/approve-update-cuti/{cutiId}', [ApproveCutiController::class, 'showUpdateCutiApprove'])->name('dashboard.user.approve-update-cuti')->middleware('auth');
+
 // dashboard user pengajuan cuti
 Route::get('/dashboard/user/pengajuan-cuti', [PengajuanCutiController::class, 'showTambahPengajuanCuti'])->name('dashboard.user.pengajuan-cuti')->middleware('auth');
 Route::get('/dashboard/user/menunggu-approval-cuti', [PengajuanCutiController::class, 'showDaftarApproval'])->name('dashboard.user.daftar-approval')->middleware('auth');

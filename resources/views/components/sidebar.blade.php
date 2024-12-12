@@ -66,10 +66,17 @@
     <div class="menu_section">
         <h3>Menu Khusus</h3>
         <ul class="nav side-menu">
-            <li><a href="#"><i class="fa fa-calendar"></i> Approval Cuti <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a href="index.php?page=approve_cuti">Approve Cuti</a></li>
+            <li>
+                <a href="#SubMenuKhusus" data-toggle="collapse" aria-expanded="false" style="text-decoration: none;">
+                    <i class="fa fa-calendar"></i> Approve Cuti
+                    <span class="fa fa-chevron-down"></span>
+                </a>
+                <ul class="collapse list-unstyled px-5 pb-2" id="SubMenuKhusus">
+                    <li><a href="{{ route('dashboard.user.daftar-approve-cuti') }}"
+                            style="text-decoration: none;">Approval
+                            Cuti</a></li>
                 </ul>
+
             </li>
         </ul>
     </div>

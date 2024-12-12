@@ -74,6 +74,7 @@
                                     <td>{{ $cuti->pegawai->nama_pegawai }}</td>
                                     <td>{{ $cuti->pegawai->nip }}</td>
                                     <td>{{ $cuti->pegawai->jabatan->nama_jabatan }}</td>
+                                    <td>{{ $cuti->pegawai->golongan->nama_golongan }}</td>
                                     <td>{{ $cuti->jenis_cuti }}</td>
                                     <td>{{ $cuti->alasan_cuti }}</td>
                                     <td>{{ $cuti->lama_cuti }} {{ $cuti->ket_lama_cuti }}</td>
@@ -82,21 +83,26 @@
                                     <td>{{ $cuti->status_cuti }}</td>
                                     <td>{{ $cuti->ket_status_cuti }}</td>
                                     <td>
-                                        <a href="" class="btn btn-info" data-toggle="modal"
-                                            data-target="#modalviewcuti{{ $cuti->id_cutipegawai }}">
-                                            View
-                                        </a>
-                                        <a href="/dashboard/user/approve-update-cuti/{{ $cuti->id_cutipegawai }}"
-                                            class="btn btn-success">Approve</a>
+                                        <a href="#" class="btn btn-info">View</a>
+                                        <a href="#" class="btn btn-success">Approve</a>
                                     </td>
                                 </tr>
 
-                                <div class="modal fade" id="modalviewcuti{{ $cuti->id_cutipegawai }}">
+
+                                <td>
+                                    <a href="#" class="btn btn-info" data-toggle="modal"
+                                        data-target="#modalviewcuti<?php echo $row['id_cutipegawai']; ?>"><i class="fa fa-eye"></i> View</a>
+                                    <a href="index.php?page=approval_cuti&nip=<?php echo $row['nip']; ?>&id=<?php echo $row['id_cutipegawai']; ?>"
+                                        class="btn btn-danger"><i class="fa fa-check"></i> Approve</a>
+                                </td>
+                                </tr>
+
+                                <div class="modal fade" id="modalviewcuti<?php echo $row['id_cutipegawai']; ?>">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h4 class="modal-title">Detail Pengajuan Cuti Pegawai
-                                                    {{ $cuti->pegawai->nama_pegawai }}</h4>
+                                                <h4 class="modal-title">Detail Pengajuan Cuti Pegawai <?php echo $row['nama_pegawai']; ?>
+                                                </h4>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -104,43 +110,41 @@
                                             </div>
                                             <div class="modal-body">
                                                 <strong>Nama lengkap</strong>
-                                                <p class="text-muted">{{ $cuti->pegawai->nama_pegawai }}</p>
+                                                <p class="text-muted"><?php echo $row['nama_pegawai']; ?></p>
                                                 <hr>
                                                 <strong>NIP</strong>
-                                                <p class="text-muted">{{ $cuti->pegawai->nip }}</p>
+                                                <p class="text-muted"><?php echo $row['nip']; ?></p>
                                                 <hr>
                                                 <strong>Jabatan</strong>
-                                                <p class="text-muted">{{ $cuti->pegawai->jabatan->nama_jabatan }}</p>
+                                                <p class="text-muted"><?php echo $row['nama_jabatan']; ?></p>
                                                 <hr>
                                                 <strong>Golongan</strong>
-                                                <p class="text-muted">{{ $cuti->pegawai->golongan->nama_golongan }}</p>
+                                                <p class="text-muted"><?php echo $row['nama_golongan']; ?></p>
                                                 <hr>
                                                 <strong>Jenis pengajuan cuti</strong>
-                                                <p class="text-muted">{{ $cuti->jenis_cuti }}</p>
+                                                <p class="text-muted"><?php echo $row['jenis_cuti']; ?></p>
                                                 <hr>
                                                 <strong>Alasan cuti</strong>
-                                                <p class="text-muted">{{ $cuti->alasan_cuti }}</p>
+                                                <p class="text-muted"><?php echo $row['alasan_cuti']; ?></p>
                                                 <hr>
                                                 <strong>Durasi cuti selama</strong>
-                                                <p class="text-muted">{{ $cuti->lama_cuti }} {{ $cuti->ket_lama_cuti }}
-                                                </p>
+                                                <p class="text-muted"><?php echo $row['lama_cuti']; ?> <?php echo $row['ket_lama_cuti']; ?></p>
                                                 <hr>
                                                 <strong>Tanggal mulai cuti</strong>
-                                                <p class="text-muted">{{ $cuti->dari_tanggal }}</p>
+                                                <p class="text-muted"><?php echo $row['dari_tanggal']; ?></p>
                                                 <hr>
                                                 <strong>Tanggal akhir cuti</strong>
-                                                <p class="text-muted">{{ $cuti->sampai_dengan }}</p>
+                                                <p class="text-muted"><?php echo $row['sampai_dengan']; ?></p>
                                                 <hr>
                                                 <strong>Status</strong>
-                                                <p class="text-muted">{{ $cuti->status_cuti }}
-                                                    {{ $cuti->ket_status_cuti }}</p>
+                                                <p class="text-muted"><?php echo $row['status_cuti']; ?> <?php echo $row['ket_status_cuti']; ?></p>
                                                 <hr>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                {{-- end dump --}}
                             @endforeach
+
                         </tbody>
                     </table>
                 </div>
