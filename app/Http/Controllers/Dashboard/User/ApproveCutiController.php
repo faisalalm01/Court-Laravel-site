@@ -58,4 +58,5 @@ class ApproveCutiController extends Controller
         $data = CutiPegawai::findOrFail($request->cutiId);
         return view('dashboard.user.aprove_update', ['title' => 'Dashboard User | Approval Cuti Update', 'data' => $data]);
     }
+    public function updateApprovalCuti(Request $request) {}
 }
