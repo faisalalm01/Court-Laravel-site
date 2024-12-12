@@ -22,7 +22,7 @@ class AuthLoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nip' => ['required', 'numeric'],
+            'nip' => ['required', 'numeric', 'max:18'],
             'password' => ['required'],
         ];
     }
