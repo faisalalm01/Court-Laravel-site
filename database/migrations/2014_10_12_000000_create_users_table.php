@@ -22,9 +22,9 @@ return new class extends Migration
         // });
         Schema::create('user', function (Blueprint $table) {
             $table->id('id_user');
-            $table->string('nip', 255)->unique();
+            $table->string('nip', 18)->unique();
             $table->string('password', 255);
-            $table->string('role', 255);
+            $table->enum('role', ['Admin', 'User']);
             $table->text('foto')->nullable();
             $table->timestamps();
         });

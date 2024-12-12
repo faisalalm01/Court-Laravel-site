@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pegawai', function (Blueprint $table) {
             $table->id('id_pegawai');
             $table->string('nama_pegawai', 255);
-            $table->string('nip', 255)->unique();
+            $table->string('nip', 18)->unique();
             $table->unsignedBigInteger('id_jabatan');
             $table->unsignedBigInteger('id_golongan');
             $table->string('unit_kerja', 255)->nullable();

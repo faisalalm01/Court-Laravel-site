@@ -59,7 +59,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($data as $d)
+                            @foreach ($data as $d)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $d->pegawai->nama_pegawai }}</td>
@@ -70,9 +70,7 @@
                                     <td>{{ $d->keterangan }}</td>
                                 </tr>
                         </tbody>
-                    @empty
-                        <p>Data Kosong</p>
-                        @endforelse
+                        @endforeach
 
                     </table>
 
@@ -154,15 +152,15 @@
         </div>
         {{-- <?php
         include '../database/koneksi.php';
-
+        
         if (isset($_POST['submit'])) {
             $id = $_POST['pegawai'];
             $kgbterakhir = $_POST['kgb_terakhir'];
             $kgbdatang = $_POST['kgb_datang'];
             $ket = $_POST['keterangan'];
-
+        
             $query = mysqli_query($koneksi, "INSERT INTO kgb_pegawai VALUES (null, '$id', '$kgbterakhir', '$kgbdatang', '$ket')");
-
+        
             if ($query) {
                 echo "<script>alert('Data Berhasil Ditambahkan'); document.location='index.php?page=daftar_kgb';</script>";
             } else {

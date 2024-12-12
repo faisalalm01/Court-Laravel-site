@@ -13,7 +13,8 @@
                                 </a>
                             </li>
                             <li>
-                                <img src="https://st.depositphotos.com/1537427/3571/v/450/depositphotos_35717211-stock-illustration-vector-user-icon.jpg" class="rounded profile_img" alt="img-profile">
+                                <img src="https://st.depositphotos.com/1537427/3571/v/450/depositphotos_35717211-stock-illustration-vector-user-icon.jpg"
+                                    class="rounded profile_img" alt="img-profile">
 
                                 {{-- <?php
                 include '../database/koneksi.php';
@@ -132,27 +133,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($data as $d)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $d->pegawai->nama_pegawai }}</td>
-                                <td>{{ $d->jenis_cuti }}</td>
-                                <td>{{ $d->alasan_cuti }}</td>
-                                <td>{{ $d->lama_cuti }} {{ $d->ket_lama_cuti }}</td>
-                                <td>{{ $d->dari_tanggal }}</td>
-                                <td>{{ $d->sampai_dengan }}</td>
+                            @foreach ($data as $d)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $d->pegawai->nama_pegawai }}</td>
+                                    <td>{{ $d->jenis_cuti }}</td>
+                                    <td>{{ $d->alasan_cuti }}</td>
+                                    <td>{{ $d->lama_cuti }} {{ $d->ket_lama_cuti }}</td>
+                                    <td>{{ $d->dari_tanggal }}</td>
+                                    <td>{{ $d->sampai_dengan }}</td>
 
-                                <td class="text-center">
-                                    <a href="#" class="btn btn-success btn-xs "> {{ $d->status_cuti }}</a>
-                                </td>
-                                <td class="text-center">
-                                    <a href="#" class="btn btn-primary btn-xs ">
-                                        {{ $d->ket_status_cuti }}</a>
-                                </td>
-                            </tr>
-                        @empty
-                            <p>Data Kosong</p>
-                        @endforelse
+                                    <td class="text-center">
+                                        <a href="#" class="btn btn-success btn-xs "> {{ $d->status_cuti }}</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="#" class="btn btn-primary btn-xs ">
+                                            {{ $d->ket_status_cuti }}</a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

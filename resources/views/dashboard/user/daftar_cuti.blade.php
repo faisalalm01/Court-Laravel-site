@@ -65,7 +65,7 @@
 
 
                         <tbody>
-                            @forelse ($data as $d)
+                            @foreach ($data as $d)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $d->pegawai->nama_pegawai }}</td>
@@ -92,8 +92,6 @@
                                         <a href="#" class="btn btn-primary btn-xs "> <?php echo $d->ket_status_cuti; ?></a>
                                     </td>
                                 </tr>
-                            @empty
-                                <p>Data Kosong</p>
                                 <div class="modal fade" id="modalviewcuti{{ $d->id_cutipegawai }}">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -155,7 +153,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            @endforelse
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

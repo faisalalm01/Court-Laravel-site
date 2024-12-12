@@ -61,7 +61,7 @@
 
 
                         <tbody>
-                            @forelse ($data as $d)
+                            @foreach ($data as $d)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $d->pegawai->nama_pegawai }}</td>
@@ -71,9 +71,7 @@
                                     <td>{{ $d->knp_datang }}</td>
                                     <td>{{ $d->keterangan }}</td>
                                 </tr>
-                            @empty
-                                <p>Data Kosong</p>
-                            @endforelse
+                            @endforeach
                         </tbody>
                     </table>
 
@@ -157,15 +155,15 @@
         </div>
         {{-- <?php
         include '../database/koneksi.php';
-
+        
         if (isset($_POST['submit'])) {
             $id = $_POST['pegawai'];
             $knpterakhir = $_POST['knp_terakhir'];
             $knpdatang = $_POST['knp_datang'];
             $ket = $_POST['keterangan'];
-
+        
             $query = mysqli_query($koneksi, "INSERT INTO knp_pegawai VALUES ('', '$id','$knpterakhir', '$knpdatang', '$ket')");
-
+        
             if ($query) {
                 echo "<script>alert('Data Berhasil Ditambahkan'); document.location='index.php?page=daftar_knp';</script>";
             } else {
