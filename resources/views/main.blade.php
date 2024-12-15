@@ -14,8 +14,7 @@
     @vite(['resources/css/custom.css'])
 </head>
 
-<body>
-
+<body class="d-flex">
     @yield('main_content')
     <!-- Tambahkan script JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

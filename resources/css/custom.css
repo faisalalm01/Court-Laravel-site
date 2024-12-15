@@ -4,8 +4,7 @@
     top: 0;
     left: 0;
     height: 100%;
-    background-color: #343a40;
-    padding-top: 20px;
+    background-color: #0f8a0f;
     transform: translateX(0);
     transition: transform 0.3s ease;
     z-index: 1040;
@@ -26,7 +25,6 @@
 #main-content {
     margin-left: 250px;
     transition: margin-left 0.3s ease;
-    padding-top: 60px;
 }
 
 #main-content.collapsed {
@@ -42,59 +40,37 @@
 
 .nav.side-menu li a {
     text-decoration: none;
+    color: #ffffff;
 }
 
 .nav.side-menu li a:hover {
     text-decoration: none;
 }
  */
-/* Custom styles for sidebar */
 #sidebar {
+    transition: width 0.3s ease;
     width: 250px;
-    position: fixed;
     top: 0;
     left: 0;
     height: 100%;
-    background-color: #0f8a0f;
-    /* padding-top: 20px; */
-    transform: translateX(0);
-    transition: transform 0.3s ease;
-    z-index: 1040;
 }
 
-#sidebar.hidden {
-    transform: translateX(-250px);
+#sidebar.collapsed .nav-link {
+    text-align: center;
 }
 
-#sidebar .nav-link {
-    color: #ffffff;
+#sidebar.collapsed .nav-link i {
+    margin: 0;
 }
 
-.navbar {
-    z-index: 1030;
+#sidebar.collapsed {
+    overflow: hidden;
 }
 
-#main-content {
-    margin-left: 250px;
-    transition: margin-left 0.3s ease;
+#sidebar.collapsed .sidebar-text {
+    display: none;
 }
 
-#main-content.collapsed {
-    margin-left: 0;
-}
-
-.navbar,
-.menu_section h3,
-.nav.side-menu li a {
-    border: 0;
-    text-decoration: none;
-}
-
-.nav.side-menu li a {
-    text-decoration: none;
-    color: #ffffff;
-}
-
-.nav.side-menu li a:hover {
-    text-decoration: none;
+.main-content {
+    width: 100%;
 }

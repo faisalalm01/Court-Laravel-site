@@ -32,3 +32,26 @@ $(document).ready(function () {
         }
     });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const sidebar = document.getElementById('sidebar');
+    const sidebarTextElements = document.querySelectorAll('.sidebar-text');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+
+    sidebarToggle.addEventListener('click', function () {
+        // Toggle kelas sidebar untuk menyempitkan
+        sidebar.classList.toggle('collapsed');
+
+        // Toggle visibility dari teks sidebar
+        sidebarTextElements.forEach(element => {
+            element.classList.toggle('d-none');
+        });
+
+        // Ubah width sidebar
+        if (sidebar.classList.contains('collapsed')) {
+            sidebar.style.width = '70px';
+        } else {
+            sidebar.style.width = '280px';
+        }
+    });
+});
