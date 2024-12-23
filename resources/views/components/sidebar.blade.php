@@ -125,44 +125,142 @@
         </li>
     </ul>
 </div> --}}
-<!-- Sidebar -->
-<aside id="sidebar" class="d-flex flex-column flex-shrink-0 p-3 border-end vh-100" style="width: 280px; transition: width 0.3s;">
-    <!-- Toggle Button -->
-    <button id="sidebarToggle" class="btn mb-3">
-        <i class="fas fa-bars"></i>
-    </button>
 
-    <!-- Sidebar Content -->
-    <a href="/" class="d-flex align-items-center mb-3 text-decoration-none text-primary">
-        <span id="sidebar-logo" class="fs-4 fw-bold"><i class="fas fa-wrench me-2"></i> <span class="sidebar-text">Hope UI</span></span>
-    </a>
-    <hr>
-    <ul class="nav nav-pills flex-column mb-auto">
-        <li class="nav-item">
-            <a href="#" class="nav-link text-dark">
-                <i class="fas fa-table-columns"></i> <span class="sidebar-text ms-2">Dashboard</span>
-            </a>
-        </li>
-        <li>
-            <a href="#" class="nav-link text-dark">
-                <i class="fas fa-layer-group"></i> <span class="sidebar-text ms-2">Menu Style</span>
-            </a>
-        </li>
-        <li>
-            <a href="#" class="nav-link text-dark">
-                <i class="fas fa-palette"></i> <span class="sidebar-text ms-2">Design System</span>
-            </a>
-        </li>
-        <li>
-            <a href="#" class="nav-link text-dark">
-                <i class="fas fa-user-shield"></i> <span class="sidebar-text ms-2">Authentication</span>
-            </a>
-        </li>
-        <li>
-            <a href="#" class="nav-link text-dark">
-                <i class="fas fa-users"></i> <span class="sidebar-text ms-2">Users</span>
-            </a>
-        </li>
+  <div  :class="open ? 'translate-x-0' : '-translate-x-full'"
+  class="h-screen fixed lg:static inset-y-0 left-0 w-64 bg-green-700 text-white flex-shrink-0 transform transition-transform duration-300 lg:translate-x-0"
+ id="main-nav">
+    <!-- Logo -->
+    <div class="w-full h-20 flex items-center px-4 mb-8">
+      <p class="font-semibold text-2xl text-gray-100">PN-Purwokerto</p>
+    </div>
+  
+    <!-- Menu Khusus -->
+    @if (in_array(auth()->user()->pegawai->jabatan->nama_jabatan, [
+        'PANITERA', 'SEKRETARIS', 'KETUA', 'PANMUD HUKUM',
+        'PANMUD HUKUM GUGATAN', 'PANMUD HUKUM PERMOHONAN',
+        'KASUBAG KEPEGAWAIAN DAN ORTALA',
+        'KASUBAG PERNCANAAN, IT DAN PELAPORAN',
+        'KASUBAG UMUM DAN KEUANGAN',
+    ]))
+      <div class="mb-4 px-2">
+        <p class="pl-4 text-sm font-semibold text-gray-100 mb-1">MENU KHUSUS</p>
+        <div class="flex items-center text-blue-400 h-10 pl-4 hover:bg-green-600 rounded-lg cursor-pointer">
+          <svg class="h-6 w-6 fill-current mr-2" viewBox="0 0 20 20">
+            <path d="M..."></path>
+          </svg>
+          <a href="{{ route('dashboard.user.daftar-approve-cuti') }}" class="text-gray-100">Approve Cuti</a>
+        </div>
+      </div>
+    @endif
+  
+    <!-- General -->
+    <div class="mb-4 px-2">
+      <p class="pl-4 text-sm font-semibold text-gray-100 mb-1">GENERAL</p>
+      <div class="flex items-center text-blue-400 h-10 pl-4 hover:bg-green-600 rounded-lg cursor-pointer">
+          <i class="fa fa-home text-white mr-2"></i>
+        <a href="{{ route('dashboard') }}" class="text-gray-100">Dashboard</a>
+      </div>
+    </div>
+  
+    <!-- Cuti -->
+    <div class="mb-4 px-2">
+      <p class="pl-4 text-sm font-semibold text-gray-100 mb-1">CUTI</p>
+      <div class="flex flex-col space-y-2">
+        <div class="flex items-center text-blue-400 h-10 pl-4 hover:bg-green-600 rounded-lg cursor-pointer" aria-controls="dropdown-pengajuan-cuti" data-collapse-toggle="dropdown-pengajuan-cuti">
+          <i class="fa fa-calendar text-white mr-2"></i>
+          <button class="text-gray-100">Pengajuan Cuti</button>
+          <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </div>
+        <ul id="dropdown-pengajuan-cuti" class="hidden py-2 space-y-2">
+          <li>
+            <a href={{ route('dashboard.user.pengajuan-cuti') }}
+              class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11"> Ajukan Cuti</a>
+          </li>
+          <li>
+            <a href={{ route('dashboard.user.daftar-approval') }}
+              class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Menunggu Aproval</a>
+          </li>
+        </ul>
+
+        <div class="flex items-center text-blue-400 h-10 pl-4 hover:bg-green-600 rounded-lg cursor-pointer" aria-controls="dropdown-data-pengajuan-cuti" data-collapse-toggle="dropdown-data-pengajuan-cuti">
+          <i class="fa fa-bell text-white mr-2"></i>
+          <button class="text-gray-100">Data Pengajuan Cuti</button>
+          <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </div>
+        <ul id="dropdown-data-pengajuan-cuti" class="hidden py-2 space-y-2">
+          <li>
+            <a href={{ route('dashboard.user.data.cuti.disetujui') }}
+              class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11"> Disetujui</a>
+          </li>
+          <li>
+            <a href="{{ route('dashboard.user.data.cuti.perubahan') }}"
+              class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Perubahan</a>
+          </li>
+          <li>
+            <a href="{{ route('dashboard.user.data.cuti.ditangguhkan') }}"
+              class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Ditangguhkan</a>
+          </li>
+          <li>
+            <a href="{{ route('dashboard.user.data.cuti.tidak.disetujui') }}"
+              class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Tidak Disetujui</a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  
+    <!-- Management -->
+    <div class="mb-4 px-2">
+      <p class="pl-4 text-sm font-semibold text-gray-100 mb-1">MANAGEMENT</p>
+      <div class="flex flex-col space-y-2">
+        <div class="flex items-center text-blue-400 h-10 pl-4 hover:bg-green-600 rounded-lg cursor-pointer">
+          <i class="fa fa-user text-white mr-2"></i>
+          <a class="text-gray-100">Data User</a>
+        </div>
         
-    </ul>
-</aside>
+        <div class="flex items-center text-blue-400 h-10 pl-4 hover:bg-green-600 rounded-lg cursor-pointer" aria-controls="dropdown-pegawai" data-collapse-toggle="dropdown-pegawai">
+          <i class="fa fa-database text-white mr-2"></i>
+          <button class="text-gray-100">Data Pegawai</button>
+          <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </div>
+        <ul id="dropdown-pegawai" class="hidden py-2 space-y-2">
+          <li>
+            <a href="#"
+              class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11"> Data Pegawai</a>
+          </li>
+          <li>
+            <a href="#"
+              class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Data Jabatan</a>
+          </li>
+          <li>
+            <a href="#"
+              class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Data Golongan</a>
+          </li>
+        </ul>
+
+        <div class="flex items-center text-blue-400 h-10 pl-4 hover:bg-green-600 rounded-lg cursor-pointer" aria-controls="dropdown-history" data-collapse-toggle="dropdown-history">
+          <i class="fa fa-list text-white mr-2"></i>
+          <button
+          class="text-gray-100">Data History</button>
+          <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </div>
+        <ul id="dropdown-history" class="hidden py-2 space-y-2">
+          <li>
+            <a href="{{ route('dashboard.user.daftar-cuti') }}"
+              class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Daftar Cuti</a>
+          </li>
+          <li>
+            <a href="{{ route('dashboard.user.daftar-knp') }}"
+              class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Daftar KNP</a>
+          </li>
+          <li>
+            <a href="{{ route('dashboard.user.daftar-kgb') }}"
+              class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Daftar KGB</a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+  
+  

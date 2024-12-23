@@ -5,25 +5,23 @@
         <div class="d-flex justify-content-between align-items-center">
             <!-- Title Kiri -->
             <div class="title_left">
-                <h3>Pengajuan Cuti</h3>
+                <h3 class="text-2xl">Pengajuan Cuti</h3>
             </div>
 
             <!-- Breadcrumb Kanan -->
             <div class="title_right">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb float-sm-right m-0">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Pengajuan Cuti</li>
+                <nav aria-label="">
+                    <ol class="">
+                        <li class=""><a href="#">Home /</a></li>
+                        <li class=" active" aria-current="page">Pengajuan Cuti</li>
                     </ol>
                 </nav>
             </div>
         </div>
     </div>
 
-    <div class="clearfix"></div>
-
-    <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="">
+        <div class="">
             <div class="x_panel">
                 <div class="x_title">
                     <h2>Daftar Menunggu Approval <small>Daftar Menunggu approval cuti dari atasan</small></h2>
@@ -46,18 +44,18 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    <table id="table-data" class="table table-striped table-bordered">
+                    <table id="table-data" class="min-w-full table-auto border-collapse border border-gray-200">
                         <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama</th>
-                                <th>Jenis Cuti</th>
-                                <th>Alasan Cuti</th>
-                                <th>Lama Cuti</th>
-                                <th>Dari Tanggal</th>
-                                <th>Sampai Dengan</th>
-                                <th>Status</th>
-                                <th>Keterangan</th>
+                            <tr class="bg-gray-100">
+                                <th class="p-3">No</th>
+                                <th class="p-3">Nama</th>
+                                <th class="p-3">Jenis Cuti</th>
+                                <th class="p-3">Alasan Cuti</th>
+                                <th class="p-3">Lama Cuti</th>
+                                <th class="p-3">Dari Tanggal</th>
+                                <th class="p-3">Sampai Dengan</th>
+                                <th class="p-3">Status</th>
+                                <th class="p-3">Keterangan</th>
                             </tr>
                         </thead>
 
@@ -73,10 +71,10 @@
                                     <td> {{ $d->dari_tanggal }}</td>
                                     <td> {{ $d->sampai_dengan }}</td>
                                     <td class="text-center">
-                                        <a href="#" class="btn btn-success btn-xs "> {{ $d['status_cuti'] }}</a>
+                                        <a href="#" class="btn bg-green-600 p-1 text-white btn-xs"> {{ $d['status_cuti'] }}</a>
                                     </td>
                                     <td class="text-center">
-                                        <a href="#" class="btn btn-primary btn-xs "> {{ $d->ket_status_cuti }}</a>
+                                        <a href="#" class="btn bg-blue-500 p-1 text-white btn-xs "> {{ $d->ket_status_cuti }}</a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -1,64 +1,32 @@
 @extends('dashboard.index')
 
 @section('content')
-    <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="x_panel">
-                <div class="x_content text-center">
-                    <div class="flex">
-                        <ul class="list-inline widget_profile_box">
-                            <li>
-                                <a>
-                                    <i class="fa fa-lock"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <img src="https://st.depositphotos.com/1537427/3571/v/450/depositphotos_35717211-stock-illustration-vector-user-icon.jpg"
-                                    class="rounded profile_img" alt="img-profile">
-
-                                {{-- <?php
-                include '../database/koneksi.php';
-
-                $selectfoto = mysqli_query($koneksi, "SELECT * FROM user WHERE nip='$nip'");
-                $row2 = mysqli_fetch_array($selectfoto);
-                if (empty($row2['foto'])) {
-                ?>
-                    <img src="https://st.depositphotos.com/1537427/3571/v/450/depositphotos_35717211-stock-illustration-vector-user-icon.jpg" class="img-circle profile_img" alt="img-profile">
-                <?php
-              } elseif (!empty($row2['foto'])) {
-                ?>
-                    <img src="../build/images/thump_<?php echo $row2['foto']; ?>" class="img-circle profile_img">
-                <?php
-                }
-                 ?> --}}
-                            </li>
-                            <li>
-                                <a>
-                                    <i class="fa fa-lock"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="flex">
-                        <ul class="list-inline count2">
-                            <li>
-                                <h3 class="name">Selamat Datang</h3>
-
-                                <h3 class="name">
-                                    {{ Auth::user()->pegawai->nama_pegawai }}
-                                </h3>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <div class="flex flex-col items-center bg-white mb-7 py-8 shadow-sm px-5">
+        <div class="flex items-center justify-between w-full border bg-gray-400 px-4 py-2 rounded-md">
+          <div class="w-12 h-12 bg-gray-300 flex items-center justify-center rounded-full shadow">
+            <i class="fas fa-lock text-gray-700"></i>
+          </div>
+      
+          <div class="relative flex items-center justify-center w-20 h-20 bg-white border-4 border-gray-300 rounded-full shadow-lg">
+            <img src="https://st.depositphotos.com/1537427/3571/v/450/depositphotos_35717211-stock-illustration-vector-user-icon.jpg" alt="Profile" class="w-full h-full rounded-full object-cover" />
+          </div>
+      
+          <div class="w-12 h-12 bg-gray-300 flex items-center justify-center rounded-full shadow">
+            <i class="fas fa-lock text-gray-700"></i>
+          </div>
         </div>
-    </div>
-    <div class="row top_tiles">
-        <div class="col-md-12 col-sm-12 col-xs-12">
+      
+        <div class="mt-4 text-center">
+          <p class="text-2xl text-gray-600 font-semibold">Selamat Datang</p>
+          <p class="text-2xl text-gray-800 font-bold">{{ Auth::user()->pegawai->nama_pegawai }}</p>
+        </div>
+      </div>
+
+    <div class="w-full">
+        <div class="">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Daftar Pengajuan Cuti Anda<small>Daftar Menunggu approval cuti dari atasan</small></h2>
+                    <h2 class="text-xl">Daftar Pengajuan Cuti Anda<small>Daftar Menunggu approval cuti dari atasan</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
@@ -78,76 +46,36 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    {{-- <table id="datatable" class="table table-striped table-bordered table-hover">
+                    <table id="table-data" class="min-w-full table-auto border-collapse border border-gray-200">
                         <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama</th>
-                                <th>Jenis Cuti</th>
-                                <th>Alasan Cuti</th>
-                                <th>Lama Cuti</th>
-                                <th>Dari Tanggal</th>
-                                <th>Sampai Dengan</th>
-                                <th>Status</th>
-                                <th>Keterangan</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-
-                            @forelse ($data as $d)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $d->pegawai->nama_pegawai }}</td>
-                                    <td>{{ $d->jenis_cuti }}</td>
-                                    <td>{{ $d->alasan_cuti }}</td>
-                                    <td>{{ $d->lama_cuti }} {{ $d->ket_lama_cuti }}</td>
-                                    <td>{{ $d->dari_tanggal }}</td>
-                                    <td>{{ $d->sampai_dengan }}</td>
-
-                                    <td class="text-center">
-                                        <a href="#" class="btn btn-success btn-xs "> {{ $d->status_cuti }}</a>
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="#" class="btn btn-primary btn-xs ">
-                                            {{ $d->ket_status_cuti }}</a>
-                                    </td>
-                                </tr>
-                            @empty
-                                <p>Data Kosong</p>
-                            @endforelse
-                        </tbody>
-                    </table> --}}
-                    <table id="table-data" class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama</th>
-                                <th>Jenis Cuti</th>
-                                <th>Alasan Cuti</th>
-                                <th>Lama Cuti</th>
-                                <th>Dari Tanggal</th>
-                                <th>Sampai Dengan</th>
-                                <th>Status</th>
-                                <th>Keterangan</th>
-                            </tr>
+                            <tr class="bg-gray-100">
+                                <th class="p-3">No</th>
+                                <th class="p-3">Nama</th>
+                                <th class="p-3">Jenis Cuti</th>
+                                <th class="p-3">Alasan Cuti</th>
+                                <th class="p-3">Lama Cuti</th>
+                                <th class="p-3">Dari Tanggal</th>
+                                <th class="p-3">Sampai Dengan</th>
+                                <th class="p-3">Status</th>
+                                <th class="p-3">Keterangan</th>
+                           </tr>
                         </thead>
                         <tbody>
                             @foreach ($data as $d)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $d->pegawai->nama_pegawai }}</td>
-                                    <td>{{ $d->jenis_cuti }}</td>
-                                    <td>{{ $d->alasan_cuti }}</td>
-                                    <td>{{ $d->lama_cuti }} {{ $d->ket_lama_cuti }}</td>
-                                    <td>{{ $d->dari_tanggal }}</td>
-                                    <td>{{ $d->sampai_dengan }}</td>
+                                    <td class="p-3">{{ $loop->iteration }}</td>
+                                    <td class="p-3">{{ $d->pegawai->nama_pegawai }}</td>
+                                    <td class="p-3">{{ $d->jenis_cuti }}</td>
+                                    <td class="p-3">{{ $d->alasan_cuti }}</td>
+                                    <td class="p-3">{{ $d->lama_cuti }} {{ $d->ket_lama_cuti }}</td>
+                                    <td class="p-3">{{ $d->dari_tanggal }}</td>
+                                    <td class="p-3">{{ $d->sampai_dengan }}</td>
 
-                                    <td class="text-center">
-                                        <a href="#" class="btn btn-success btn-xs "> {{ $d->status_cuti }}</a>
+                                    <td class="p-3 text-center">
+                                        <a href="#" class="btn bg-green-500 text-white p-1 btn-xs "> {{ $d->status_cuti }}</a>
                                     </td>
-                                    <td class="text-center">
-                                        <a href="#" class="btn btn-primary btn-xs ">
+                                    <td class="p-3 ext-center">
+                                        <a href="#" class="btn bg-blue-500 text-white p-1 btn-xs ">
                                             {{ $d->ket_status_cuti }}</a>
                                     </td>
                                 </tr>
@@ -158,13 +86,12 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="ccol-md-12 col-sm-12 col-xs-12">
+    <div>
+        <div class="w-full">
             <div class="x_panel">
                 <div class="x_content text-center">
-                    <h1><i class="fa fa-university"></i> </h1>
-                    <p>Data Pegawai Pengadilan Negeri Purwokerto</p>
-                    <p></p>
+                    <h1><i class="fa fa-university text-4xl"></i> </h1>
+                    <p class="py-2">Data Pegawai Pengadilan Negeri Purwokerto</p>
                     <p>©<?= date('Y') ?> Pengadilan Negeri Purwokerto.</p>
                 </div>
             </div>

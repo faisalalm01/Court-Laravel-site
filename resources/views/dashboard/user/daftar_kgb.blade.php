@@ -1,11 +1,11 @@
 @extends('dashboard.index')
 
 @section('content')
-    <div class="p-3">
-        <div class="d-flex justify-content-between align-items-center">
+    <div class="mb-10">
+        <div class="justify-between">
             <!-- Title Kiri -->
             <div class="title_left">
-                <h3>KGB</h3>
+                <h3 class="text-2xl">KGB</h3>
             </div>
 
             <!-- Breadcrumb Kanan -->
@@ -20,10 +20,8 @@
         </div>
     </div>
 
-    <div class="clearfix"></div>
-
-    <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="">
+        <div class="">
             <div class="x_panel">
                 <div class="x_title">
                     <h2>Daftar KGB <small>Kenaikan Gaji Berkala Pengadilan Negeri Purwokerto</small></h2>
@@ -46,7 +44,7 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    <table id="table-data" class="table table-striped table-bordered">
+                    <table id="table-data" class="min-w-full table-auto border-collapse border border-gray-200">
                         <thead>
                             <tr>
                                 <th>No</th>

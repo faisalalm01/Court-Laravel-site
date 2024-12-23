@@ -1,15 +1,11 @@
 import './bootstrap';
 import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap-icons/font/bootstrap-icons.css';
+import '../css/app.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import '@fortawesome/fontawesome-free/js/all.js';
 import 'laravel-datatables-vite';
-// import 'datatables.net-dt/css/jquery.dataTables.css'; // Import CSS DataTables
-import 'datatables.net-buttons-dt/css/buttons.dataTables.css'; // Import CSS Buttons DataTables
+import 'datatables.net-buttons-dt/css/buttons.dataTables.css';
 import $ from 'jquery';
-import dt from 'datatables.net';
-import dtButtons from 'datatables.net-buttons';
 import 'datatables.net-buttons/js/buttons.html5.js';
 import 'datatables.net-buttons/js/buttons.print.js';
 
@@ -33,25 +29,38 @@ $(document).ready(function () {
     });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
+    const hamburgerButton = document.getElementById('hamburgerButton');
     const sidebar = document.getElementById('sidebar');
-    const sidebarTextElements = document.querySelectorAll('.sidebar-text');
-    const sidebarToggle = document.getElementById('sidebarToggle');
 
-    sidebarToggle.addEventListener('click', function () {
-        // Toggle kelas sidebar untuk menyempitkan
-        sidebar.classList.toggle('collapsed');
-
-        // Toggle visibility dari teks sidebar
-        sidebarTextElements.forEach(element => {
-            element.classList.toggle('d-none');
-        });
-
-        // Ubah width sidebar
-        if (sidebar.classList.contains('collapsed')) {
-            sidebar.style.width = '70px';
-        } else {
-            sidebar.style.width = '280px';
-        }
+    // Toggle Sidebar
+    hamburgerButton.addEventListener('click', () => {
+        sidebar.classList.toggle('-translate-x-full'); // Toggle visibility
+        hamburgerButton.classList.toggle('active'); // Toggle active class
     });
+
+    // Toggle Dropdowns
+    document.querySelectorAll('.dropdown-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const dropdown = button.nextElementSibling;
+            dropdown.classList.toggle('hidden'); // Show/Hide dropdown
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const hamburgerButton = document.getElementById('hamburgerButton');
+    const sidebar = document.getElementById('sidebar');
+
+    // Pastikan elemen ditemukan
+    if (hamburgerButton && sidebar) {
+        hamburgerButton.addEventListener('click', () => {
+            // Toggle visibility
+            sidebar.classList.toggle('-translate-x-full'); 
+            // Toggle active class untuk animasi tombol
+            hamburgerButton.classList.toggle('active'); 
+        });
+    } else {
+        console.error('Hamburger button or sidebar not found in DOM');
+    }
 });
