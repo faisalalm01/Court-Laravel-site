@@ -1,24 +1,19 @@
-    {{-- <?php
-    include '../database/koneksi.php';
+    {{--
+  <?php
+  include '../database/koneksi.php';
 
-    if (isset($_POST['submit'])) {
-        $nip = $_POST['pegawai'];
-        $password = md5($_POST['password']);
-        $hakakses = $_POST['hak_akses'];
+  if (isset($_POST['submit'])) {
+      $namapegawai = $_POST['nama_lengkap'];
+      $nippegawai = $_POST['nip'];
+      $jabatanpegawai = $_POST['jabatan'];
+      $golpegawai = $_POST['golongan'];
 
-        $selectnip = mysqli_query($koneksi, "SELECT * FROM user where nip=$nip");
-        $data = mysqli_fetch_array($selectnip);
+      $query = mysqli_query($koneksi, "INSERT INTO pegawai VALUES (null, '$namapegawai','$nippegawai', '$jabatanpegawai', '$golpegawai', 'PENGADILAN NEGERI PURWOKERTO')");
 
-        if (empty($data['nip'])) {
-            $query = mysqli_query($koneksi, "INSERT INTO user VALUES (null, '$nip','$password', '$hakakses', null)");
-
-            if ($query) {
-                echo "<script>alert('Data Berhasil Ditambahkan'); document.location='index.php?page=data_user';</script>";
-            } else {
-                echo "<script>alert('Data Gagal Ditambahkan'); document.location='index.php?page=data_user';</script>";
-            }
-        } elseif (!empty($data['nip'])) {
-            echo "<script>alert('Akun sudah didaftarkan'); document.location='index.php?page=data_user';</script>";
-        }
-    }
-    ?> --}}
+      if ($query) {
+          echo "<script>alert('Data Berhasil Ditambahkan'); document.location='index.php?page=data_pegawai';</script>";
+      } else {
+          echo "<script>alert('Data Gagal Ditambahkan'); document.location='index.php?page=data_pegawai';</script>";
+      }
+  }
+  ?> --}}

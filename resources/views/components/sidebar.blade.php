@@ -165,7 +165,8 @@
                     <span class="fa fa-chevron-down"></span>
                 </a>
                 <ul class="collapse list-unstyled px-5 pb-2" id="dataPegawai">
-                    <li><a href="daftar_cuti" style="text-decoration: none;">Data Pegawai</a></li>
+                    <li><a href="{{ route('dashboard.admin.data-pegawai') }}" style="text-decoration: none;">Data
+                            Pegawai</a></li>
                     <li><a href="daftar_knp" style="text-decoration: none;">Data Jabatan</a></li>
                     <li><a href="daftar_kgb" style="text-decoration: none;">Data Golongan</a></li>
                 </ul>

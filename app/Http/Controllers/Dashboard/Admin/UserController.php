@@ -15,7 +15,7 @@ class UserController extends Controller
     {
         $data = User::all();
         $pegawai = Pegawai::all();
-        return view('dashboard.admin.data_users', ['data' => $data, 'pegawai' => $pegawai]);
+        return view('dashboard.admin.data_users', ['title' => 'Dashboard Admin | Data Users', 'data' => $data, 'pegawai' => $pegawai]);
     }
     public function addUser(AddUserRequest $request)
     {

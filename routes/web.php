@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Dashboard\Admin\PegawaiController;
 use App\Http\Controllers\Dashboard\Admin\UserController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\User\ApproveCutiController;
@@ -56,3 +57,6 @@ Route::post('/dashboard/admin/add-users', [UserController::class, 'addUser'])->n
 Route::put('/dashboard/admin/edit-users/{nip}', [UserController::class, 'editUser'])
     ->name('dashboard.admin.edit-users')
     ->middleware('auth');
+
+// dashboard admin data pegawai
+Route::get('/dashboard/admin/data-pegawai', [PegawaiController::class, 'index'])->name('dashboard.admin.data-pegawai')->middleware('auth');
