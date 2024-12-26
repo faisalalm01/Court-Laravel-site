@@ -16,7 +16,7 @@ class AuthController extends Controller
 
     public function login(AuthLoginRequest $request)
     {
-        $validatedData = $request->all();
+        $validatedData = $request->validated();
         $user  = User::where('nip',  $validatedData['nip'])->first();
         if ($user && $user->password === md5($validatedData['password'])) {
             Auth::login($user);

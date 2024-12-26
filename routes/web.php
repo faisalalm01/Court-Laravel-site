@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Dashboard\Admin\UserController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\User\ApproveCutiController;
 use App\Http\Controllers\Dashboard\User\DataCutiController;
@@ -48,3 +49,10 @@ Route::get('/dashboard/user/data-cuti-tidak-disetujui', [DataCutiController::cla
 Route::get('/dashboard/user/daftar-cuti', [HistoryController::class, 'showDaftarCuti'])->name('dashboard.user.daftar-cuti')->middleware('auth');
 Route::get('/dashboard/user/daftar-kgb', [HistoryController::class, 'showDaftarKGB'])->name('dashboard.user.daftar-kgb')->middleware('auth');
 Route::get('/dashboard/user/daftar-knp', [HistoryController::class, 'showDaftarKNP'])->name('dashboard.user.daftar-knp')->middleware('auth');
+
+// dashboard admin data users
+Route::get('/dashboard/admin/data-users', [UserController::class, 'index'])->name('dashboard.admin.data-users')->middleware('auth');
+Route::post('/dashboard/admin/add-users', [UserController::class, 'addUser'])->name('dashboard.admin.add-users')->middleware('auth');
+Route::put('/dashboard/admin/edit-users/{nip}', [UserController::class, 'editUser'])
+    ->name('dashboard.admin.edit-users')
+    ->middleware('auth');

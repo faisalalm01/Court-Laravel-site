@@ -92,7 +92,7 @@
 </div>
 
 <div class="menu_section">
-    <h3 style="border: 0;">Management</h3>
+
     <ul class="nav side-menu">
         <!-- Dropdown Pengajuan Cuti -->
         <li>
@@ -150,6 +150,27 @@
             @endif
 
         </li>
+        <h3 style="border: 0;">Management</h3>
+        <!-- Dropdown Data User dan  Pegawai -->
+        @if (auth()->user()->role === 'Admin')
+            <li>
+                <a href="{{ route('dashboard.admin.data-users') }}" style="text-decoration: none;">
+                    <i class="fa fa-users"></i> Data Users
+                    <span class="fa fa-chevron-down"></span>
+                </a>
+            </li>
+            <li>
+                <a href="#dataPegawai" data-toggle="collapse" aria-expanded="false" style="text-decoration: none;">
+                    <i class="fa fa-database"></i> Data Pegawai
+                    <span class="fa fa-chevron-down"></span>
+                </a>
+                <ul class="collapse list-unstyled px-5 pb-2" id="dataPegawai">
+                    <li><a href="daftar_cuti" style="text-decoration: none;">Data Pegawai</a></li>
+                    <li><a href="daftar_knp" style="text-decoration: none;">Data Jabatan</a></li>
+                    <li><a href="daftar_kgb" style="text-decoration: none;">Data Golongan</a></li>
+                </ul>
+            </li>
+        @endif
 
         <!-- Dropdown Data Histori -->
         <li>
