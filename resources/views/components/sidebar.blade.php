@@ -238,12 +238,14 @@
           </li>
         </ul>
 
+        <!-- Dropdown Data Histori -->
         <div class="flex items-center text-blue-400 h-10 pl-4 hover:bg-green-600 rounded-lg cursor-pointer" aria-controls="dropdown-history" data-collapse-toggle="dropdown-history">
           <i class="fa fa-list text-white mr-2"></i>
           <button
           class="text-gray-100">Data History</button>
           <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
         </div>
+        @if (auth()->user()->role !== 'Admin')
         <ul id="dropdown-history" class="hidden py-2 space-y-2">
           <li>
             <a href="{{ route('dashboard.user.daftar-cuti') }}"
@@ -258,6 +260,22 @@
               class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Daftar KGB</a>
           </li>
         </ul>
+        @else
+        <ul id="dropdown-history" class="hidden py-2 space-y-2">
+          <li>
+            <a href="daftar_cuti"
+              class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Daftar Cuti</a>
+          </li>
+          <li>
+            <a href="daftar_knp"
+              class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Daftar KNP</a>
+          </li>
+          <li>
+            <a href="daftar_kgb"
+              class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Daftar KGB</a>
+          </li>
+        </ul>
+        @endif
 
       </div>
     </div>
