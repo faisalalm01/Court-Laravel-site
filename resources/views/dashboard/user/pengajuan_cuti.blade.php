@@ -7,14 +7,14 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <!-- Title Kiri -->
                     <div class="title_left">
-                        <h3>Ajukan Cuti</h3>
+                        <h3 class="text-2xl">Pengajuan Cuti</h3>
                     </div>
 
                     <!-- Breadcrumb Kanan -->
                     <div class="title_right">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb float-sm-right m-0">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Home /</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Ajukan Cuti</li>
                             </ol>
                         </nav>
@@ -25,12 +25,12 @@
 
             <div class="clearfix"></div>
 
-            <div class="row">
-                <div class="col-md-3 col-sm-3"></div>
-                <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="">
+                <div class=""></div>
+                <div class="">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Form Pengajuan Cuti</h2>
+                            <h2 class="text-xl">Form Pengajuan Cuti</h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
