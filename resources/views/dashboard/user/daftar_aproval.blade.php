@@ -5,7 +5,7 @@
         <div class="d-flex justify-content-between align-items-center">
             <!-- Title Kiri -->
             <div class="title_left">
-                <h3 class="text-2xl">Pengajuan Cuti</h3>
+                <h3 class="text-2xl">Daftar Approval</h3>
             </div>
 
             <!-- Breadcrumb Kanan -->
@@ -13,7 +13,7 @@
                 <nav aria-label="">
                     <ol class="">
                         <li class=""><a href="#">Home /</a></li>
-                        <li class=" active" aria-current="page">Pengajuan Cuti</li>
+                        <li class=" active" aria-current="page">Daftar Approval</li>
                     </ol>
                 </nav>
             </div>
@@ -44,7 +44,7 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    <table id="table-data" class="min-w-full table-auto border-collapse border border-gray-200">
+                    <table id="data-tables">
                         <thead>
                             <tr class="bg-gray-100">
                                 <th class="p-3">No</th>
@@ -64,7 +64,7 @@
                             @foreach ($data as $d)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td> {{ $d->nama_pegawai }}</td>
+                                    <td> {{ $d->pegawai->nama_pegawai }}</td>
                                     <td>{{ $d->jenis_cuti }}</td>
                                     <td> {{ $d->alasan_cuti }}</td>
                                     <td> {{ $d->lama_cuti }} {{ $d->ket_lama_cuti }} </td>
@@ -73,7 +73,7 @@
                                     <td class="text-center">
                                         <a href="#" class="btn bg-green-600 p-1 text-white btn-xs"> {{ $d['status_cuti'] }}</a>
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center px-2">
                                         <a href="#" class="btn bg-blue-500 p-1 text-white btn-xs "> {{ $d->ket_status_cuti }}</a>
                                     </td>
                                 </tr>

@@ -3408,13 +3408,7 @@ ul.project_files li a i {
 a.hiddenanchor {
     display: none;
 }
-.login_wrapper {
-    right: 0px;
-    margin: 0px auto;
-    margin-top: 5%;
-    max-width: 350px;
-    position: relative;
-}
+
 .registration_form,
 .login_form {
     position: absolute;
@@ -3506,34 +3500,14 @@ form:after {
     height: 1px;
     position: absolute;
     top: 10px;
-    width: 27%;
-}
-.login_content h1:after {
-    background: #7e7e7e;
-    background: linear-gradient(left, #7e7e7e 0%, #fff 100%);
-    right: 0;
-}
-.login_content h1:before {
-    background: #7e7e7e;
-    background: linear-gradient(right, #7e7e7e 0%, #fff 100%);
-    left: 0;
-}
-.login_content h1:before,
-.login_content h1:after {
-    content: "";
-    height: 1px;
-    position: absolute;
-    top: 10px;
     width: 20%;
 }
 .login_content h1:after {
     background: #7e7e7e;
-    background: linear-gradient(left, #7e7e7e 0%, #fff 100%);
     right: 0;
 }
 .login_content h1:before {
     background: #7e7e7e;
-    background: linear-gradient(right, #7e7e7e 0%, #fff 100%);
     left: 0;
 }
 .login_content form {
@@ -3587,7 +3561,6 @@ form:after {
 }
 .button {
     background: #f7f9fa;
-    background: linear-gradient(top, #f7f9fa 0%, #f0f0f0 100%);
     filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#f7f9fa', endColorstr='#f0f0f0', GradientType=0);
     -ms-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
     -o-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
@@ -4201,73 +4174,4 @@ ul.notifications {
     .dataTables_length {
         float: none;
     }
-}
-
-/* CSS3 Checkbox */
-/*
-   .checkbox-input { display:block;position:relative; }
-   .checkbox-input:before { display:block;content:"";position:absolute;top:2px;left:0;height:20px;width:20px;background:red;border-radius:3px; }
-
-
-    #input + label:after {
-       content: 'click my input';
-       color: blue;
-     }
-
-     #input:focus + label:after {
-       content: 'not valid yet';
-       color: blue;
-     }
-
-     #input:valid + label:after {
-       content: 'looks good';
-       color: red;
-     }
-
-   /* CSS3 Checkbox - end */
-/*
-   
-   /*
-   .checkbox 																										{ display: block;position:relative;cursor:pointer; }
-   .checkbox input 																								{ position:absolute;z-index:-1;opacity:0;left:0;top:0; }
-   .checkbox div 																									{ position:absolute;top:2px;left:0;height:20px;width:20px;background:#e6e6e6;border-radius:3px; }
-   .checkbox input:checked ~ div 																			{ background: #1ABC9C; }
-   .checkbox:hover input:not([disabled]):checked ~ div,
-   .checkbox input:checked:focus ~ div 																	{ background: #1ABC9C; }
-   .checkbox input:disabled ~ div 																			{ background: #1ABC9C;opacity: 0.6;pointer-events: none; }
-   .checkbox div:after 																							{ content: '';position: absolute;display: none; }
-   .checkbox input:checked ~ div:after 																	{ display: block; }
-   .checkbox-wp div:after 																					{ left: 7px;top: 3px;width: 7px;height: 11px;border: solid #fff;border-width: 0 2px 2px 0;transform: rotate(40deg); }
-   .checkbox-wp input:disabled ~ div:after 																{ border-color: #F2F2F2; }
-
-
-   .checkbox-radio div 																							{ border-radius: 50%; }
-   .checkbox-radio div:after 																					{ left: 7px;top: 7px;height: 6px;width: 6px;border-radius: 50%;background: #fff; }
-   .checkbox-radio input:disabled ~ div:after 															{ background: #F2F2F2; }
-
-
-   .checkbox, .radio { margin-top:-3px; }
-
-   table thead .checkbox { margin-top:-7px;margin-top:-21px; }
-   table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
-   */
-
-.daterangepicker.xdisplay {
-    width: 228px;
-}
-
-.dataTables_wrapper > .row {
-    overflow: auto !important; /*prevent datatables overflowing its container*/
-}
-
-/** bootstrap-datetimepicker **/
-.input-group.date .input-group-addon {
-    border-radius: 0px !important;
-    background-color: #ffff !important;
-}
-/** /bootstrap-datetimepicker **/
-
-.disabled {
-    pointer-events: none;
-    cursor: default;
 }

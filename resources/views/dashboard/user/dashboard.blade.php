@@ -1,7 +1,7 @@
 @extends('dashboard.index')
 
 @section('content')
-    <div class="flex flex-col items-center bg-white mb-7 py-8 shadow-sm px-5">
+    <div class="flex flex-col items-center rounded-lg bg-white mb-7 py-8 shadow-sm px-5">
         <div class="flex items-center justify-between w-full border bg-gray-400 px-4 py-2 rounded-md">
           <div class="w-12 h-12 bg-gray-300 flex items-center justify-center rounded-full shadow">
             <i class="fas fa-lock text-gray-700"></i>
@@ -24,7 +24,7 @@
 
     <div class="w-full">
         <div class="">
-            <div class="x_panel">
+            <div class="x_panel rounded-lg shadow-md mb-20">
                 <div class="x_title">
                     <h2 class="text-xl">Daftar Pengajuan Cuti Anda<small>Daftar Menunggu approval cuti dari atasan</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
@@ -46,35 +46,35 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    <table id="table-data" class="min-w-full table-auto border-collapse border border-gray-200">
+                    <table id="data-tables" class="table-auto">
                         <thead>
                             <tr class="bg-gray-100">
-                                <th class="p-3">No</th>
-                                <th class="p-3">Nama</th>
-                                <th class="p-3">Jenis Cuti</th>
-                                <th class="p-3">Alasan Cuti</th>
-                                <th class="p-3">Lama Cuti</th>
-                                <th class="p-3">Dari Tanggal</th>
-                                <th class="p-3">Sampai Dengan</th>
-                                <th class="p-3">Status</th>
-                                <th class="p-3">Keterangan</th>
+                                <th class="">No</th>
+                                <th class="">Nama</th>
+                                <th class="">Jenis Cuti</th>
+                                <th class="">Alasan Cuti</th>
+                                <th class="">Lama Cuti</th>
+                                <th class="">Dari Tanggal</th>
+                                <th class="">Sampai Dengan</th>
+                                <th class="">Status</th>
+                                <th class="">Keterangan</th>
                            </tr>
                         </thead>
                         <tbody>
                             @foreach ($data as $d)
                                 <tr>
-                                    <td class="p-3">{{ $loop->iteration }}</td>
-                                    <td class="p-3">{{ $d->pegawai->nama_pegawai }}</td>
-                                    <td class="p-3">{{ $d->jenis_cuti }}</td>
-                                    <td class="p-3">{{ $d->alasan_cuti }}</td>
-                                    <td class="p-3">{{ $d->lama_cuti }} {{ $d->ket_lama_cuti }}</td>
-                                    <td class="p-3">{{ $d->dari_tanggal }}</td>
-                                    <td class="p-3">{{ $d->sampai_dengan }}</td>
+                                    <td class="">{{ $loop->iteration }}</td>
+                                    <td class="">{{ $d->pegawai->nama_pegawai }}</td>
+                                    <td class="">{{ $d->jenis_cuti }}</td>
+                                    <td class="">{{ $d->alasan_cuti }}</td>
+                                    <td class="">{{ $d->lama_cuti }} {{ $d->ket_lama_cuti }}</td>
+                                    <td class="">{{ $d->dari_tanggal }}</td>
+                                    <td class="">{{ $d->sampai_dengan }}</td>
 
-                                    <td class="p-3 text-center">
+                                    <td class=" text-center">
                                         <a href="#" class="btn bg-green-500 text-white p-1 btn-xs "> {{ $d->status_cuti }}</a>
                                     </td>
-                                    <td class="p-3 ext-center">
+                                    <td class=" ext-center">
                                         <a href="#" class="btn bg-blue-500 text-white p-1 btn-xs ">
                                             {{ $d->ket_status_cuti }}</a>
                                     </td>

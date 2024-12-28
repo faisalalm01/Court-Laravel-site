@@ -25,7 +25,7 @@
         <div class="">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2 class="text-xl">Daftar Cuti Ditangguhkan </h2>
+                    <h2>Daftar Cuti Ditangguhkan </h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
@@ -45,7 +45,7 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    <table id="table-data" class="min-w-full table-auto border-collapse border border-gray-200">
+                    <table id="data-tables" class="min-w-full table-auto border-collapse border border-gray-200">
                         <thead>
                             <tr class="bg-gray-100">
                                 <th class="p-3">No</th>

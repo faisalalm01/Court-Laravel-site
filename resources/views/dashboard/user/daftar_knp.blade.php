@@ -44,7 +44,7 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    <table id="table-data" class="min-w-full table-auto border-collapse border border-gray-200">
+                    <table id="data-tables" class="min-w-full table-auto border-collapse border border-gray-200">
                         <thead>
                             <tr>
                                 <th>No</th>

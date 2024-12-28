@@ -17,11 +17,11 @@ $(document).ready(function () {
         // ],
         responsive: true,
         language: {
-            search: "Cari:",
+            search: `Cari`,
             lengthMenu: "Tampilkan _MENU_ entri",
             info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
             paginate: {
-                previous: "previous",
+                previous: `<button class="bg-red-600">previous</button>`,
                 next: "next"
             },
             zeroRecords: "Tidak ada data yang ditemukan"
@@ -29,38 +29,14 @@ $(document).ready(function () {
     });
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    const hamburgerButton = document.getElementById('hamburgerButton');
-    const sidebar = document.getElementById('sidebar');
+new DataTable('#example');
 
-    // Toggle Sidebar
-    hamburgerButton.addEventListener('click', () => {
-        sidebar.classList.toggle('-translate-x-full'); // Toggle visibility
-        hamburgerButton.classList.toggle('active'); // Toggle active class
+if (document.getElementById("data-tables") && typeof simpleDatatables.DataTable !== 'undefined') {
+    const dataTable = new simpleDatatables.DataTable("#data-tables", {
+        paging: true,
+        perPage: 5,
+        perPageSelect: [5, 10, 15, 20, 25],
+        sortable: true,
     });
+}
 
-    // Toggle Dropdowns
-    document.querySelectorAll('.dropdown-btn').forEach(button => {
-        button.addEventListener('click', () => {
-            const dropdown = button.nextElementSibling;
-            dropdown.classList.toggle('hidden'); // Show/Hide dropdown
-        });
-    });
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    const hamburgerButton = document.getElementById('hamburgerButton');
-    const sidebar = document.getElementById('sidebar');
-
-    // Pastikan elemen ditemukan
-    if (hamburgerButton && sidebar) {
-        hamburgerButton.addEventListener('click', () => {
-            // Toggle visibility
-            sidebar.classList.toggle('-translate-x-full'); 
-            // Toggle active class untuk animasi tombol
-            hamburgerButton.classList.toggle('active'); 
-        });
-    } else {
-        console.error('Hamburger button or sidebar not found in DOM');
-    }
-});
