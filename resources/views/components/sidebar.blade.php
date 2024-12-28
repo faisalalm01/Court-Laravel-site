@@ -94,41 +94,9 @@
           </li>
         </ul>
 
-<<<<<<< HEAD
-<div class="menu_section">
-
-    <ul class="nav side-menu">
-        <!-- Dropdown Pengajuan Cuti -->
-        <li>
-            <a href="#pengajuanCutiSubmenu" data-toggle="collapse" aria-expanded="false" style="text-decoration: none;">
-                <i class="fa fa-calendar"></i> Pengajuan Cuti
-                <span class="fa fa-chevron-down"></span>
-            </a>
-            @if (auth()->user()->role !== 'Admin')
-                <ul class="collapse list-unstyled px-5 pb-2" id="pengajuanCutiSubmenu">
-                    <li class=""><a href="{{ route('dashboard.user.pengajuan-cuti') }}"
-                            style="text-decoration: none;">Ajukan
-                            Cuti</a>
-                    </li>
-                    <li><a href="{{ route('dashboard.user.daftar-approval') }}" style="text-decoration: none;">Menunggu
-                            Approval</a>
-                    </li>
-                </ul>
-            @else
-                <ul class="collapse list-unstyled px-5 pb-2" id="pengajuanCutiSubmenu">
-                    <li class=""><a href="index.php?page=ajukan_cuti" style="text-decoration: none;">Ajukan
-                            Cuti</a>
-                    </li>
-                    <li><a href="index.php?page=daftar_approval" style="text-decoration: none;">Menunggu Approval</a>
-                    </li>
-                </ul>
-            @endif
-        </li>
-=======
       </div>
     </div>
     @endif
->>>>>>> 1978784faa59ff6261bb5527ffa8cb2f0ebdfeb8
 
   
     <!-- Management Super Admin -->
@@ -136,30 +104,6 @@
       <p class="pl-4 text-xs font-semibold text-gray-100 mb-1">MANAGEMENT</p>
       <div class="flex flex-col space-y-2">
 
-<<<<<<< HEAD
-        </li>
-        <h3 style="border: 0;">Management</h3>
-        <!-- Dropdown Data User dan  Pegawai -->
-        @if (auth()->user()->role === 'Admin')
-            <li>
-                <a href="{{ route('dashboard.admin.data-users') }}" style="text-decoration: none;">
-                    <i class="fa fa-users"></i> Data Users
-                    <span class="fa fa-chevron-down"></span>
-                </a>
-            </li>
-            <li>
-                <a href="#dataPegawai" data-toggle="collapse" aria-expanded="false" style="text-decoration: none;">
-                    <i class="fa fa-database"></i> Data Pegawai
-                    <span class="fa fa-chevron-down"></span>
-                </a>
-                <ul class="collapse list-unstyled px-5 pb-2" id="dataPegawai">
-                    <li><a href="{{ route('dashboard.admin.data-pegawai') }}" style="text-decoration: none;">Data
-                            Pegawai</a></li>
-                    <li><a href="daftar_knp" style="text-decoration: none;">Data Jabatan</a></li>
-                    <li><a href="daftar_kgb" style="text-decoration: none;">Data Golongan</a></li>
-                </ul>
-            </li>
-=======
         @if (auth()->user()->role == 'Admin')
         <div class="flex items-center text-blue-400 h-10 pl-4 hover:bg-green-600 rounded-lg cursor-pointer">
           <i class="fa fa-user text-white mr-2"></i>
@@ -235,7 +179,6 @@
             </li>
           </ul>
         </div>
->>>>>>> 1978784faa59ff6261bb5527ffa8cb2f0ebdfeb8
         @endif
 
         <!-- Dropdown Data Histori -->
