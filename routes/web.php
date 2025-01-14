@@ -1,12 +1,15 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Dashboard\Admin\GolonganController;
+use App\Http\Controllers\Dashboard\Admin\JabatanController;
 use App\Http\Controllers\Dashboard\Admin\PegawaiController;
 use App\Http\Controllers\Dashboard\Admin\UserController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\User\ApproveCutiController;
 use App\Http\Controllers\Dashboard\User\DataCutiController;
 use App\Http\Controllers\Dashboard\User\HistoryController;
+use App\Http\Controllers\Dashboard\Admin\HistoryController as AdminHistoryController;
 use App\Http\Controllers\Dashboard\User\PengajuanCutiController;
 use Illuminate\Support\Facades\Route;
 
@@ -60,3 +63,14 @@ Route::put('/dashboard/admin/edit-users/{nip}', [UserController::class, 'editUse
 
 // dashboard admin data pegawai
 Route::get('/dashboard/admin/data-pegawai', [PegawaiController::class, 'index'])->name('dashboard.admin.data-pegawai')->middleware('auth');
+
+// dashboard admin data jabatan
+Route::get('/dashboard/admin/data-jabatan', [JabatanController::class, 'index'])->name('dashboard.admin.data-jabatan')->middleware('auth');
+
+// dashboard admin data golongan
+Route::get('/dashboard/admin/data-golongan', [GolonganController::class, 'index'])->name('dashboard.admin.data-golongan')->middleware('auth');
+
+// dashboard admin data history
+Route::get('/dashboard/admin/daftar-cuti', [AdminHistoryController::class, 'showDaftarCuti'])->name('dashboard.admin.daftar-cuti')->middleware('auth');
+Route::get('/dashboard/admin/daftar-knp', [AdminHistoryController::class, 'showDaftarKNP'])->name('dashboard.admin.daftar-knp')->middleware('auth');
+Route::get('/dashboard/admin/daftar-kgb', [AdminHistoryController::class, 'showDaftarKGB'])->name('dashboard.admin.daftar-kgb')->middleware('auth');

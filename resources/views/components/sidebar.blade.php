@@ -157,12 +157,12 @@
                             Data Pegawai</a>
                     </li>
                     <li>
-                        <a href="#"
+                        <a href="{{ route('dashboard.admin.data-jabatan') }}"
                             class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Data
                             Jabatan</a>
                     </li>
                     <li>
-                        <a href="#"
+                        <a href="{{ route('dashboard.admin.data-golongan') }}"
                             class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Data
                             Golongan</a>
                     </li>
@@ -269,17 +269,17 @@
             @else
                 <ul id="dropdown-history" class="hidden py-2 space-y-2">
                     <li>
-                        <a href="daftar_cuti"
+                        <a href="{{ route('dashboard.admin.daftar-cuti') }}"
                             class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Daftar
                             Cuti</a>
                     </li>
                     <li>
-                        <a href="daftar_knp"
+                        <a href="{{ route('dashboard.admin.daftar-knp') }}"
                             class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Daftar
                             KNP</a>
                     </li>
                     <li>
-                        <a href="daftar_kgb"
+                        <a href="{{ route('dashboard.admin.daftar-kgb') }}"
                             class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Daftar
                             KGB</a>
                     </li>
