@@ -12,7 +12,8 @@ class Pegawai extends Model
         'nip',
         'id_jabatan',
         'id_golongan',
-        'unit_kerja'
+        'unit_kerja',
+        'jenis_kelamin'
     ];
 
     // Relasi ke Jabatan
