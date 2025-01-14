@@ -53,7 +53,12 @@
                                         <option value="Cuti Tahunan">Cuti Tahunan</option>
                                         <option value="Cuti Besar">Cuti Besar</option>
                                         <option value="Cuti Sakit">Cuti Sakit</option>
-                                        <option value="Cuti Melahirkan">Cuti Melahirkan</option>
+                                        @if (auth()->user()->pegawai->jenis_kelamin === 'P')
+                                            <option value="Cuti Melahirkan">Cuti Melahirkan</option>
+                                        @else
+                                            <option value="Cuti Melahirkan" disabled class="bg-gray-300">Cuti Melahirkan
+                                            </option>
+                                        @endif
                                         <option value="Cuti Karena Alasan Penting">Cuti Karena Alasan Penting</option>
                                         <option value="Cuti diluar Tanggungan Negara">Cuti diluar Tanggungan Negara</option>
                                     </select>
