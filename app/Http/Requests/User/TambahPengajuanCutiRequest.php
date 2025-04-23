@@ -24,6 +24,7 @@ class TambahPengajuanCutiRequest extends FormRequest
         return [
             'jenis_cuti' =>  ['required'],
             'alasan_cuti' => ['required'],
+            'alamat' => ['required'],
             'lama_cuti' => ['required'],
             'ket_lamacuti' => ['required'],
             'dari_tanggal' => ['required'],
