@@ -28,6 +28,7 @@ return new class extends Migration
             $table->integer('app_ketua')->nullable();
             $table->string('status_cuti', 255)->nullable();
             $table->string('ket_status_cuti', 255)->nullable();
+            $table->text('alamat')->nullable();
             $table->timestamps();
 
             // Foreign key

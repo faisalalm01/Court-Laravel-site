@@ -12,6 +12,7 @@ class CutiPegawai extends Model
         'id_pegawai',
         'jenis_cuti',
         'alasan_cuti',
+        'alamat',
         'lama_cuti',
         'dari_tanggal',
         'sampai_dengan',
