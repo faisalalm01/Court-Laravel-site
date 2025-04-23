@@ -4,7 +4,7 @@ namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TambahPengajuanCutiRequest extends FormRequest
+class UpdatePengajuanCutiRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,12 @@ class TambahPengajuanCutiRequest extends FormRequest
         return [
             'jenis_cuti' =>  ['required'],
             'alasan_cuti' => ['required'],
-            'alamat' => ['required'],
             'lama_cuti' => ['required'],
             'ket_lamacuti' => ['required'],
             'dari_tanggal' => ['required'],
             'sampai_dengan' => ['required'],
+            'alamat' => ['required'],
             'atasan' => ['required'],
-
         ];
     }
 }

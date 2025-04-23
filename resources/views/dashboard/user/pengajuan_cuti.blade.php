@@ -69,10 +69,6 @@
                                         name="alasan_cuti">
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Alamat</label>
-                                    <input type="text" required class="form-control" placeholder="Alamat" name="alamat">
-                                </div>
-                                <div class="form-group">
                                     <label for="">Lamanya cuti</label>
                                     <input type="text" required class="form-control" placeholder="Masukan berapa lama"
                                         name="lama_cuti">
@@ -91,6 +87,10 @@
                                 <div class="form-group">
                                     <label for="">Sampai dengan</label>
                                     <input type="date" required class="form-control" name="sampai_dengan">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Alamat</label>
+                                    <input type="text" required class="form-control" placeholder="Alamat" name="alamat">
                                 </div>
                                 <div class="form-group">
                                     <label for="">Atasan</label>
