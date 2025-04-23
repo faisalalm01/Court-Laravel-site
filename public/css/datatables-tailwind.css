@@ -1,0 +1,47 @@
+/* Styling untuk search box */
+div.dataTables_filter {
+    margin-bottom: 15px !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 14px !important;
+    color: #333 !important;
+}
+div.dataTables_filter input {
+    width: 300px !important;
+    padding: 6px !important;
+    border: 1px solid #ccc !important;
+    border-radius: 5px !important;
+}
+
+/* Styling untuk info text */
+div.dataTables_info {
+    font-family: Arial, sans-serif !important;
+    font-size: 13px !important;
+    color: #555 !important;
+    margin-top: 10px !important;
+}
+
+/* Styling untuk pagination */
+div.dataTables_paginate {
+    margin-top: 10px !important;
+    text-align: right !important;
+}
+div.dataTables_paginate .paginate_button {
+    display: inline-block !important;
+    padding: 8px 12px !important;
+    margin: 0 4px !important;
+    border: 1px solid #007bff !important;
+    border-radius: 4px !important;
+    background-color: #007bff !important;
+    color: #fff !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+}
+div.dataTables_paginate .paginate_button:hover {
+    background-color: #0056b3 !important;
+    border-color: #0056b3 !important;
+}
+div.dataTables_paginate .paginate_button.current {
+    background-color: #0056b3 !important;
+    border-color: #0056b3 !important;
+    color: #fff !important;
+}
