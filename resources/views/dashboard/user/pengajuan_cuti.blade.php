@@ -89,6 +89,10 @@
                                     <input type="date" required class="form-control" name="sampai_dengan">
                                 </div>
                                 <div class="form-group">
+                                    <label for="">Alamat</label>
+                                    <input type="text" required class="form-control" placeholder="Alamat" name="alamat">
+                                </div>
+                                <div class="form-group">
                                     <label for="">Atasan</label>
                                     <select class="form-control" name="atasan">
                                         @if (auth()->user()->pegawai->jabatan->nama_jabatan === 'JURU SITA' ||
@@ -128,7 +132,7 @@
                                 </div>
                                 <hr>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">Ajukan Cuti</button>
+                                    <button type="submit" class="btn btn-primary ">Ajukan Cuti</button>
                                 </div>
                             </form>
                         </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\UpdatePengajuanCutiRequest;
 use App\Models\CutiPegawai;
 use App\Models\Pegawai;
 use Illuminate\Http\Request;
@@ -58,5 +59,36 @@ class ApproveCutiController extends Controller
         $data = CutiPegawai::findOrFail($request->cutiId);
         return view('dashboard.user.aprove_update', ['title' => 'Dashboard User | Approval Cuti Update', 'data' => $data]);
     }
-    public function updateApprovalCuti(Request $request) {}
+    public function updateApprovalCuti(UpdatePengajuanCutiRequest $request)
+    {
+        $cuti = CutiPegawai::findOrFail($request->cutiId);
+        $nip = $this->getPegawai()->nip;
+        $jabatan = $this->getPegawai()->jabatan->nama_jabatan;
+
+        if (in_array($jabatan, [
+            'PANMUD HUKUM',
+            'PANMUD HUKUM GUGATAN',
+            'PANMUD HUKUM PERMOHONAN',
+            'KASUBAG KEPEGAWAIAN DAN ORTALA',
+            'KASUBAG PERNCANAAN, IT DAN PELAPORAN',
+            'KASUBAG UMUM DAN KEUANGAN'
+        ])) {
+            $cuti->update([
+                'app_panmud_kasubag' => 1,
+                'status_cuti' => 'Disetujui oleh Panmud/Kasubag',
+            ]);
+        } elseif (in_array($jabatan, ['PANITERA', 'SEKRETARIS'])) {
+            $cuti->update([
+                'app_panitera_sekretaris' => 1,
+                'status_cuti' => 'Disetujui oleh Panitera/Sekretaris',
+            ]);
+        } elseif ($jabatan == 'KETUA') {
+            $cuti->update([
+                'app_ketua' => 1,
+                'status_cuti' => 'Disetujui oleh Ketua',
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Pengajuan cuti berhasil disetujui.');
+    }
 }

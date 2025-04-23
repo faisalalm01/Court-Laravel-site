@@ -59,6 +59,7 @@
                                 <th>Durasi Cuti</th>
                                 <th>Dari Tanggal</th>
                                 <th>Sampai Dengan</th>
+                                <th>Alamat</th>
                                 <th>Status</th>
                                 <th>Keterangan</th>
                                 <th>Action</th>
@@ -79,6 +80,7 @@
                                     <td>{{ $cuti->lama_cuti }} {{ $cuti->ket_lama_cuti }}</td>
                                     <td>{{ $cuti->dari_tanggal }}</td>
                                     <td>{{ $cuti->sampai_dengan }}</td>
+                                    <td>{{ $cuti->alamat }}</td>
                                     <td>{{ $cuti->status_cuti }}</td>
                                     <td>{{ $cuti->ket_status_cuti }}</td>
                                     <td>
@@ -130,6 +132,9 @@
                                                 <hr>
                                                 <strong>Tanggal akhir cuti</strong>
                                                 <p class="text-muted">{{ $cuti->sampai_dengan }}</p>
+                                                <hr>
+                                                <strong>Alamat</strong>
+                                                <p class="text-muted">{{ $cuti->alamat }}</p>
                                                 <hr>
                                                 <strong>Status</strong>
                                                 <p class="text-muted">{{ $cuti->status_cuti }}

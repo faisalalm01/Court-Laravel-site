@@ -54,6 +54,7 @@
                                 <th class="p-3">Lama Cuti</th>
                                 <th class="p-3">Dari Tanggal</th>
                                 <th class="p-3">Sampai Dengan</th>
+                                <th class="p-3">Alamat</th>
                                 <th class="p-3">Status</th>
                                 <th class="p-3">Keterangan</th>
                             </tr>
@@ -70,11 +71,14 @@
                                     <td> {{ $d->lama_cuti }} {{ $d->ket_lama_cuti }} </td>
                                     <td> {{ $d->dari_tanggal }}</td>
                                     <td> {{ $d->sampai_dengan }}</td>
+                                    <td> {{ $d->alamat }}</td>
                                     <td class="text-center">
-                                        <a href="#" class="btn bg-green-600 p-1 text-white btn-xs"> {{ $d['status_cuti'] }}</a>
+                                        <a href="#" class="btn bg-green-600 p-1 text-white btn-xs">
+                                            {{ $d['status_cuti'] }}</a>
                                     </td>
                                     <td class="text-center px-2">
-                                        <a href="#" class="btn bg-blue-500 p-1 text-white btn-xs "> {{ $d->ket_status_cuti }}</a>
+                                        <a href="#" class="btn bg-blue-500 p-1 text-white btn-xs ">
+                                            {{ $d->ket_status_cuti }}</a>
                                     </td>
                                 </tr>
                             @endforeach

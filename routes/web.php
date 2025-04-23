@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/login', [AuthController::class, 'index'])->name('login')->middleware('guest');
+Route::get('/', [AuthController::class, 'index'])->name('login')->middleware('guest');
 
 // auth
 Route::post('/auth/login', [AuthController::class, 'login'])->name('auth.login');
@@ -36,6 +36,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 // dashboard user approve cuti
 Route::get('/dashboard/user/approve-cuti', [ApproveCutiController::class, 'index'])->name('dashboard.user.daftar-approve-cuti')->middleware('auth');
 Route::get('/dashboard/user/approve-update-cuti/{cutiId}', [ApproveCutiController::class, 'showUpdateCutiApprove'])->name('dashboard.user.approve-update-cuti')->middleware('auth');
+Route::post('/dashboard/user/approve-update-cuti/{cutiId}', [ApproveCutiController::class, 'showUpdateCutiApprove'])->name('dashboard.user.approve-update-cuti')->middleware('auth');
 
 // dashboard user pengajuan cuti
 Route::get('/dashboard/user/pengajuan-cuti', [PengajuanCutiController::class, 'showTambahPengajuanCuti'])->name('dashboard.user.pengajuan-cuti')->middleware('auth');

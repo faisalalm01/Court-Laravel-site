@@ -22,7 +22,9 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_content">
-                    <form class="form-horizontal" name="cuti" action="#" method="POST">
+                    <form class="form-horizontal" name="cuti" method="POST">
+                        @csrf
+                        <input type="hidden" name="cutiId" value="{{ $data->id_cutipegawai }}">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3>Review Pengajuan Cuti</h3>
@@ -97,6 +99,12 @@
                                         <input type="hidden" name="id_cutipegawai" value="{{ $data->id_cutipegawai }}<">
                                         <input type="text" class="form-control"
                                             value="{{ $data->status_cuti }} {{ $data->ket_status_cuti }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3">Alamat</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" value="{{ $data->alamat }} " readonly>
                                     </div>
                                 </div>
 

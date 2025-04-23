@@ -12,10 +12,10 @@
 </head>
 
 <body class="">
-        @yield('main_content')
+    @yield('main_content')
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>   
+    <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
     <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.1.8/js/dataTables.tailwindcss.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@9.0.3"></script>
