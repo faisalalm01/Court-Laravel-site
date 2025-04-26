@@ -66,25 +66,26 @@
                                 </td>
                             </tr>
 
-                            <!-- Modal (kalau mau sekalian dimasukin) -->
-                            <div class="modal fade" id="modalviewcuti{{ $cuti->id_cutipegawai }}">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Detail Cuti - {{ $cuti->pegawai->nama_pegawai }}</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <!-- isi detail cuti -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </tbody>
-                </table>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    @push('modals')
+<div class="modal fade" id="modalviewcuti{{ $cuti->id_cutipegawai }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel{{ $cuti->id_cutipegawai }}" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel{{ $cuti->id_cutipegawai }}">Detail Cuti - {{ $cuti->pegawai->nama_pegawai }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- detail data cuti -->
+            </div>
+        </div>
+    </div>
+</div>
+@endpush
             </div>
 
         </div>
