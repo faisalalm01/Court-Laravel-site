@@ -2,13 +2,10 @@
 
 @section('content')
     <div class="p-3">
-        <div class="d-flex justify-between items-center">
-            <!-- Title Kiri -->
+        <div class="flex justify-between items-center">
             <div class="title_left">
                 <h3 class="text-2xl font-semibold">Daftar Approval</h3>
             </div>
-
-            <!-- Breadcrumb Kanan -->
             <div class="title_right">
                 <nav aria-label="breadcrumb">
                     <ol class="flex space-x-2 text-gray-600">
@@ -30,7 +27,7 @@
             <div class="overflow-x-auto">
                 <table id="data-tables" class="min-w-full table-auto border-collapse">
                     <thead>
-                        <tr class="bg-gray-100 text-left text-gray-700 uppercase text-sm leading-normal">
+                        <tr class="bg-gray-100 text-gray-700 uppercase text-sm leading-normal">
                             <th class="p-3 border-b">No</th>
                             <th class="p-3 border-b">Nama</th>
                             <th class="p-3 border-b">Jenis Cuti</th>
@@ -60,34 +57,41 @@
                                     </span>
                                 </td>
                                 <td class="p-3 border-b">
-                                    <a href="#" class="text-blue-600 hover:underline" data-toggle="modal" data-target="#modalviewcuti{{ $cuti->id_cutipegawai }}">View</a>
-                                    |
+                                    <a href="#" class="text-blue-600 hover:underline" data-modal-toggle="modalviewcuti{{ $cuti->id_cutipegawai }}">View</a> |
                                     <a href="/dashboard/user/approve-update-cuti/{{ $cuti->id_cutipegawai }}" class="text-green-600 hover:underline">Approve</a>
                                 </td>
                             </tr>
-
+                            
+                            <!-- Modal -->
+                            <div id="modalviewcuti{{ $cuti->id_cutipegawai }}" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
+                                <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
+                                    <div class="p-6">
+                                        <h3 class="text-xl font-bold mb-4">Detail Cuti - {{ $cuti->pegawai->nama_pegawai }}</h3>
+                                        <!-- Konten modal -->
+                                        <div class="space-y-3">
+                                            <p><strong>Jenis Cuti:</strong> {{ $cuti->jenis_cuti }}</p>
+                                            <p><strong>Alasan:</strong> {{ $cuti->alasan_cuti }}</p>
+                                            <p><strong>Lama:</strong> {{ $cuti->lama_cuti }} {{ $cuti->ket_lama_cuti }}</p>
+                                            <p><strong>Dari:</strong> {{ $cuti->dari_tanggal }}</p>
+                                            <p><strong>Sampai:</strong> {{ $cuti->sampai_dengan }}</p>
+                                            <p><strong>Alamat:</strong> {{ $cuti->alamat }}</p>
+                                            <p><strong>Status:</strong> {{ $cuti->status_cuti }}</p>
+                                            <!-- Data lainnya -->
+                                        </div>
+                                    </div>
+                                    <div class="bg-gray-50 px-6 py-3 flex justify-end">
+                                        <button type="button" data-modal-hide="modalviewcuti{{ $cuti->id_cutipegawai }}"
+                                            class="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded-lg">
+                                            Tutup
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
                             @endforeach
                         </tbody>
                     </table>
-                    @push('modals')
-<div class="modal fade" id="modalviewcuti{{ $cuti->id_cutipegawai }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel{{ $cuti->id_cutipegawai }}" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalLabel{{ $cuti->id_cutipegawai }}">Detail Cuti - {{ $cuti->pegawai->nama_pegawai }}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
-            <div class="modal-body">
-                <!-- detail data cuti -->
-            </div>
-        </div>
-    </div>
-</div>
-@endpush
-            </div>
-
         </div>
     </div>
 @endsection
