@@ -22,7 +22,6 @@
                 </div>
             </dis>
 
-
             <div class="clearfix"></div>
 
             <div class="">
@@ -44,11 +43,11 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
-                            <form method="POST" action="{{ route('dashboard.user.tambah.pengajuan-cuti') }}">
+                            <form method="POST" action="{{ route('dashboard.user.tambah.pengajuan-cuti') }}" id="cutiForm">
                                 @csrf
                                 <div class="form-group">
                                     <label>Jenis cuti yang diambil</label>
-                                    <select class="form-control" name="jenis_cuti">
+                                    <select class="form-control" name="jenis_cuti" id="jenis_cuti" required>
                                         <option disabled selected>-- Pilih jenis cuti --</option>
                                         <option value="Cuti Tahunan">Cuti Tahunan</option>
                                         <option value="Cuti Besar">Cuti Besar</option>
@@ -70,27 +69,29 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="">Lamanya cuti</label>
-                                    <input type="text" required class="form-control" placeholder="Masukan berapa lama"
-                                        name="lama_cuti">
-                                    <select name="ket_lamacuti" class="form-control select2">
+                                    <input type="number" required class="form-control" placeholder="Masukan berapa lama"
+                                        name="lama_cuti" id="lama_cuti" min="1">
+                                    <select name="ket_lamacuti" class="form-control select2" id="ket_lamacuti" required>
                                         <option disabled selected>-- Pilih Hari, Bulan, Tahun --</option>
                                         <option value="Hari">Hari</option>
                                         <option value="Minggu">Minggu</option>
                                         <option value="Bulan">Bulan</option>
                                         <option value="Tahun">Tahun</option>
                                     </select>
+                                    <small id="max_cuti_info" class="text-muted"></small>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Dari tanggal</label>
-                                    <input type="date" required class="form-control" name="dari_tanggal">
+                                    <input type="date" required class="form-control" name="dari_tanggal" id="dari_tanggal" min="{{ date('Y-m-d') }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="">Sampai dengan</label>
-                                    <input type="date" required class="form-control" name="sampai_dengan">
+                                    <input type="date" required class="form-control" name="sampai_dengan" id="sampai_dengan" disabled>
+                                    <small id="date_error" class="text-danger"></small>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Alamat</label>
-                                    <input type="text" required class="form-control" placeholder="Alamat" name="alamat">
+                                    <label for="">Alamat selama cuti</label>
+                                    <textarea class="form-control" placeholder="Masukkan alamat lengkap selama cuti" name="alamat" required></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Atasan</label>
@@ -132,7 +133,7 @@
                                 </div>
                                 <hr>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary ">Ajukan Cuti</button>
+                                    <button type="submit" class="btn btn-primary" id="submitBtn">Ajukan Cuti</button>
                                 </div>
                             </form>
                         </div>
@@ -142,4 +143,150 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const jenisCuti = document.getElementById('jenis_cuti');
+            const lamaCuti = document.getElementById('lama_cuti');
+            const ketLamaCuti = document.getElementById('ket_lamacuti');
+            const dariTanggal = document.getElementById('dari_tanggal');
+            const sampaiDengan = document.getElementById('sampai_dengan');
+            const maxCutiInfo = document.getElementById('max_cuti_info');
+            const dateError = document.getElementById('date_error');
+            const form = document.getElementById('cutiForm');
+            const submitBtn = document.getElementById('submitBtn');
+
+            // Aturan lamanya cuti berdasarkan jenis cuti
+            const cutiRules = {
+                'Cuti Tahunan': { max: 12, unit: 'Hari', text: 'Maksimal 12 Hari' },
+                'Cuti Besar': { max: 3, unit: 'Bulan', text: 'Maksimal 3 Bulan' },
+                'Cuti Sakit': { max: 14, unit: 'Hari', text: 'Maksimal 14 Hari' },
+                'Cuti Melahirkan': { max: 3, unit: 'Bulan', text: 'Maksimal 3 Bulan' },
+                'Cuti Karena Alasan Penting': { max: 2, unit: 'Hari', text: 'Maksimal 2 Hari' },
+                'Cuti diluar Tanggungan Negara': { max: 5, unit: 'Tahun', text: 'Maksimal 5 Tahun' }
+            };
+
+            // Update info maksimal cuti ketika jenis cuti berubah
+            jenisCuti.addEventListener('change', function() {
+                const selectedCuti = this.value;
+                if (cutiRules[selectedCuti]) {
+                    maxCutiInfo.textContent = cutiRules[selectedCuti].text;
+                    ketLamaCuti.value = cutiRules[selectedCuti].unit;
+                    
+                    // Set max value based on cuti rules
+                    lamaCuti.max = cutiRules[selectedCuti].max;
+                    
+                    // Auto-select the unit in dropdown
+                    const options = ketLamaCuti.options;
+                    for (let i = 0; i < options.length; i++) {
+                        if (options[i].value === cutiRules[selectedCuti].unit) {
+                            options[i].selected = true;
+                            break;
+                        }
+                    }
+                } else {
+                    maxCutiInfo.textContent = '';
+                }
+            });
+
+            // Enable sampai_dengan when dari_tanggal is selected
+            dariTanggal.addEventListener('change', function() {
+                sampaiDengan.disabled = false;
+                sampaiDengan.min = this.value;
+                calculateEndDate();
+            });
+
+            // Calculate end date based on duration
+            lamaCuti.addEventListener('input', calculateEndDate);
+            ketLamaCuti.addEventListener('change', calculateEndDate);
+
+            function calculateEndDate() {
+                if (!dariTanggal.value || !lamaCuti.value || !ketLamaCuti.value) return;
+
+                const startDate = new Date(dariTanggal.value);
+                const duration = parseInt(lamaCuti.value);
+                const unit = ketLamaCuti.value;
+
+                let endDate = new Date(startDate);
+
+                switch(unit) {
+                    case 'Hari':
+                        endDate.setDate(startDate.getDate() + duration);
+                        break;
+                    case 'Minggu':
+                        endDate.setDate(startDate.getDate() + (duration * 7));
+                        break;
+                    case 'Bulan':
+                        endDate.setMonth(startDate.getMonth() + duration);
+                        break;
+                    case 'Tahun':
+                        endDate.setFullYear(startDate.getFullYear() + duration);
+                        break;
+                }
+
+                // Format date to YYYY-MM-DD
+                const formattedDate = endDate.toISOString().split('T')[0];
+                sampaiDengan.value = formattedDate;
+                
+                validateDateRange();
+            }
+
+            // Validate date range doesn't exceed duration
+            sampaiDengan.addEventListener('change', validateDateRange);
+
+            function validateDateRange() {
+                if (!dariTanggal.value || !sampaiDengan.value) return;
+
+                const start = new Date(dariTanggal.value);
+                const end = new Date(sampaiDengan.value);
+                const diffTime = Math.abs(end - start);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                
+                const selectedCuti = jenisCuti.value;
+                const maxDays = getMaxDays(selectedCuti, cutiRules);
+
+                if (diffDays > maxDays) {
+                    dateError.textContent = `Rentang cuti tidak boleh melebihi ${maxDays} hari`;
+                    submitBtn.disabled = true;
+                } else {
+                    dateError.textContent = '';
+                    submitBtn.disabled = false;
+                }
+            }
+
+            function getMaxDays(cutiType, rules) {
+                if (!rules[cutiType]) return 0;
+                
+                const rule = rules[cutiType];
+                switch(rule.unit) {
+                    case 'Hari': return rule.max;
+                    case 'Minggu': return rule.max * 7;
+                    case 'Bulan': return rule.max * 30; // Approximate
+                    case 'Tahun': return rule.max * 365; // Approximate
+                    default: return 0;
+                }
+            }
+
+            // Form validation before submit
+            form.addEventListener('submit', function(e) {
+                if (!validateForm()) {
+                    e.preventDefault();
+                }
+            });
+
+            function validateForm() {
+                // Check if dates are in the past
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                
+                const startDate = new Date(dariTanggal.value);
+                if (startDate < today) {
+                    dateError.textContent = 'Tanggal cuti tidak boleh di tanggal yang sudah dilewati';
+                    return false;
+                }
+
+                return true;
+            }
+        });
+    </script>
 @endsection
