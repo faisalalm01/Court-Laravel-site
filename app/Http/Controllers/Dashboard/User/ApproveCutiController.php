@@ -45,7 +45,6 @@ class ApproveCutiController extends Controller
                 ->get();
         } elseif ($jabatanpegawai == 'KETUA') {
             $data = CutiPegawai::with(['pegawai.jabatan', 'pegawai.golongan'])
-                ->where('ketua', $nip)
                 ->where('app_ketua', 0)
                 ->where('status_cuti', 'Diajukan')
                 ->get();
@@ -59,36 +58,41 @@ class ApproveCutiController extends Controller
         $data = CutiPegawai::findOrFail($request->cutiId);
         return view('dashboard.user.aprove_update', ['title' => 'Dashboard User | Approval Cuti Update', 'data' => $data]);
     }
-    public function updateApprovalCuti(UpdatePengajuanCutiRequest $request)
+    public function updateApprovalCuti(Request $request, string $cutiId)
     {
-        $cuti = CutiPegawai::findOrFail($request->cutiId);
-        $nip = $this->getPegawai()->nip;
+        $cuti = CutiPegawai::findOrFail($cutiId);
         $jabatan = $this->getPegawai()->jabatan->nama_jabatan;
-
-        if (in_array($jabatan, [
-            'PANMUD HUKUM',
-            'PANMUD HUKUM GUGATAN',
-            'PANMUD HUKUM PERMOHONAN',
-            'KASUBAG KEPEGAWAIAN DAN ORTALA',
-            'KASUBAG PERNCANAAN, IT DAN PELAPORAN',
-            'KASUBAG UMUM DAN KEUANGAN'
-        ])) {
-            $cuti->update([
-                'app_panmud_kasubag' => 1,
-                'status_cuti' => 'Disetujui oleh Panmud/Kasubag',
-            ]);
-        } elseif (in_array($jabatan, ['PANITERA', 'SEKRETARIS'])) {
-            $cuti->update([
-                'app_panitera_sekretaris' => 1,
-                'status_cuti' => 'Disetujui oleh Panitera/Sekretaris',
-            ]);
-        } elseif ($jabatan == 'KETUA') {
-            $cuti->update([
-                'app_ketua' => 1,
-                'status_cuti' => 'Disetujui oleh Ketua',
-            ]);
+        $status_cuti = $request->input('status_cuti');
+        $catatan = $request->input('catatan');
+        if ($status_cuti == 'Disetujui') {
+            if (in_array($jabatan, [
+                'PANMUD HUKUM',
+                'PANMUD HUKUM GUGATAN',
+                'PANMUD HUKUM PERMOHONAN',
+                'KASUBAG KEPEGAWAIAN DAN ORTALA',
+                'KASUBAG PERNCANAAN, IT DAN PELAPORAN',
+                'KASUBAG UMUM DAN KEUANGAN'
+            ])) {
+                $cuti->update([
+                    'app_panmud_kasubag' => 1,
+                    'catatan' => $catatan,
+                    'ket_status_cuti' => 'Menunggu Approval Ketua'
+                ]);
+            } elseif (in_array($jabatan, ['PANITERA', 'SEKRETARIS'])) {
+                $cuti->update([
+                    'app_panitera_sekretaris' => 1,
+                    'catatan' => $catatan,
+                    'ket_status_cuti' => 'Menunggu Approval Ketua'
+                ]);
+            } elseif ($jabatan == 'KETUA') {
+                $cuti->update([
+                    'app_ketua' => 1,
+                    'status_cuti' => 'Disetujui',
+                    'catatan' => $catatan,
+                    'ket_status_cuti' => 'Pengajuan Cuti Diterima'
+                ]);
+            }
         }
-
-        return redirect()->back()->with('success', 'Pengajuan cuti berhasil disetujui.');
+        return redirect()->route('dashboard.user.daftar-approve-cuti')->with('success', 'Pengajuan cuti berhasil disetujui.');
     }
 }

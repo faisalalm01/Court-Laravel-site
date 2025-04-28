@@ -12,7 +12,7 @@
             <div class="">
                 <nav aria-label="">
                     <ol class="">
-                        <li class=""><a href="#">Home /</a></li>
+                        <li class=""><a href="">Home /</a></li>
                         <li class="active" aria-current="page">Cuti Disetujui</li>
                     </ol>
                 </nav>
@@ -57,7 +57,7 @@
                                 <th class="p-3">Status</th>
                                 <th class="p-3">Keterangan</th>
                                 <th>Action</th>
-                           </tr>
+                            </tr>
                         </thead>
 
 
@@ -80,8 +80,9 @@
                                         <a href="#" class="btn btn-primary btn-xs "> {{ $d->ket_status_cuti }}</a>
                                     </td>
                                     <td>
-                                        <a href="cetak_pdf.php?id=<?php echo $row['id_cutipegawai'] ?>" class="btn btn-info"><i class="fa fa-print"></i> Print PDF</a>
-                                      </td>
+                                        <a href="cetak_pdf.php?id=<?php echo $d['id_cutipegawai']; ?>" class="btn btn-info"><i
+                                                class="fa fa-print"></i> Print PDF</a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

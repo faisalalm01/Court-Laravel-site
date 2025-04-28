@@ -36,8 +36,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 // dashboard user approve cuti
 Route::get('/dashboard/user/approve-cuti', [ApproveCutiController::class, 'index'])->name('dashboard.user.daftar-approve-cuti')->middleware('auth');
 Route::get('/dashboard/user/approve-update-cuti/{cutiId}', [ApproveCutiController::class, 'showUpdateCutiApprove'])->name('dashboard.user.approve-update-cuti')->middleware('auth');
-Route::post('/dashboard/user/approve-update-cuti/{cutiId}', [ApproveCutiController::class, 'showUpdateCutiApprove'])->name('dashboard.user.approve-update-cuti')->middleware('auth');
-
+Route::post('/dashboard/user/approval-cuti/{cutiId}', [ApproveCutiController::class, 'updateApprovalCuti'])->name('approval-cuti.update');
 // dashboard user pengajuan cuti
 Route::get('/dashboard/user/pengajuan-cuti', [PengajuanCutiController::class, 'showTambahPengajuanCuti'])->name('dashboard.user.pengajuan-cuti')->middleware('auth');
 Route::get('/dashboard/user/menunggu-approval-cuti', [PengajuanCutiController::class, 'showDaftarApproval'])->name('dashboard.user.daftar-approval')->middleware('auth');

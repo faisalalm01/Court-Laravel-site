@@ -28,10 +28,9 @@
                 <p class="text-sm text-gray-500">Periksa dan approve cuti pegawai.</p>
             </div>
 
-            <form method="POST" action="/dashboard/user/approve-cuti/{{ $data->id_cutipegawai }}">
+            <form action="{{ route('approval-cuti.update', $data->id_cutipegawai) }}" method="POST">
                 @csrf
-                @method('PUT')
-
+                @method('POST')
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-gray-700 font-semibold mb-2">Nama Pegawai</label>
@@ -45,7 +44,8 @@
 
                     <div>
                         <label class="block text-gray-700 font-semibold mb-2">Lama Cuti</label>
-                        <input type="text" class="form-control" value="{{ $data->lama_cuti }} {{ $data->ket_lama_cuti }}" readonly>
+                        <input type="text" class="form-control" value="{{ $data->lama_cuti }} {{ $data->ket_lama_cuti }}"
+                            readonly>
                     </div>
 
                     <div>
