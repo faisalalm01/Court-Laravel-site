@@ -61,6 +61,7 @@ class ApproveCutiController extends Controller
     public function updateApprovalCuti(Request $request, string $cutiId)
     {
         $cuti = CutiPegawai::findOrFail($cutiId);
+        $nip = $this->getPegawai()->nip;
         $jabatan = $this->getPegawai()->jabatan->nama_jabatan;
         $status_cuti = $request->input('status_cuti');
         $catatan = $request->input('catatan');
@@ -75,21 +76,48 @@ class ApproveCutiController extends Controller
             ])) {
                 $cuti->update([
                     'app_panmud_kasubag' => 1,
-                    'catatan' => $catatan,
-                    'ket_status_cuti' => 'Menunggu Approval Ketua'
+                    'ket_status_cuti' => 'Menunggu Approval Ketua',
+                    'panmud_kasubag' => $nip
                 ]);
             } elseif (in_array($jabatan, ['PANITERA', 'SEKRETARIS'])) {
                 $cuti->update([
                     'app_panitera_sekretaris' => 1,
-                    'catatan' => $catatan,
-                    'ket_status_cuti' => 'Menunggu Approval Ketua'
+                    'ket_status_cuti' => 'Menunggu Approval Ketua',
+                    'panitera_sekretaris' => $nip
                 ]);
             } elseif ($jabatan == 'KETUA') {
                 $cuti->update([
                     'app_ketua' => 1,
                     'status_cuti' => 'Disetujui',
-                    'catatan' => $catatan,
+                    'ketua' => $nip,
                     'ket_status_cuti' => 'Pengajuan Cuti Diterima'
+                ]);
+            }
+        } else {
+            if (in_array($jabatan, [
+                'PANMUD HUKUM',
+                'PANMUD HUKUM GUGATAN',
+                'PANMUD HUKUM PERMOHONAN',
+                'KASUBAG KEPEGAWAIAN DAN ORTALA',
+                'KASUBAG PERNCANAAN, IT DAN PELAPORAN',
+                'KASUBAG UMUM DAN KEUANGAN'
+            ])) {
+                $cuti->update([
+                    'status_cuti' => 'Tidak Disetujui',
+                    'panmud_kasubag' => $nip,
+                    'ket_status_cuti' => $catatan
+                ]);
+            } elseif (in_array($jabatan, ['PANITERA', 'SEKRETARIS'])) {
+                $cuti->update([
+                    'status_cuti' => 'Tidak Disetujui',
+                    'panitera_sekretaris' => $nip,
+                    'ket_status_cuti' => $catatan
+                ]);
+            } elseif ($jabatan == 'KETUA') {
+                $cuti->update([
+                    'status_cuti' => 'Tidak Disetujui',
+                    'ketua' => $nip,
+                    'ket_status_cuti' => $catatan
                 ]);
             }
         }

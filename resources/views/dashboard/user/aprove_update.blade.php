@@ -66,16 +66,16 @@
 
                 <div class="mt-6">
                     <label class="block text-gray-700 font-semibold mb-2">Status Approval</label>
-                    <select name="status_cuti" class="form-control" required>
+                    <select name="status_cuti" id="status_cuti" class="form-control" required>
                         <option value="">-- Pilih Status --</option>
                         <option value="Disetujui">Disetujui</option>
                         <option value="Ditolak">Ditolak</option>
                     </select>
                 </div>
-
                 <div class="mt-6">
                     <label class="block text-gray-700 font-semibold mb-2">Catatan (Opsional)</label>
-                    <textarea name="catatan" class="form-control" rows="4" placeholder="Tulis alasan jika menolak (opsional)"></textarea>
+                    <textarea name="catatan" id="catatan" class=" form-control" rows="4"
+                        placeholder="Tulis alasan jika menolak (opsional " disabled></textarea>
                 </div>
 
                 <div class="flex space-x-4 mt-8">
@@ -89,4 +89,19 @@
             </form>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const statusCuti = document.getElementById('status_cuti');
+            const catatan = document.getElementById('catatan');
+
+            statusCuti.addEventListener('change', function() {
+                if (this.value === 'Ditolak') {
+                    catatan.disabled = false;
+                } else {
+                    catatan.disabled = true;
+                    catatan.value = '';
+                }
+            });
+        });
+    </script>
 @endsection
