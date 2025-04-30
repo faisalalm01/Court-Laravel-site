@@ -182,7 +182,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <divs class="modal fade btn-tambah-user" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal fade btn-tambah-user" tabindex="-1" role="dialog" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -236,7 +236,7 @@
                                 </div>
                             </div>
                         </div>
-                    </divs>
+                    </div>
                 </div>
             </div>
         </div>
@@ -266,8 +266,8 @@
             </div>
 
             <div class="overflow-x-auto">
-                <button`~ href="#" title="Tambah User" type="button" class="btn btn-info pull-right" data-toggle="modal"
-                    data-modal-hide="modaltambahuser"><i class="fa fa-plus-circle"></i> Tambah User</button>
+                <button href="#" title="Tambah User" type="button" class="btn btn-info pull-right" data-toggle="modal"
+                    data-modal-toggle="modaltambahuser"><i class="fa fa-plus-circle"></i> Tambah User</button>
                     @if (session('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             {{ session('success') }}
@@ -294,7 +294,7 @@
                                 <th>Nama Pegawai</th>
                                 <th>Jabatan</th>
                                 <th>Hak Akses</th>
-                                <th class="text-center" colspan='2'>Action</th>
+                                <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -309,12 +309,12 @@
                                         <a href="#" class="btn btn-info" data-toggle="modal"
                                             data-modal-toggle="modalviewuser{{ $user->nip }}"><i class="fa fa-eye"></i>
                                             View</a>
+                                            <a href="#" class="btn btn-info" data-toggle="modal"
+                                                data-modal-toggle="modaledituser{{ $user->nip }}"><i class="fa fa-edit"></i>
+                                            Edit</a>
                                     </td>
-                                    <td class="text-center">
-                                        <a href="#" class="btn btn-info" data-toggle="modal"
-                                            data-modal-toggle="modalviewuser{{ $user->nip }}"><i class="fa fa-eye"></i>
-                                            View</a>
-                                    </td>
+                                    <!-- <td class="text-center">
+                                    </td> -->
                             </tr>
                             
                             <!-- Modal -->
@@ -343,18 +343,12 @@
                             </div>
 
                             <div id="modaltambahuser" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal"><span
-                                                    aria-hidden="true">×</span>
-                                            </button>
-                                            <h4 class="modal-title" id="myModalLabel">Form Tambah User </h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form action="{{ route('dashboard.admin.add-users') }}" data-parsley-validate
-                                                class="form-horizontal form-label-left" method="POST">
-                                                @csrf
+                                
+                                <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
+                                    <div class="px-6 py-3">
+                                            <div class="">
+                                            <fo action="{{ route('dashboard.admin.add-users') }}" data-parsley-validate
+                                                    class="form-horizontal form-label-left" method="POST">
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Pegawai</label>
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -386,13 +380,16 @@
                                                     </div>
                                                 </div>
                                                 <div class="ln_solid"></div>
-                                                <div class="form-group">
-                                                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                                        <button type="submit" class="btn btn-primary"
-                                                            name="submit">Submit</button>
+                                                    <div class="form-group">
+                                                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                                            <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </form>
+                                                </form>
+                                            </div>
+                                            <button class="p-2 my-3 bg-gray-200 text-2xl rounded-md" type="button" data-modal-hide="modaltambahuser">
+                                    <span aria-hidden="true">X</span>
+                                </button>
                                         </div>
                                     </div>
                                 </div>
