@@ -70,6 +70,8 @@
                         <option value="">-- Pilih Status --</option>
                         <option value="Disetujui">Disetujui</option>
                         <option value="Ditolak">Ditolak</option>
+                        <option value="Ditangguhkan">Ditangguhkan</option>
+                        <option value="Perubahan">Perubahan</option>
                     </select>
                 </div>
                 <div class="mt-6">

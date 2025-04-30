@@ -74,12 +74,12 @@ function initializeDataTable() {
     if (table && typeof DataTable !== "undefined") {
         const dataTable = new DataTable(table, {
             paging: true,
-            perPage: 5,
-            perPageSelect: [5, 10, 15, 20, 25],
+            perPage: 10,
+            perPageSelect: [1, 5, 10, 15, 20, 25],
             sortable: true,
             labels: {
                 placeholder: "Cari...",
-                perPage: "{select} entri per halaman",
+                // perPage: "{select} entri per halaman",
                 noRows: "Tidak ada data yang ditemukan",
                 info: "Menampilkan {start} sampai {end} dari {rows} data",
             },
