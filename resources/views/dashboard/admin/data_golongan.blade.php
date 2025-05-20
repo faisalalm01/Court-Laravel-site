@@ -1,155 +1,140 @@
 @extends('dashboard.index')
 
 @section('content')
-    <div class="page-title">
-        <div class="title_left">
-            <h3>Golongan</h3>
-        </div>
-
-        <div class="title_right">
-            <div class="col-md-3 col-sm-3 col-xs-12 pull-right">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Golongan</a></li>
-                </ol>
+    <div class="p-3">
+        <div class="flex justify-between items-center">
+            <div class="title_left">
+                <h3 class="text-2xl font-semibold">Daftar Golongan</h3>
+            </div>
+            <div class="title_right">
+                <nav aria-label="breadcrumb">
+                    <ol class="flex space-x-2 text-gray-600">
+                        <li><a href="#" class="hover:underline">Home</a> /</li>
+                        <li class="text-gray-800 font-medium">Golongan</li>
+                    </ol>
+                </nav>
             </div>
         </div>
     </div>
 
-    <div class="clearfix"></div>
+    <div class="p-3">
+        <div class="bg-white shadow rounded-lg p-4">
+            <div class="mb-4">
+                <h2 class="text-xl font-bold">Daftar Golongan</h2>
 
-    <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <a href="#" class="btn btn-info pull-right" data-toggle="modal" data-target=".btn-tambah-golongan"><i
-                    class="fa fa-plus-circle"></i> Tambah Golongan</a>
-            <div class="x_panel">
-                <div class="x_title">
-                    <h2>Data Golongan <small>Data golongan pegawai Pengadilan Negeri Purwokerto</small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Settings 1</a>
-                                </li>
-                                <li><a href="#">Settings 2</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                        </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                    <table id="datatable" class="table table-striped table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th style="width:5%">No</th>
-                                <th>Nama Golongan</th>
-                                <th class="text-center" style="width:20%">Action</th>
+            </div>
+
+            <div class="overflow-x-auto">
+                <button href="#" title="Tambah User" type="button" class="btn btn-info pull-right"
+                    data-toggle="modal" data-modal-toggle="modaltambahuser"><i class="fa fa-plus-circle"></i> Tambah
+                    Golongan</button>
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+
+                @if (session('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ session('error') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+
+                <table id="data-tables" class="min-w-full table-auto border-collapse">
+                    <thead>
+                        <tr class="bg-gray-100 text-gray-700 uppercase text-sm leading-normal">
+                            <th>No</th>
+                            <th>Nama Golongan</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($data as $golongan)
+                            <tr class="hover:bg-gray-50">
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $golongan->nama_golongan }}</td>
+                                <td class="text-center">
+                                    <a href="#" class="btn btn-info" data-toggle="modal"
+                                        data-modal-toggle="modalviewuser{{ $golongan->id_golongan }}"><i
+                                            class="fa fa-eye"></i>
+                                        View</a>
+                                    <a href="#" class="btn btn-info" data-toggle="modal"
+                                        data-modal-toggle="modaledituser{{ $golongan->id_golongan }}"><i
+                                            class="fa fa-edit"></i>
+                                        Edit</a>
+                                </td>
+                                <!-- <td class="text-center">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </td> -->
                             </tr>
-                        </thead>
-                        <tbody>
 
-                            @foreach ($golongan as $g)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $g->nama_golongan }}</td>
-                                    <td class="text-center">
-                                        <a href="#" class="btn btn-info" data-toggle="modal"
-                                            data-target="#modalviewgolongan{{ $g->id_golongan }}"><i class="fa fa-eye"></i>
-                                            View</a>
-                                        <a href="#" class="btn btn-primary" data-toggle="modal"
-                                            data-target="#modaleditgolongan{{ $g->id_golongan }}"><i class="fa fa-edit"></i>
-                                            Edit</a>
-                                    </td>
-                                </tr>
+                            <!-- Modal -->
+                            <div id="modalviewuser{{ $golongan->id_golongan }}"
+                                class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
+                                <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
+                                    <div class="p-6">
+                                        <h3 class="text-xl font-bold mb-4">Detail golongan -
+                                            {{ $golongan->nama_golongan }}
+                                        </h3>
+                                        <!-- Konten modal -->
+                                        <div class="space-y-3">
+                                            <p><strong>Nama:</strong> {{ $golongan->nama_golongan }}</p>
 
-                                <div class="modal fade" id="modaleditgolongan{{ $g->id_golongan }}">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Form Edit Golongan</h4>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="" action="edit_golongan.php" method="get">
-                                                    <div class="form-group">
-                                                        <label>Nama Golongan</label>
-                                                        <input type="hidden" name="id_golongan"
-                                                            value="{{ $g->id_golongan }}">
-                                                        <input type="text" name="nama_golongan" class="form-control"
-                                                            value="{{ $g->id_golongan }}">
-                                                    </div>
-                                                    <hr>
-                                                    <div class="form-group">
-                                                        <button type="submit" class="btn btn-primary">Save changes</button>
-                                                    </div>
-                                                </form>
-                                            </div>
+                                            <!-- Data lainnya -->
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="modal fade" id="modalviewgolongan{{ $g->id_golongan }}">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Nama golongan :{{ $g->nama_golongan }}</h4>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-
-                                            </div>
-                                        </div>
+                                    <div class="bg-gray-50 px-6 py-3 flex justify-end">
+                                        <button type="button" data-modal-hide="modalviewuser{{ $golongan->id_golongan }}"
+                                            class="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded-lg">
+                                            Tutup
+                                        </button>
                                     </div>
-                                </div>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    <div class="modal fade btn-tambah-golongan" tabindex="-1" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal"><span
-                                            aria-hidden="true">×</span>
-                                    </button>
-                                    <h4 class="modal-title" id="myModalLabel">Form Tambah Golongan </h4>
-                                </div>
-                                <div class="modal-body">
-                                    <form data-parsley-validate class="form-horizontal form-label-left" method="POST">
-
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Golongan</label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input class="form-control col-md-7 col-xs-12" type="text"
-                                                    name="namagolongan" placeholder="Masukkan nama golongan">
-                                            </div>
-                                        </div>
-
-                                        <div class="ln_solid"></div>
-                                        <div class="form-group">
-                                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                                <button type="submit" class="btn btn-primary"
-                                                    name="submit">Submit</button>
-                                            </div>
-                                        </div>
-                                    </form>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
+
+                            <div id="modaltambahuser"
+                                class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
+
+                                <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
+                                    <div class="px-6 py-3">
+                                        <div class="">
+                                            <fo action="{{ route('dashboard.admin.add-golongan') }}" data-parsley-validate
+                                                class="form-horizontal form-label-left" method="POST">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama
+                                                        Golongan</label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input class="form-control col-md-7 col-xs-12" type="text"
+                                                            name="nama_golongan" placeholder="Masukkan nama golongan">
+                                                    </div>
+                                                </div>
+                                                <div class="ln_solid"></div>
+                                                <div class="form-group">
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                                        <button type="submit" class="btn btn-primary"
+                                                            name="submit">Submit</button>
+                                                    </div>
+                                                </div>
+                                                </form>
+                                        </div>
+                                        <button class="p-2 my-3 bg-gray-200 text-2xl rounded-md" type="button"
+                                            data-modal-hide="modaltambahuser">
+                                            <span aria-hidden="true">X</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
             </div>
+            @endforeach
+            </tbody>
+            </table>
         </div>
+    </div>
     </div>
 @endsection

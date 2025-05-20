@@ -58,19 +58,22 @@ Route::get('/dashboard/user/daftar-knp', [HistoryController::class, 'showDaftarK
 // dashboard admin data users
 Route::get('/dashboard/admin/data-users', [UserController::class, 'index'])->name('dashboard.admin.data-users')->middleware('auth');
 Route::post('/dashboard/admin/add-users', [UserController::class, 'addUser'])->name('dashboard.admin.add-users')->middleware('auth');
+
 Route::put('/dashboard/admin/edit-users/{nip}', [UserController::class, 'editUser'])
     ->name('dashboard.admin.edit-users')
     ->middleware('auth');
 
 // dashboard admin data pegawai
 Route::get('/dashboard/admin/data-pegawai', [PegawaiController::class, 'index'])->name('dashboard.admin.data-pegawai')->middleware('auth');
+Route::post('/dashboard/admin/add-pegawai', [PegawaiController::class, 'add'])->name('dashboard.admin.add-pegawai')->middleware('auth');
 
 // dashboard admin data jabatan
 Route::get('/dashboard/admin/data-jabatan', [JabatanController::class, 'index'])->name('dashboard.admin.data-jabatan')->middleware('auth');
+Route::post('/dashboard/admin/add-jabatan', [JabatanController::class, 'add'])->name('dashboard.admin.add-jabatan')->middleware('auth');
 
 // dashboard admin data golongan
 Route::get('/dashboard/admin/data-golongan', [GolonganController::class, 'index'])->name('dashboard.admin.data-golongan')->middleware('auth');
-
+Route::post('/dashboard/admin/add-golongan', [GolonganController::class, 'add'])->name('dashboard.admin.add-golongan')->middleware('auth');
 // dashboard admin data history
 Route::get('/dashboard/admin/daftar-cuti', [AdminHistoryController::class, 'showDaftarCuti'])->name('dashboard.admin.daftar-cuti')->middleware('auth');
 Route::get('/dashboard/admin/daftar-knp', [AdminHistoryController::class, 'showDaftarKNP'])->name('dashboard.admin.daftar-knp')->middleware('auth');

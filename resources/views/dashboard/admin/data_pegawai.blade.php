@@ -1,143 +1,141 @@
 @extends('dashboard.index')
 
 @section('content')
-    <div class="page-title">
-        <div class="title_left">
-            <h3>Data Pegawai</h3>
-        </div>
-
-        <div class="title_right">
-            <div class="col-md-3 col-sm-3 col-xs-12 pull-right">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Pegawai</a></li>
-                </ol>
+    <div class="p-3">
+        <div class="flex justify-between items-center">
+            <div class="title_left">
+                <h3 class="text-2xl font-semibold">Daftar Pegawai</h3>
+            </div>
+            <div class="title_right">
+                <nav aria-label="breadcrumb">
+                    <ol class="flex space-x-2 text-gray-600">
+                        <li><a href="#" class="hover:underline">Home</a> /</li>
+                        <li class="text-gray-800 font-medium">Pegawai</li>
+                    </ol>
+                </nav>
             </div>
         </div>
     </div>
 
-    <div class="clearfix"></div>
+    <div class="p-3">
+        <div class="bg-white shadow rounded-lg p-4">
+            <div class="mb-4">
+                <h2 class="text-xl font-bold">Daftar Pegawai</h2>
 
-    <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <a href="export_pegawai.php" title="Tambah User" class="btn btn-success pull-right"><i
-                    class="fa fa-download"></i> Export Excel</a>
-            <a href="#" title="Tambah User" class="btn btn-info pull-right" data-toggle="modal"
-                data-target=".btn-tambah-pegawai"><i class="fa fa-plus-circle"></i> Tambah Pegawai</a>
-            <div class="x_panel">
-                <div class="x_title">
-                    <h2>Data Pegawai <small>Daftar pegawai pengadilan Negeri Purwokerto</small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Settings 1</a>
-                                </li>
-                                <li><a href="#">Settings 2</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                        </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                    <table id="datatable" class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama</th>
-                                <th>NIP</th>
-                                <th>Jabatan</th>
-                                <th>Golongan</th>
-                                <th>Unit Kerja</th>
-                                <th class="text-center" style="width:25%">Action</th>
+            </div>
+
+            <div class="overflow-x-auto">
+                <button href="#" title="Tambah User" type="button" class="btn btn-info pull-right"
+                    data-toggle="modal" data-modal-toggle="modaltambahuser"><i class="fa fa-plus-circle"></i> Tambah
+                    Pegawai</button>
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+
+                @if (session('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ session('error') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+
+                <table id="data-tables" class="min-w-full table-auto border-collapse">
+                    <thead>
+                        <tr class="bg-gray-100 text-gray-700 uppercase text-sm leading-normal">
+                            <th>No</th>
+                            <th>NIP</th>
+                            <th>Nama Pegawai</th>
+                            <th>Jabatan</th>
+                            <th>Golongan</th>
+                            <th>Unit Kerja</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($data as $pegawai)
+                            <tr class="hover:bg-gray-50">
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $pegawai->nip }}</td>
+                                <td>{{ $pegawai->nama_pegawai }}</td>
+                                <td>{{ $pegawai->jabatan->nama_jabatan }}</td>
+                                <td>{{ $pegawai->golongan->nama_golongan }}</td>
+                                <td>{{ $pegawai->unit_kerja }}</td>
+                                <td class="text-center">
+                                    <a href="#" class="btn btn-info" data-toggle="modal"
+                                        data-modal-toggle="modalviewuser{{ $pegawai->nip }}"><i class="fa fa-eye"></i>
+                                        View</a>
+                                    <a href="#" class="btn btn-info" data-toggle="modal"
+                                        data-modal-toggle="modaledituser{{ $pegawai->nip }}"><i class="fa fa-edit"></i>
+                                        Edit</a>
+                                </td>
+                                <!-- <td class="text-center">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </td> -->
                             </tr>
-                        </thead>
 
-
-
-                        <tbody>
-
-                            @foreach ($data as $pegawai)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $pegawai->nama_pegawai }}</td>
-                                    <td>{{ $pegawai->nip }}</td>
-                                    <td>{{ $pegawai->jabatan->nama_jabatan }} </td>
-                                    <td>{{ $pegawai->golongan->nama_golongan }}</td>
-                                    <td>{{ $pegawai->unit_kerja }}</td>
-                                    <td class="text-center">
-                                        <a href="#" class="btn btn-info" data-toggle="modal"
-                                            data-target="#modalviewpegawai{{ $pegawai->nip }}"><i class="fa fa-eye"></i>
-                                            View</a>
-                                        <a href="#" class="btn btn-primary" data-toggle="modal"
-                                            data-target="#modaleditpegawai{{ $pegawai->nip }}"><i class="fa fa-edit"></i>
-                                            Edit</a>
-                                        <a href="#" class="btn btn-danger" data-toggle="modal"
-                                            data-target="#modaldeletepegawai{{ $pegawai->nip }}"><i class="fa fa-trash"></i>
-                                            Delete</a>
-                                    </td>
-                                </tr>
-
-                                <div class="modal fade" id="modaldeletepegawai{{ $pegawai->nip }}">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Hapus Pegawai {{ $pegawai->nama_pegawai }}</h4>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="" action="delete_pegawai.php" method="get">
-                                                    <div class="form-group">
-                                                        <label>Anda ingin menghapus Pegawai
-                                                            {{ $pegawai->nama_pegawai }}</label>
-                                                        <label>Semua data user, cuti, knp dan kgb akan hilang</label>
-                                                        <input type="hidden" name="id_pegawai" class="form-control"
-                                                            value="{{ $pegawai->id_pegawai }}">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <button type="submit" class="btn btn-primary">Yes</button>
-                                                        <button type="button" class="btn btn-default"
-                                                            data-dismiss="modal"s>No</button>
-                                                    </div>
-                                                </form>
-                                            </div>
+                            <!-- Modal -->
+                            <div id="modalviewuser{{ $pegawai->nip }}"
+                                class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
+                                <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
+                                    <div class="p-6">
+                                        <h3 class="text-xl font-bold mb-4">Detail Pegawai -
+                                            {{ $pegawai->nama_pegawai }}
+                                        </h3>
+                                        <!-- Konten modal -->
+                                        <div class="space-y-3">
+                                            <p><strong>Nama Lengkap:</strong> {{ $pegawai->nama_pegawai }}</p>
+                                            <p><strong>NIP:</strong> {{ $pegawai->nip }}</p>
+                                            <p><strong>Jabatan:</strong> {{ $pegawai->jabatan->nama_jabatan }}</p>
+                                            <p><strong>Golongan:</strong> {{ $pegawai->golongan->nama_golongan }}
+                                            </p>
+                                            <p><strong>Unit Kerja</strong> {{ $pegawai->unit_kerja }}</p>
+                                            <!-- Data lainnya -->
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="modal fade" id="modaleditpegawai{{ $pegawai->nip }}">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Form Edit Pegawai</h4>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="" action="edit_pegawai.php" method="get">
-                                                    <div class="form-group">
-                                                        <label>Nama Pegawai</label>
-                                                        <input type="hidden" name="nip"
-                                                            value="{{ $pegawai->nip }}">
-                                                        <input type="text" class="form-control" name="pegawai"
-                                                            value="{{ $pegawai->nama_pegawai }}">
+                                    <div class="bg-gray-50 px-6 py-3 flex justify-end">
+                                        <button type="button" data-modal-hide="modalviewuser{{ $pegawai->nip }}"
+                                            class="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded-lg">
+                                            Tutup
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="modaltambahuser"
+                                class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
+
+                                <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
+                                    <div class="px-6 py-3">
+                                        <div class="">
+                                            <fo action="{{ route('dashboard.admin.add-pegawai') }}" data-parsley-validate
+                                                class="form-horizontal form-label-left" method="POST">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama
+                                                        Pegawai</label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input class="form-control col-md-7 col-xs-12" type="text"
+                                                            name="nama" placeholder="Nama Pegawai">
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label>Jabatan</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">NIP</label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input class="form-control col-md-7 col-xs-12" type="text"
+                                                            name="nip" placeholder="NIP">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Jabatan</label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
                                                         <select class="form-control" name="jabatan">
                                                             <option selected disabled>-- Pilih Jabatan--</option>
-
                                                             @foreach ($jabatan as $jab)
                                                                 <option value="{{ $jab->id_jabatan }}">
                                                                     {{ $jab->nama_jabatan }}
@@ -145,134 +143,42 @@
                                                             @endforeach
                                                         </select>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label>Golongan</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label
+                                                        class="control-label col-md-3 col-sm-3 col-xs-12">Golongan</label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
                                                         <select class="form-control" name="golongan">
                                                             <option selected disabled>-- Pilih Golongan--</option>
-                                                            @foreach ($golongans as $gol)
+                                                            @foreach ($golongan as $gol)
                                                                 <option value="{{ $gol->id_golongan }}">
                                                                     {{ $gol->nama_golongan }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <button type="submit" class="btn btn-primary">Save
-                                                            changes</button>
+                                                </div>
+                                                <div class="ln_solid"></div>
+                                                <div class="form-group">
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                                        <button type="submit" class="btn btn-primary"
+                                                            name="submit">Submit</button>
                                                     </div>
+                                                </div>
                                                 </form>
-                                            </div>
                                         </div>
+                                        <button class="p-2 my-3 bg-gray-200 text-2xl rounded-md" type="button"
+                                            data-modal-hide="modaltambahuser">
+                                            <span aria-hidden="true">X</span>
+                                        </button>
                                     </div>
                                 </div>
-
-                                <div class="modal fade" id="modalviewpegawai{{ $pegawai->nip }}">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">View Pegawai {{ $pegawai->nama_pegawai }}
-                                                </h4>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <strong>Nama Lengkap</strong>
-                                                <p class="text-muted">{{ $pegawai->nama_pegawai }}</p>
-                                                <hr>
-                                                <strong>NIP</strong>
-                                                <p class="text-muted">{{ $pegawai->nip }}</p>
-                                                <hr>
-                                                <strong>Jabatan</strong>
-                                                <p class="text-muted">{{ $pegawai->jabatan->nama_jabatan }}
-                                                </p>
-                                                <hr>
-                                                <strong>Golongan</strong>
-                                                <p class="text-muted">
-                                                    {{ $pegawai->golongan->nama_golongan }}</p>
-                                                <hr>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-
-                        </tbody>
-                    </table>
-                    <div class="modal fade btn-tambah-pegawai" tabindex="-1" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal"><span
-                                            aria-hidden="true">×</span>
-                                    </button>
-                                    <h4 class="modal-title" id="myModalLabel">Form Tambah Pegawai </h4>
-                                </div>
-                                <div class="modal-body">
-                                    <form data-parsley-validate class="form-horizontal form-label-left" method="POST">
-
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Lengkap</label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input class="form-control col-md-7 col-xs-12" type="text"
-                                                    name="nama_lengkap" placeholder="Masukkan Nama">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">NIP</label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input class="form-control col-md-7 col-xs-12" type="number"
-                                                    name="nip" placeholder="Masukkan NIP">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Jabatan</label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <select class="form-control" name="jabatan">
-                                                    <option selected disabled>-- Pilih Jabatan--</option>
-
-                                                    @foreach ($jabatan as $jab)
-                                                        <option value="{{ $jab->id_jabatan }}">{{ $jab->nama_jabatan }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Golongan</label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <select class="form-control" name="golongan">
-                                                    <option selected disabled>-- Pilih Golongan--</option>
-                                                    @foreach ($golongans as $gol)
-                                                        <option value="{{ $gol->id_golongan }}">{{ $gol->nama_golongan }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="ln_solid"></div>
-                                        <div class="form-group">
-                                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                                <button type="submit" class="btn btn-primary"
-                                                    name="submit">Submit</button>
-                                            </div>
-                                        </div>
-
-                                    </form>
-                                </div>
-
                             </div>
-                        </div>
-                    </div>
-                </div>
             </div>
+            @endforeach
+            </tbody>
+            </table>
         </div>
-
+    </div>
     </div>
 @endsection
