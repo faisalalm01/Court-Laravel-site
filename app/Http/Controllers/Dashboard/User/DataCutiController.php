@@ -13,7 +13,6 @@ class DataCutiController extends Controller
 {
     public function getPegawai()
     {
-
         $user = Auth::user();
         return  Pegawai::where('nip', $user->nip)->first();
     }
@@ -41,24 +40,34 @@ class DataCutiController extends Controller
         $data =  CutiPegawai::where('id_pegawai', $pegawai->id_pegawai)->where('status_cuti', 'Tidak Disetujui')->get();
         return view('dashboard.user.data_cuti_tidak_disetujui', ['title' => 'Dashboard User | Data Cuti Tidak Disetujui', 'data' => $data]);
     }
-    public function cetakPdf()
+    public function cetakPdf(string $cutiId)
     {
-        $data =   [
-            'nama' => 'ANNA SETYARINI',
-            'nip' => '197201291994032003',
-            'jabatan' => 'JURU SITA PENGGANTI',
+        $nip = $this->getPegawai()->nip;
+        $pegawai = Pegawai::with('jabatan')->where('nip', $nip)->firstOrFail();
+        $cutiPegawai = CutiPegawai::where('id_cutipegawai', $cutiId)
+            ->where('status_cuti', 'Disetujui')
+            ->first();
+        if (!$cutiPegawai) {
+            abort(404, 'Data cuti tidak ditemukan atau belum disetujui.');
+        }
+        $nipAtasan = $cutiPegawai->panitera_sekretaris ?? $cutiPegawai->panmud_kasubag;
+        $atasan = Pegawai::with('jabatan')->where('nip', $nipAtasan)->first();
+        $ketua = Pegawai::with('jabatan')->where('nip', $cutiPegawai->ketua)->first();
+        $data = [
+            'nama' => $pegawai->nama_pegawai,
+            'nip' => $pegawai->nip,
+            'jabatan' => $pegawai->jabatan->nama_jabatan,
             'unit_kerja' => 'PENGADILAN NEGERI PURWOKERTO',
-            'jenis_cuti' => 'Cuti Tahunan',
-            'alasan_cuti' => '1dada',
-            'tanggal_mulai' => '2025-05-22',
-            'tanggal_selesai' => '2025-05-31',
-            'lama_cuti' => '1',
-            'alamat' => 'Alamat selama cuti',
-            'telepon' => '08123456789',
-            'atasan' => 'HARIYANTO, S.H, M.H',
-            'nip_atasan' => '196804101996031003',
-            'ketua' => 'Richard E Basoeki, S.H, M.H.',
-            'nip_ketua' => '123333333333232312332',
+            'jenis_cuti' => $cutiPegawai->jenis_cuti,
+            'alasan_cuti' => $cutiPegawai->alasan_cuti,
+            'tanggal_mulai' => $cutiPegawai->dari_tanggal,
+            'tanggal_selesai' => $cutiPegawai->sampai_dengan,
+            'lama_cuti' => $cutiPegawai->lama_cuti,
+            'alamat' => $cutiPegawai->alamat ?? '-',
+            'atasan' => $atasan->nama_pegawai ?? '-',
+            'nip_atasan' => $atasan->nip ?? '-',
+            'ketua' => $ketua->nama_pegawai ?? '-',
+            'nip_ketua' => $ketua->nip ?? '-',
         ];
         $pdf = Pdf::loadView('pdf.cetak-cuti', $data);
         return $pdf->download('pengajuan_cuti.pdf');

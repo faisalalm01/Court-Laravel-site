@@ -169,8 +169,7 @@
             <td colspan="14">ALAMAT SELAMA MENJALANKAN CUTI</td>
         </tr>
         <tr>
-            <td colspan="6">{{ $alamat }}</td>
-            <td colspan="5">No. Telepon : {{ $telepon }}</td>
+            <td colspan="11">{{ $alamat }}</td>
             <td colspan="4" class="center">
                 Hormat saya<br><br>
                 <strong>{{ $nama }}</strong><br>

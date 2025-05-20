@@ -91,10 +91,8 @@
                                         </td>
                                     @endif
                                     <td>
-                                        {{-- <a href="#<?php echo $d['id_cutipegawai']; ?>" class="btn btn-info"><i class="fa fa-print"></i>
-                                            Print PDF</a> --}}
-                                        <a href="{{ route('dashboard.user.data.cuti.cetak.pdf') }}" class="btn btn-info"><i
-                                                class="fa fa-print"></i>
+                                        <a href="/dashboard/user/cetak-pdf/{{ $d->id_cutipegawai }}"
+                                            class="btn btn-info"><i class="fa fa-print"></i>
                                             Print PDF</a>
                                     </td>
                                 </tr>

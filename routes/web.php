@@ -44,7 +44,7 @@ Route::post('/dashboard/user/tambah-pengajuan-cuti', [PengajuanCutiController::c
 
 // dashboard user pengajuan cuti
 Route::get('/dashboard/user/data-cuti-disetujui', [DataCutiController::class, 'showDataCutiDisetujui'])->name('dashboard.user.data.cuti.disetujui')->middleware('auth');
-Route::get('/dashboard/user/data-cuti-cetak-pdf', [DataCutiController::class, 'cetakPdf'])->name('dashboard.user.data.cuti.cetak.pdf')->middleware('auth');
+Route::get('/dashboard/user/cetak-pdf/{cutiId}', [DataCutiController::class, 'cetakPdf'])->name('dashboard.user.data.cuti.cetak.pdf')->middleware('auth');
 Route::get('/dashboard/user/data-cuti-ditangguhkan', [DataCutiController::class, 'showDataCutiDitangguhkan'])->name('dashboard.user.data.cuti.ditangguhkan')->middleware('auth');
 Route::get('/dashboard/user/data-cuti-perubahan', [DataCutiController::class, 'showDataCutiPerubahan'])->name('dashboard.user.data.cuti.perubahan')->middleware('auth');
 Route::get('/dashboard/user/data-cuti-tidak-disetujui', [DataCutiController::class, 'showDataCutiTidakDisetujui'])->name('dashboard.user.data.cuti.tidak.disetujui')->middleware('auth');
