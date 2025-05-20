@@ -93,7 +93,7 @@ class ApproveCutiController extends Controller
                     'ket_status_cuti' => 'Pengajuan Cuti Diterima'
                 ]);
             }
-        } else {
+        } else if ($status_cuti == 'Ditolak') {
             if (in_array($jabatan, [
                 'PANMUD HUKUM',
                 'PANMUD HUKUM GUGATAN',
@@ -120,6 +120,16 @@ class ApproveCutiController extends Controller
                     'ket_status_cuti' => $catatan
                 ]);
             }
+        } else if ($status_cuti == 'Ditangguhkan') {
+            $cuti->update([
+                'status_cuti' => 'Ditangguhkan',
+                'ket_status_cuti' => $catatan
+            ]);
+        } else {
+            $cuti->update([
+                'status_cuti' => 'Perubahan',
+                'ket_status_cuti' => $catatan
+            ]);
         }
         return redirect()->route('dashboard.user.daftar-approve-cuti')->with('success', 'Pengajuan cuti berhasil disetujui.');
     }

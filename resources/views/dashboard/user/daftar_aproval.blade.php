@@ -72,14 +72,24 @@
                                     <td> {{ $d->dari_tanggal }}</td>
                                     <td> {{ $d->sampai_dengan }}</td>
                                     <td> {{ $d->alamat }}</td>
-                                    <td class="text-center">
-                                        <a href="#" class="btn bg-green-600 p-1 text-white btn-xs">
-                                            {{ $d['status_cuti'] }}</a>
+                                    <td class="p-3 border-b">
+                                        <span class="px-2 py-1 rounded bg-yellow-200 text-yellow-800">
+                                            {{ $d->status_cuti }}
+                                        </span>
                                     </td>
-                                    <td class="text-center px-2">
-                                        <a href="#" class="btn bg-blue-500 p-1 text-white btn-xs ">
-                                            {{ $d->ket_status_cuti }}</a>
-                                    </td>
+                                    @if ($d->ket_status_cuti)
+                                        <td class="p-3 border-b">
+                                            <span class="px-2 py-1 rounded  text-black">
+                                                {{ $d->ket_status_cuti }}
+                                            </span>
+                                        </td>
+                                    @else
+                                        <td class="p-3 border-b">
+                                            <span class="px-2 py-1 rounded  text-black">
+                                                -
+                                            </span>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

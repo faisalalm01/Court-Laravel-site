@@ -56,7 +56,7 @@
                                 <th class="p-3">Sampai Dengan</th>
                                 <th class="p-3">Status</th>
                                 <th class="p-3">Keterangan</th>
-                           </tr>
+                            </tr>
                         </thead>
 
 
@@ -71,13 +71,24 @@
                                     </td>
                                     <td> {{ $d->dari_tanggal }}</td>
                                     <td>{{ $d->sampai_dengan }}</td>
-                                    <td class="text-center">
-                                        <a href="#" class="btn btn-danger btn-xs "> {{ $d->status_cuti }}
-                                        </a>
+                                    <td class="p-3 border-b">
+                                        <span class="px-2 py-1 rounded bg-red-200 text-red-800">
+                                            {{ $d->status_cuti }}
+                                        </span>
                                     </td>
-                                    <td class="text-center">
-                                        <a href="#" class="btn btn-primary btn-xs "> {{ $d->ket_status_cuti }}</a>
-                                    </td>
+                                    @if ($d->ket_status_cuti)
+                                        <td class="p-3 border-b">
+                                            <span class="px-2 py-1 rounded  text-black">
+                                                {{ $d->ket_status_cuti }}
+                                            </span>
+                                        </td>
+                                    @else
+                                        <td class="p-3 border-b">
+                                            <span class="px-2 py-1 rounded  text-black">
+                                                -
+                                            </span>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

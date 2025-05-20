@@ -72,16 +72,30 @@
                                     </td>
                                     <td>{{ $d->dari_tanggal }}</td>
                                     <td> {{ $d->sampai_dengan }}</td>
-                                    <td class="text-center">
-                                        <a href="#" class="btn btn-success btn-xs "> {{ $d->status_cuti }}
-                                        </a>
+                                    <td class="p-3 border-b">
+                                        <span class="px-2 py-1 rounded bg-green-200 text-green-800">
+                                            {{ $d->status_cuti }}
+                                        </span>
                                     </td>
-                                    <td class="text-center">
-                                        <a href="#" class="btn btn-primary btn-xs "> {{ $d->ket_status_cuti }}</a>
-                                    </td>
+                                    @if ($d->ket_status_cuti)
+                                        <td class="p-3 border-b">
+                                            <span class="px-2 py-1 rounded  text-black">
+                                                {{ $d->ket_status_cuti }}
+                                            </span>
+                                        </td>
+                                    @else
+                                        <td class="p-3 border-b">
+                                            <span class="px-2 py-1 rounded  text-black">
+                                                -
+                                            </span>
+                                        </td>
+                                    @endif
                                     <td>
-                                        <a href="cetak_pdf.php?id=<?php echo $d['id_cutipegawai']; ?>" class="btn btn-info"><i
-                                                class="fa fa-print"></i> Print PDF</a>
+                                        {{-- <a href="#<?php echo $d['id_cutipegawai']; ?>" class="btn btn-info"><i class="fa fa-print"></i>
+                                            Print PDF</a> --}}
+                                        <a href="{{ route('dashboard.user.data.cuti.cetak.pdf') }}" class="btn btn-info"><i
+                                                class="fa fa-print"></i>
+                                            Print PDF</a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -52,26 +52,31 @@
                                 <td class="p-3 border-b">{{ $cuti->sampai_dengan }}</td>
                                 <td class="p-3 border-b">{{ $cuti->alamat }}</td>
                                 <td class="p-3 border-b">
-                                    <span class="px-2 py-1 rounded bg-yellow-100 text-yellow-800">
+                                    <span class="px-2 py-1 rounded bg-yellow-200 text-yellow-800">
                                         {{ $cuti->status_cuti }}
                                     </span>
                                 </td>
                                 <td class="p-3 border-b">
-                                    <a href="#" class="text-blue-600 hover:underline" data-modal-toggle="modalviewcuti{{ $cuti->id_cutipegawai }}">View</a> |
-                                    <a href="/dashboard/user/approve-update-cuti/{{ $cuti->id_cutipegawai }}" class="text-green-600 hover:underline">Approve</a>
+                                    <a href="#" class="text-blue-600 hover:underline"
+                                        data-modal-toggle="modalviewcuti{{ $cuti->id_cutipegawai }}">View</a> |
+                                    <a href="/dashboard/user/approve-update-cuti/{{ $cuti->id_cutipegawai }}"
+                                        class="text-green-600 hover:underline">Approve</a>
                                 </td>
                             </tr>
-                            
+
                             <!-- Modal -->
-                            <div id="modalviewcuti{{ $cuti->id_cutipegawai }}" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
+                            <div id="modalviewcuti{{ $cuti->id_cutipegawai }}"
+                                class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
                                 <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
                                     <div class="p-6">
-                                        <h3 class="text-xl font-bold mb-4">Detail Cuti - {{ $cuti->pegawai->nama_pegawai }}</h3>
+                                        <h3 class="text-xl font-bold mb-4">Detail Cuti - {{ $cuti->pegawai->nama_pegawai }}
+                                        </h3>
                                         <!-- Konten modal -->
                                         <div class="space-y-3">
                                             <p><strong>Jenis Cuti:</strong> {{ $cuti->jenis_cuti }}</p>
                                             <p><strong>Alasan:</strong> {{ $cuti->alasan_cuti }}</p>
-                                            <p><strong>Lama:</strong> {{ $cuti->lama_cuti }} {{ $cuti->ket_lama_cuti }}</p>
+                                            <p><strong>Lama:</strong> {{ $cuti->lama_cuti }} {{ $cuti->ket_lama_cuti }}
+                                            </p>
                                             <p><strong>Dari:</strong> {{ $cuti->dari_tanggal }}</p>
                                             <p><strong>Sampai:</strong> {{ $cuti->sampai_dengan }}</p>
                                             <p><strong>Alamat:</strong> {{ $cuti->alamat }}</p>
@@ -87,10 +92,9 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                            @endforeach
-                        </tbody>
-                    </table>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

@@ -1,8 +1,8 @@
 @extends('dashboard.index')
 
 @section('content')
-<div class="mb-10">
-    <div class="justify-between">
+    <div class="mb-10">
+        <div class="justify-between">
             <!-- Title Kiri -->
             <div class="title_left">
                 <h3 class="text-2xl">Cuti Perubahan</h3>
@@ -71,13 +71,24 @@
                                     </td>
                                     <td> {{ $d->dari_tanggal }}</td>
                                     <td>{{ $d->sampai_dengan }}</td>
-                                    <td class="text-center">
-                                        <a href="#" class="btn btn-primary btn-xs "> {{ $d->status_cuti }}
-                                        </a>
+                                    <td class="p-3 border-b">
+                                        <span class="px-2 py-1 rounded bg-blue-200 text-blue-800">
+                                            {{ $d->status_cuti }}
+                                        </span>
                                     </td>
-                                    <td class="text-center">
-                                        <a href="#" class="btn btn-primary btn-xs "> {{ $d->ket_status_cuti }}</a>
-                                    </td>
+                                    @if ($d->ket_status_cuti)
+                                        <td class="p-3 border-b">
+                                            <span class="px-2 py-1 rounded  text-black">
+                                                {{ $d->ket_status_cuti }}
+                                            </span>
+                                        </td>
+                                    @else
+                                        <td class="p-3 border-b">
+                                            <span class="px-2 py-1 rounded  text-black">
+                                                -
+                                            </span>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

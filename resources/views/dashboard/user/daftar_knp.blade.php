@@ -1,8 +1,8 @@
 @extends('dashboard.index')
 
 @section('content')
-<div class="mb-10">
-    <div class="justify-between">
+    <div class="mb-10">
+        <div class="justify-between">
             <!-- Title Kiri -->
             <div class="title_left">
                 <h3 class="text-2xl">KGB</h3>
@@ -13,7 +13,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb float-sm-right m-0">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">KGB</li>
+                        <li class="breadcrumb-item active" aria-current="page">KNP</li>
                     </ol>
                 </nav>
             </div>
