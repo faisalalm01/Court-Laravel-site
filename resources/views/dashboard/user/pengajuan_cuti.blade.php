@@ -1,16 +1,15 @@
 @extends('dashboard.index')
 
 @section('content')
+
     <div role="main">
         <div class="px-3">
-            <dis class="p-3">
+            <!-- <div class="p-3">
                 <div class="d-flex justify-content-between align-items-center">
-                    <!-- Title Kiri -->
                     <div class="title_left">
                         <h3 class="text-2xl">Pengajuan Cuti</h3>
                     </div>
 
-                    <!-- Breadcrumb Kanan -->
                     <div class="title_right">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb float-sm-right m-0">
@@ -20,7 +19,22 @@
                         </nav>
                     </div>
                 </div>
-            </dis>
+            </div> -->
+                <div class="p-3">
+                    <div class="flex justify-between items-center">
+                        <div class="title_left">
+                            <h3 class="text-2xl font-semibold">Pengajuan Cuti</h3>
+                        </div>
+                        <div class="title_right">
+                            <nav aria-label="breadcrumb">
+                                <ol class="flex space-x-2 text-gray-600">
+                                    <li><a href="#" class="hover:underline">Home</a> /</li>
+                                    <li class="text-gray-800 font-medium">Ajukan Cuti</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
 
             <div class="clearfix"></div>
 

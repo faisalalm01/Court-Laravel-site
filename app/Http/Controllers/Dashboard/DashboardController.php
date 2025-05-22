@@ -15,6 +15,8 @@ class DashboardController extends Controller
         $user = Auth::user();
         $pegawai = Pegawai::where('nip', $user->nip)->first();
         $title = $user->role === 'Admin' ? 'Dashboard Admin' : 'Dashboard User';
+        $userCount = $user::count();
+        $pegawaiCount = $pegawai::count();
         if (!$pegawai) {
             return view('cuti.index', [
                 'title' => $title,
@@ -27,6 +29,6 @@ class DashboardController extends Controller
         } else {
             $data = CutiPegawai::where('id_pegawai', $pegawai->id_pegawai)->where('status_cuti', 'Diajukan')->get();
         }
-        return view('dashboard.user.dashboard', ['title' => $title, 'data' =>  $data]);
+        return view('dashboard.user.dashboard', ['title' => $title, 'data' =>  $data, 'userCount' => $userCount, 'pegawaiCount' => $pegawaiCount]);
     }
 }

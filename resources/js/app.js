@@ -34,8 +34,8 @@
 // new DataTable('#example');
 
 // Import library
-import "./bootstrap";
-import "bootstrap";
+// import "./bootstrap";
+// import "bootstrap";
 import "../css/app.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "@fortawesome/fontawesome-free/js/all.js";
@@ -46,24 +46,43 @@ import "simple-datatables/dist/style.css";
 
 // Fungsi untuk handle modal
 function setupModals() {
-    // Buka modal
-    document.querySelectorAll("[data-modal-toggle]").forEach((button) => {
-        button.addEventListener("click", function () {
-            const modalId = this.getAttribute("data-modal-toggle");
+    // Handle semua klik di dokumen
+    document.addEventListener('click', function(e) {
+        // Buka modal
+        const toggleBtn = e.target.closest('[data-modal-toggle]');
+        if (toggleBtn) {
+            e.preventDefault();
+            const modalId = toggleBtn.getAttribute('data-modal-toggle');
             const modal = document.getElementById(modalId);
-            modal.classList.remove("hidden");
-            modal.classList.add("flex");
-        });
-    });
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            }
+        }
 
-    // Tutup modal
-    document.querySelectorAll("[data-modal-hide]").forEach((button) => {
-        button.addEventListener("click", function () {
-            const modalId = this.getAttribute("data-modal-hide");
+        // Tutup modal
+        const hideBtn = e.target.closest('[data-modal-hide]');
+        if (hideBtn) {
+            e.preventDefault();
+            const modalId = hideBtn.getAttribute('data-modal-hide');
             const modal = document.getElementById(modalId);
-            modal.classList.add("hidden");
-            modal.classList.remove("flex");
-        });
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = ''; // Enable scrolling
+            }
+        }
+
+        // Tutup modal saat klik di luar konten modal
+        if (e.target.classList.contains('fixed') && 
+            e.target.classList.contains('inset-0') && 
+            e.target.classList.contains('bg-black') && 
+            e.target.classList.contains('bg-opacity-50')) {
+            e.target.classList.add('hidden');
+            e.target.classList.remove('flex');
+            document.body.style.overflow = ''; // Enable scrolling
+        }
     });
 }
 

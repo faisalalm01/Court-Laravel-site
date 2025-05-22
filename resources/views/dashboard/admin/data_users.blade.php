@@ -26,7 +26,7 @@
 
             <div class="overflow-x-auto">
                 <button href="#" title="Tambah User" type="button" class="btn btn-info pull-right"
-                    data-toggle="modal" data-modal-toggle="modaltambahuser"><i class="fa fa-plus-circle"></i> Tambah
+                    data-modal-toggle="modaltambahuser"><i class="fa fa-plus-circle"></i> Tambah
                     User</button>
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -104,7 +104,35 @@
                                 </div>
                             </div>
 
+                            <!-- modal tambah -->
                             <div id="modaltambahuser"
+                                class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
+                                <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
+                                    <div class="p-6">
+                                        <h3 class="text-xl font-bold mb-4">Detail User - {{ $user->pegawai->nama_pegawai }}
+                                        </h3>
+                                        <!-- Konten modal -->
+                                        <div class="space-y-3">
+                                            <p><strong>Nama Lengkap:</strong> {{ $user->pegawai->nama_pegawai }}</p>
+                                            <p><strong>NIP:</strong> {{ $user->nip }}</p>
+                                            <p><strong>Jabatan:</strong> {{ $user->pegawai->jabatan->nama_jabatan }}</p>
+                                            <p><strong>Golongan:</strong> {{ $user->pegawai->golongan->nama_golongan }}</p>
+                                            <p><strong>Hak Akses Akun:</strong> {{ $user->role }}</p>
+                                            <!-- Data lainnya -->
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-gray-50 px-6 py-3 flex justify-end">
+                                        <button type="button" data-modal-hide="modaltambahuser"
+                                            class="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded-lg">
+                                            Tutup
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+
+                            <!-- <div id="modaltambahuser"
                                 class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
 
                                 <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
@@ -161,7 +189,7 @@
                                     </div>
                                 </div>
                             </div>
-            </div>
+            </div> -->
             @endforeach
             </tbody>
             </table>

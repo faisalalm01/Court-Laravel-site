@@ -47,7 +47,7 @@
                 <ul id="dropdown-menu-khusus" class="hidden py-2 space-y-2">
                     <li>
                         <a href={{ route('dashboard.user.daftar-approve-cuti') }}
-                            class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">
+                            class="flex items-center w-full p-2 text-md font-normal text-white hover:text-black transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">
                             Approve Cuti</a>
                     </li>
                 </ul>
@@ -77,12 +77,12 @@
                 <ul id="dropdown-pengajuan-cuti" class="hidden py-2 space-y-2">
                     <li>
                         <a href={{ route('dashboard.user.pengajuan-cuti') }}
-                            class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">
+                            class="flex items-center w-full p-2 text-md font-normal text-white hover:text-black transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">
                             Ajukan Cuti</a>
                     </li>
                     <li>
                         <a href={{ route('dashboard.user.daftar-approval') }}
-                            class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Menunggu
+                            class="flex items-center w-full p-2 text-md font-normal text-white hover:text-black transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Menunggu
                             Aproval</a>
                     </li>
                 </ul>
@@ -103,20 +103,20 @@
                 <ul id="dropdown-data-pengajuan-cuti" class="hidden py-2 space-y-2">
                     <li>
                         <a href={{ route('dashboard.user.data.cuti.disetujui') }}
-                            class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">
+                            class="flex items-center w-full p-2 text-md font-normal text-white hover:text-black transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">
                             Disetujui</a>
                     </li>
                     <li>
                         <a href="{{ route('dashboard.user.data.cuti.perubahan') }}"
-                            class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Perubahan</a>
+                            class="flex items-center w-full p-2 text-md font-normal text-white hover:text-black transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Perubahan</a>
                     </li>
                     <li>
                         <a href="{{ route('dashboard.user.data.cuti.ditangguhkan') }}"
-                            class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Ditangguhkan</a>
+                            class="flex items-center w-full p-2 text-md font-normal text-white hover:text-black transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Ditangguhkan</a>
                     </li>
                     <li>
                         <a href="{{ route('dashboard.user.data.cuti.tidak.disetujui') }}"
-                            class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Tidak
+                            class="flex items-center w-full p-2 text-md font-normal text-white hover:text-black transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Tidak
                             Disetujui</a>
                     </li>
                 </ul>
@@ -153,17 +153,17 @@
                 <ul id="dropdown-pegawai" class="hidden py-2 space-y-2">
                     <li>
                         <a href="{{ route('dashboard.admin.data-pegawai') }}"
-                            class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">
+                            class="flex items-center w-full p-2 text-md font-normal text-white hover:text-black transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">
                             Data Pegawai</a>
                     </li>
                     <li>
                         <a href="{{ route('dashboard.admin.data-jabatan') }}"
-                            class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Data
+                            class="flex items-center w-full p-2 text-md font-normal text-white hover:text-black transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Data
                             Jabatan</a>
                     </li>
                     <li>
                         <a href="{{ route('dashboard.admin.data-golongan') }}"
-                            class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Data
+                            class="flex items-center w-full p-2 text-md font-normal text-white hover:text-black transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Data
                             Golongan</a>
                     </li>
                 </ul>
@@ -187,12 +187,12 @@
                     <ul id="dropdown-pengajuan-cuti" class="hidden py-2 space-y-2">
                         <li>
                             <a href={{ route('dashboard.user.pengajuan-cuti') }}
-                                class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">
+                                class="flex items-center w-full p-2 text-md font-normal text-white hover:text-black transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">
                                 Ajukan Cuti</a>
                         </li>
                         <li>
                             <a href={{ route('dashboard.user.daftar-approval') }}
-                                class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Menunggu
+                                class="flex items-center w-full p-2 text-md font-normal text-white hover:text-black transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Menunggu
                                 Aproval</a>
                         </li>
                     </ul>
@@ -214,20 +214,20 @@
                     <ul id="dropdown-data-pengajuan-cuti" class="hidden py-2 space-y-2">
                         <li>
                             <a href={{ route('dashboard.user.data.cuti.disetujui') }}
-                                class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">
+                                class="flex items-center w-full p-2 text-md font-normal text-white hover:text-black transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">
                                 Disetujui</a>
                         </li>
                         <li>
                             <a href="{{ route('dashboard.user.data.cuti.perubahan') }}"
-                                class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Perubahan</a>
+                                class="flex items-center w-full p-2 text-md font-normal text-white hover:text-black transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Perubahan</a>
                         </li>
                         <li>
                             <a href="{{ route('dashboard.user.data.cuti.ditangguhkan') }}"
-                                class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Ditangguhkan</a>
+                                class="flex items-center w-full p-2 text-md font-normal text-white hover:text-black transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Ditangguhkan</a>
                         </li>
                         <li>
                             <a href="{{ route('dashboard.user.data.cuti.tidak.disetujui') }}"
-                                class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Tidak
+                                class="flex items-center w-full p-2 text-md font-normal text-white hover:text-black transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Tidak
                                 Disetujui</a>
                         </li>
                     </ul>
@@ -252,17 +252,17 @@
                 <ul id="dropdown-history" class="hidden py-2 space-y-2">
                     <li>
                         <a href="{{ route('dashboard.user.daftar-cuti') }}"
-                            class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Daftar
+                            class="flex items-center w-full p-2 text-md font-normal text-white hover:text-black transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Daftar
                             Cuti</a>
                     </li>
                     <li>
                         <a href="{{ route('dashboard.user.daftar-knp') }}"
-                            class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Daftar
+                            class="flex items-center w-full p-2 text-md font-normal text-white hover:text-black transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Daftar
                             KNP</a>
                     </li>
                     <li>
                         <a href="{{ route('dashboard.user.daftar-kgb') }}"
-                            class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Daftar
+                            class="flex items-center w-full p-2 text-md font-normal text-white hover:text-black transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Daftar
                             KGB</a>
                     </li>
                 </ul>
@@ -270,17 +270,17 @@
                 <ul id="dropdown-history" class="hidden py-2 space-y-2">
                     <li>
                         <a href="{{ route('dashboard.admin.daftar-cuti') }}"
-                            class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Daftar
+                            class="flex items-center w-full p-2 text-md font-normal text-white hover:text-black transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Daftar
                             Cuti</a>
                     </li>
                     <li>
                         <a href="{{ route('dashboard.admin.daftar-knp') }}"
-                            class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Daftar
+                            class="flex items-center w-full p-2 text-md font-normal text-white hover:text-black transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Daftar
                             KNP</a>
                     </li>
                     <li>
                         <a href="{{ route('dashboard.admin.daftar-kgb') }}"
-                            class="flex items-center w-full p-2 text-md font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Daftar
+                            class="flex items-center w-full p-2 text-md font-normal text-white hover:text-black transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Daftar
                             KGB</a>
                     </li>
                 </ul>

@@ -1,7 +1,7 @@
 @extends('dashboard.index')
 
 @section('content')
-    <div class="page-title">
+    <!-- <div class="page-title">
         <div class="title_left">
             <h3>Cuti</h3>
         </div>
@@ -312,5 +312,195 @@
                 </div>
             </div>
         </div>
+    </div> -->
+    
+    <div class="p-3">
+    <div class="flex justify-between items-center">
+        <div class="title_left">
+            <h3 class="text-2xl font-semibold">Cuti</h3>
+        </div>
+        <div class="title_right">
+            <nav aria-label="breadcrumb">
+                <ol class="flex space-x-2 text-gray-600">
+                    <li><a href="#" class="hover:underline">Home</a> /</li>
+                    <li class="text-gray-800 font-medium">Cuti</li>
+                </ol>
+            </nav>
+        </div>
     </div>
+</div>
+
+<div class="p-3">
+    <div class="bg-white shadow rounded-lg p-4">
+        <div class="flex justify-between items-center mb-4">
+            <div>
+                <h2 class="text-xl font-bold">Daftar Cuti</h2>
+                <p class="text-sm text-gray-500">Daftar cuti pegawai pengadilan Negeri Purwokerto</p>
+            </div>
+            <a href="export_cuti.php" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded flex items-center">
+                <i class="fa fa-download mr-2"></i> Export Excel
+            </a>
+        </div>
+
+        @if (session('success'))
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                <span class="block sm:inline">{{ session('success') }}</span>
+                <button type="button" class="absolute top-0 bottom-0 right-0 px-4 py-3" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                <span class="block sm:inline">{{ session('error') }}</span>
+                <button type="button" class="absolute top-0 bottom-0 right-0 px-4 py-3" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+
+        <div class="overflow-x-auto">
+            <table id="data-tables" class="min-w-full table-auto border-collapse">
+                <thead>
+                    <tr class="bg-gray-100 text-gray-700 uppercase text-sm leading-normal">
+                        <th class="py-3 px-6 text-left">No</th>
+                        <th class="py-3 px-6 text-left">Nama</th>
+                        <th class="py-3 px-6 text-left">Jenis Cuti</th>
+                        <th class="py-3 px-6 text-left">Alasan Cuti</th>
+                        <th class="py-3 px-6 text-left">Lama Cuti</th>
+                        <th class="py-3 px-6 text-left">Dari Tanggal</th>
+                        <th class="py-3 px-6 text-left">Sampai Dengan</th>
+                        <th class="py-3 px-6 text-center">Status</th>
+                        <th class="py-3 px-6 text-center">Keterangan</th>
+                        <th class="py-3 px-6 text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($data as $d)
+                        <tr class="hover:bg-gray-50 border-b border-gray-200">
+                            <td class="py-4 px-6">{{ $loop->iteration }}</td>
+                            <td class="py-4 px-6">{{ $d->pegawai->nama_pegawai }}</td>
+                            <td class="py-4 px-6">{{ $d->jenis_cuti }}</td>
+                            <td class="py-4 px-6">{{ $d->alasan_cuti }}</td>
+                            <td class="py-4 px-6">{{ $d->lama_cuti }} {{ $d->ket_lama_cuti }}</td>
+                            <td class="py-4 px-6">{{ $d->dari_tanggal }}</td>
+                            <td class="py-4 px-6">{{ $d->sampai_dengan }}</td>
+                            <td class="py-4 px-6 text-center">
+                                <span class="px-3 py-1 rounded-full text-xs 
+                                    {{ $d->status_cuti == 'Diajukan' || $d->status_cuti == 'Disetujui' ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800' }}">
+                                    {{ $d->status_cuti }}
+                                </span>
+                            </td>
+                            <td class="py-4 px-6 text-center">
+                                <span class="px-3 py-1 rounded-full text-xs bg-blue-200 text-blue-800">
+                                    {{ $d->ket_status_cuti }}
+                                </span>
+                            </td>
+                            <td class="py-4 px-6 text-center">
+                                @if($d->status_cuti == 'Disetujui')
+                                    <a href="cetak_pdf.php?id={{ $d->id_cutipegawai }}" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded flex items-center justify-center">
+                                        <i class="fa fa-print mr-1"></i> Print PDF
+                                    </a>
+                                @else
+                                    <button class="bg-blue-300 text-white px-3 py-1 rounded flex items-center justify-center cursor-not-allowed" disabled>
+                                        <i class="fa fa-print mr-1"></i> Print PDF
+                                    </button>
+                                @endif
+                            </td>
+                        </tr>
+
+                        <!-- Modal Delete -->
+                        <div class="modal fade hidden" id="modaldeletecuti{{ $d->id_cutipegawai }}">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Hapus Cuti Pegawai {{ $d->pegawai->nama_pegawai }}</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="" action="delete_cuti.php" method="get">
+                                            <div class="form-group">
+                                                <label>Anda ingin menghapus Cuti {{ $d->pegawai->nama_pegawai }}</label>
+                                                <input type="hidden" name="id_cuti" class="form-control" value="{{ $d->pegawai->nama_pegawai }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Yes</button>
+                                                <button type="button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded ml-2" data-dismiss="modal">No</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal Edit -->
+                        <div class="modal fade hidden" id="modaleditcuti{{ $d->id_cutipegawai }}">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Form Edit Cuti</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="" action="edit_cuti.php" method="get">
+                                            <div class="form-group mb-4">
+                                                <label class="block text-gray-700 mb-2">Pegawai</label>
+                                                <select class="form-control w-full px-3 py-2 border rounded" name="pegawai">
+                                                    <option value="{{ $d->pegawai->nip }}"> {{ $d->pegawai->nama_pegawai }}</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group mb-4">
+                                                <label class="block text-gray-700 mb-2">Cuti tahunan</label>
+                                                <div>
+                                                    <input type="hidden" name="id_cuti" value="{{ $d->id_cutipegawai }}">
+                                                    <input class="w-full px-3 py-2 border rounded" type="text" name="ct_tahunan" value="{{ $d['cuti_tahunan'] }}">
+                                                </div>
+                                            </div>
+
+                                            <!-- Other form fields with similar styling -->
+                                            
+                                            <div class="form-group">
+                                                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Save changes</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal View -->
+                        <div class="modal fade hidden" id="modalviewcuti{{ $d->id_cutipegawai }}">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">View Cuti Pegawai {{ $d->pegawai->nama_pegawai }}</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="space-y-4">
+                                            <div>
+                                                <strong class="block text-gray-700">Nama lengkap</strong>
+                                                <p class="text-gray-600">{{ $d->pegawai->nama_pegawai }}</p>
+                                            </div>
+                                            <hr>
+                                            <!-- Other view fields with similar styling -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 @endsection

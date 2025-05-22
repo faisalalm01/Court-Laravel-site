@@ -1,19 +1,32 @@
 @extends('dashboard.index')
 
 @section('content')
-    <div class="mb-10">
+    <!-- <div class="mb-10">
         <div class="justify-between">
-            <!-- Title Kiri -->
             <div class="title_left">
                 <h3 class="text-2xl">Cuti Disetujui</h3>
             </div>
 
-            <!-- Breadcrumb Kanan -->
             <div class="">
                 <nav aria-label="">
                     <ol class="">
                         <li class=""><a href="">Home /</a></li>
                         <li class="active" aria-current="page">Cuti Disetujui</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div> -->
+    <div class="p-3">
+        <div class="flex justify-between items-center">
+            <div class="title_left">
+                <h3 class="text-2xl font-semibold">Cuti Disetujui</h3>
+            </div>
+            <div class="title_right">
+                <nav aria-label="breadcrumb">
+                    <ol class="flex space-x-2 text-gray-600">
+                        <li><a href="#" class="hover:underline">Home</a> /</li>
+                        <li class="text-gray-800 font-medium">Cuti Disetujui</li>
                     </ol>
                 </nav>
             </div>
@@ -24,7 +37,10 @@
         <div class="">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Daftar Cuti Disetujui </h2>
+                    <div class="mb-4">
+                        <h2 class="text-xl font-bold">Daftar Cuti Disetujui</h2>
+                    </div>
+                    <!-- <h2>Daftar Cuti Disetujui </h2> -->
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
