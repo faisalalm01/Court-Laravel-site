@@ -148,6 +148,7 @@
 
     </div> -->
 <div class="p-3">
+   
     <div class="flex justify-between items-center">
         <div class="title_left">
             <h3 class="text-2xl font-semibold">KNP</h3>
@@ -161,6 +162,18 @@
             </nav>
         </div>
     </div>
+     <div class="text-gray-500 text-sm">
+                <h2 class="text-cyan-900 text-xl">Syarat-syarat Kenaikan Pangkat Reguler :</h2>
+                <h2>*Salinan/Fotocopy yang disahkan dari SK CPNS</h2>
+                <h2>*Salinan/Fotocopy yang disahkan dari SK PNS</h2>
+                <h2>*Salinan/Fotocopy yang disahkan dari SK Pangkat terakhir</h2>
+                <h2>*Salinan/Fotocopy yang disahkan dari SKP dalam 2(dua) tahun terakhir</h2>
+                <h2>*Salinan/Fotocopy yang disahkan dari Karpeg/small></h2>
+                <h2>*Nota Persetujuan BKN</h2>
+                <h2 class="text-cyan-900 text-xl">Pengajuan Usul Kenaikan Pangkat :</h2>
+                <h2>- Ketua Pengadilan Tingkat Pertama mengajukan usul kenaikan pangkat bagi pegawai teknis diinstansinya masing-masing kepada Ketua Pengadilan Tingkat Banding, untuk diteruskan ke Ditjen terkait.</h2>
+                <h2>- Ketua Pengadilan Tingkat Banding mengajukan usul kenaikan pangkat bagi pegawai teknis di instansinya masing-masing kepada Ditjen terkait.</h2>
+            </div>
 </div>
 
 <div class="p-3">
@@ -171,11 +184,11 @@
                 <p class="text-sm text-gray-500">Kenaikan Pangkat Pegawai Pengadilan Negeri Purwokerto</p>
             </div>
             <div class="flex gap-2">
+                <a href="#" class="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded flex items-center" data-toggle="modal" data-target=".btn-tambah-kgb">
+                    <i class="fa fa-plus-circle mr-2"></i> Tambah KNP
+                </a>
                 <a href="export_cuti.php" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded flex items-center">
                     <i class="fa fa-download mr-2"></i> Export Excel
-                </a>
-                <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded flex items-center" data-toggle="modal" data-target=".btn-tambah-kgb">
-                    <i class="fa fa-plus-circle mr-2"></i> Tambah KNP
                 </a>
             </div>
         </div>
@@ -198,34 +211,56 @@
             </div>
         @endif
 
-        <div class="overflow-x-auto">
-            <table id="data-tables" class="min-w-full table-auto border-collapse">
-                <thead>
-                    <tr class="bg-gray-100 text-gray-700 uppercase text-sm leading-normal">
-                        <th class="py-3 px-6 text-left">No</th>
-                        <th class="py-3 px-6 text-left">Nama</th>
-                        <th class="py-3 px-6 text-left">Jabatan</th>
-                        <th class="py-3 px-6 text-left">Golongan</th>
-                        <th class="py-3 px-6 text-left">KNP terakhir</th>
-                        <th class="py-3 px-6 text-left">KNP yang akan datang</th>
-                        <th class="py-3 px-6 text-left">Keterangan</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($data as $d)
-                        <tr class="hover:bg-gray-50 border-b border-gray-200">
-                            <td class="py-4 px-6">{{ $loop->iteration }}</td>
-                            <td class="py-4 px-6">{{ $d->pegawai->nama_pegawai }}</td>
-                            <td class="py-4 px-6">{{ $d->pegawai->jabatan->nama_jabatan }}</td>
-                            <td class="py-4 px-6">{{ $d->pegawai->golongan->nama_golongan }}</td>
-                            <td class="py-4 px-6">{{ $d->knp_terakhir }}</td>
-                            <td class="py-4 px-6">{{ $d->knp_datang }}</td>
-                            <td class="py-4 px-6">{{ $d->keterangan }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+<div class="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
+    <table id="data-tables" class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+            <tr>
+                <th scope="col" class="px-6 py-3 text-left uppercase tracking-wider whitespace-nowrap">No</th>
+                <th scope="col" class="px-6 py-3 text-left uppercase tracking-wider whitespace-nowrap">Nama</th>
+                <th scope="col" class="px-6 py-3 text-left uppercase tracking-wider whitespace-nowrap">NIP</th>
+                <th scope="col" class="px-6 py-3 text-left uppercase tracking-wider whitespace-nowrap">Jabatan</th>
+                <th scope="col" class="px-6 py-3 text-left uppercase tracking-wider whitespace-nowrap">Golongan</th>
+                <th scope="col" class="px-6 py-3 text-left uppercase tracking-wider whitespace-nowrap">KNP terakhir</th>
+                <th scope="col" class="px-6 py-3 text-left uppercase tracking-wider whitespace-nowrap">KNP yang akan datang</th>
+                <th scope="col" class="px-6 py-3 text-left uppercase tracking-wider whitespace-nowrap min-w-[150px]">Keterangan</th>
+                <th scope="col" class="px-6 py-3 text-left uppercase tracking-wider whitespace-nowrap">Pensiun</th>
+                <th scope="col" class="px-6 py-3 text-left uppercase tracking-wider whitespace-nowrap">Penetapan</th>
+                <th scope="col" class="px-6 py-3 text-left uppercase tracking-wider whitespace-nowrap">Action</th>
+            </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+            @foreach ($data as $d)
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $loop->iteration }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $d->pegawai->nama_pegawai }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $d->pegawai->nip }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $d->pegawai->jabatan->nama_jabatan }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $d->pegawai->golongan->nama_golongan }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $d->knp_terakhir }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $d->knp_datang }}</td>
+                <td class="px-6 py-4 text-sm max-w-xs overflow-hidden overflow-ellipsis">
+                    <div class="line-clamp-2">{{ $d->keterangan }}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $d->pensiun }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $d->timestamp }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <div class="flex space-x-2">
+                        <a href="#" class="text-blue-600 hover:text-blue-900" data-toggle="modal" data-modal-toggle="modalviewknp{{ $d->nip }}">
+                            <i class="fas fa-eye mr-1"></i> View
+                        </a>
+                        <a href="#" class="text-yellow-600 hover:text-yellow-900" data-toggle="modal" data-modal-toggle="modaleditknp{{ $d->nip }}">
+                            <i class="fas fa-edit mr-1"></i> Edit
+                        </a>
+                        <a href="#" class="text-red-600 hover:text-red-900" data-toggle="modal" data-modal-toggle="modaldeleteknp{{ $d->nip }}">
+                            <i class="fas fa-trash mr-1"></i> Delete
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
     </div>
 </div>
 

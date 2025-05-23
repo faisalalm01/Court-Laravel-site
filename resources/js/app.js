@@ -81,7 +81,7 @@ function setupModals() {
             e.target.classList.contains('bg-opacity-50')) {
             e.target.classList.add('hidden');
             e.target.classList.remove('flex');
-            document.body.style.overflow = ''; // Enable scrolling
+            document.body.style.overflow = '';
         }
     });
 }

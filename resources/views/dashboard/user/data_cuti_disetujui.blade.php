@@ -33,33 +33,14 @@
         </div>
     </div>
 
-    <div class="">
-        <div class="">
-            <div class="x_panel">
-                <div class="x_title">
-                    <div class="mb-4">
-                        <h2 class="text-xl font-bold">Daftar Cuti Disetujui</h2>
-                    </div>
-                    <!-- <h2>Daftar Cuti Disetujui </h2> -->
-                    <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Settings 1</a>
-                                </li>
-                                <li><a href="#">Settings 2</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                        </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
+<div class="p-3">
+    <div class="bg-white shadow rounded-lg p-4">
+        <div class="flex justify-between items-center mb-4">
+            <div>
+                <h2 class="text-xl font-bold">Daftar Cuti Disetujui</h2>
+            </div>
+        </div>
+            <div class="overflow-x-auto">
                     <table id="data-tables" class="min-w-full table-auto border-collapse border border-gray-200">
                         <thead>
                             <tr class="bg-gray-100">
@@ -117,7 +98,5 @@
                     </table>
                 </div>
             </div>
-        </div>
-
-    </div>
+</div>
 @endsection

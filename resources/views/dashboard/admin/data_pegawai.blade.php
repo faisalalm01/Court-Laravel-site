@@ -19,15 +19,22 @@
 
     <div class="p-3">
         <div class="bg-white shadow rounded-lg p-4">
-            <div class="mb-4">
+        <div class="flex justify-between items-center mb-4">
+            <div>
                 <h2 class="text-xl font-bold">Daftar Pegawai</h2>
-
+                <p class="text-sm text-gray-500">Daftar pegawai pengadilan Negeri Purwokerto</p>
             </div>
+            <div class="flex gap-2">
+                <a href="#" data-toggle="modal" data-modal-toggle="modaltambahpegawai" class="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded flex items-center" data-toggle="modal" data-target=".btn-tambah-kgb">
+                    <i class="fa fa-plus-circle mr-2"></i> Tambah Pegawai
+                </a>
+                <a href="export_kgb.php" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded flex items-center">
+                    <i class="fa fa-download mr-2"></i> Export Excel
+                </a>
+            </div>
+        </div>
 
             <div class="overflow-x-auto">
-                <button href="#" title="Tambah User" type="button" class="btn btn-info pull-right"
-                    data-toggle="modal" data-modal-toggle="modaltambahuser"><i class="fa fa-plus-circle"></i> Tambah
-                    Pegawai</button>
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('success') }}
@@ -69,18 +76,22 @@
                                 <td>{{ $pegawai->unit_kerja }}</td>
                                 <td class="text-center">
                                     <a href="#" class="btn btn-info" data-toggle="modal"
-                                        data-modal-toggle="modalviewuser{{ $pegawai->nip }}"><i class="fa fa-eye"></i>
+                                        data-modal-toggle="modalviewpegawai{{ $pegawai->nip }}"><i class="fa fa-eye"></i>
                                         View</a>
                                     <a href="#" class="btn btn-info" data-toggle="modal"
-                                        data-modal-toggle="modaledituser{{ $pegawai->nip }}"><i class="fa fa-edit"></i>
+                                        data-modal-toggle="modaleditpegawai{{ $pegawai->nip }}"><i class="fa fa-edit"></i>
                                         Edit</a>
+                                    <a href="#" class="btn btn-info" data-toggle="modal"
+                                        data-modal-toggle="modaldeletepegawai{{ $pegawai->nip }}"><i
+                                            class="fa fa-trash"></i>
+                                        delete</a>
                                 </td>
                                 <!-- <td class="text-center">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                             </td> -->
                             </tr>
 
                             <!-- Modal -->
-                            <div id="modalviewuser{{ $pegawai->nip }}"
+                            <div id="modalviewpegawai{{ $pegawai->nip }}"
                                 class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
                                 <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
                                     <div class="p-6">
@@ -100,7 +111,7 @@
                                     </div>
 
                                     <div class="bg-gray-50 px-6 py-3 flex justify-end">
-                                        <button type="button" data-modal-hide="modalviewuser{{ $pegawai->nip }}"
+                                        <button type="button" data-modal-hide="modaleditpegawai{{ $pegawai->nip }}"
                                             class="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded-lg">
                                             Tutup
                                         </button>
@@ -108,9 +119,42 @@
                                 </div>
                             </div>
 
-                            <div id="modaltambahuser"
+                            <!-- modal edit -->
+                             <div id="modaleditpegawai{{ $pegawai->nip }}"
                                 class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
+                                <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
+                                    <div class="p-6">
+                                        modal edit
+                                    </div>
+                                    <div class="bg-gray-50 px-6 py-3 flex justify-end">
+                                        <button type="button" data-modal-hide="modaleditpegawai{{ $pegawai->nip }}"
+                                            class="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded-lg">
+                                            Tutup
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <!-- modal delete -->
+                             <div id="modaldeletepegawai{{ $pegawai->nip }}"
+                                class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
+                                <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
+                                    <div class="p-6">
+                                        modal delete
+                                    </div>
+                                    <div class="bg-gray-50 px-6 py-3 flex justify-end">
+                                        <button type="button" data-modal-hide="modaldeletepegawai{{ $pegawai->nip }}"
+                                            class="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded-lg">
+                                            batal
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                            <!-- modal tambah -->
+                            <div id="modaltambahpegawai"
+                                class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
                                 <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
                                     <div class="px-6 py-3">
                                         <div class="">
@@ -168,7 +212,7 @@
                                                 </form>
                                         </div>
                                         <button class="p-2 my-3 bg-gray-200 text-2xl rounded-md" type="button"
-                                            data-modal-hide="modaltambahuser">
+                                            data-modal-hide="modaltambahpegawai">
                                             <span aria-hidden="true">X</span>
                                         </button>
                                     </div>

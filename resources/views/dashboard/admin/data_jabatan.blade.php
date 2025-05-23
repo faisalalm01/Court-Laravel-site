@@ -19,15 +19,19 @@
 
     <div class="p-3">
         <div class="bg-white shadow rounded-lg p-4">
-            <div class="mb-4">
+        <div class="flex justify-between items-center mb-4">
+            <div>
                 <h2 class="text-xl font-bold">Daftar Jabatan</h2>
-
+                <p class="text-sm text-gray-500">Data jabatan pegawai Pengadilan Negeri Purwokerto</p>
             </div>
+            <div class="flex space-x-2">
+                <a href="#" data-toggle="modal" data-modal-toggle="modaltambahjabatan" class="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded flex items-center" data-toggle="modal" data-target=".btn-tambah-kgb">
+                    <i class="fa fa-plus-circle mr-2"></i> Tambah Jabatan
+                </a>
+            </div>
+        </div>
 
             <div class="overflow-x-auto">
-                <button href="#" title="Tambah User" type="button" class="btn btn-info pull-right"
-                    data-toggle="modal" data-modal-toggle="modaltambahuser"><i class="fa fa-plus-circle"></i> Tambah
-                    Jabatan</button>
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('success') }}
@@ -62,11 +66,11 @@
                                 <td>{{ $jabatan->nama_jabatan }}</td>
                                 <td class="text-center">
                                     <a href="#" class="btn btn-info" data-toggle="modal"
-                                        data-modal-toggle="modalviewuser{{ $jabatan->id_jabatan }}"><i
+                                        data-modal-toggle="modalviewjabatan{{ $jabatan->id_jabatan }}"><i
                                             class="fa fa-eye"></i>
                                         View</a>
                                     <a href="#" class="btn btn-info" data-toggle="modal"
-                                        data-modal-toggle="modaledituser{{ $jabatan->id_jabatan }}"><i
+                                        data-modal-toggle="modaleditjabatan{{ $jabatan->id_jabatan }}"><i
                                             class="fa fa-edit"></i>
                                         Edit</a>
                                 </td>
@@ -75,7 +79,7 @@
                             </tr>
 
                             <!-- Modal -->
-                            <div id="modalviewuser{{ $jabatan->id_jabatan }}"
+                            <div id="modalviewjabatan{{ $jabatan->id_jabatan }}"
                                 class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
                                 <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
                                     <div class="p-6">
@@ -91,7 +95,7 @@
                                     </div>
 
                                     <div class="bg-gray-50 px-6 py-3 flex justify-end">
-                                        <button type="button" data-modal-hide="modalviewuser{{ $jabatan->id_jabatan }}"
+                                        <button type="button" data-modal-hide="modalviewjabatan{{ $jabatan->id_jabatan }}"
                                             class="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded-lg">
                                             Tutup
                                         </button>
@@ -99,7 +103,24 @@
                                 </div>
                             </div>
 
-                            <div id="modaltambahuser"
+                            <!-- modal edit -->
+                            <div id="modaleditjabatan{{ $jabatan->id_jabatan }}"
+                                class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
+                                <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
+                                    <div class="p-6">
+                                        modal jabatan edit
+                                    </div>
+                                    <div class="bg-gray-50 px-6 py-3 flex justify-end">
+                                        <button type="button" data-modal-hide="modaleditjabatan{{ $jabatan->id_jabatan }}"
+                                            class="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded-lg">
+                                            Tutup
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- modal tambah -->
+                            <div id="modaltambahjabatan"
                                 class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
 
                                 <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
@@ -125,7 +146,7 @@
                                                 </form>
                                         </div>
                                         <button class="p-2 my-3 bg-gray-200 text-2xl rounded-md" type="button"
-                                            data-modal-hide="modaltambahuser">
+                                            data-modal-hide="modaltambahjabatan">
                                             <span aria-hidden="true">X</span>
                                         </button>
                                     </div>

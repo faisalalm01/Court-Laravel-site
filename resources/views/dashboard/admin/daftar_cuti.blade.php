@@ -379,25 +379,25 @@
                 <tbody>
                     @foreach ($data as $d)
                         <tr class="hover:bg-gray-50 border-b border-gray-200">
-                            <td class="py-4 px-6">{{ $loop->iteration }}</td>
-                            <td class="py-4 px-6">{{ $d->pegawai->nama_pegawai }}</td>
-                            <td class="py-4 px-6">{{ $d->jenis_cuti }}</td>
-                            <td class="py-4 px-6">{{ $d->alasan_cuti }}</td>
-                            <td class="py-4 px-6">{{ $d->lama_cuti }} {{ $d->ket_lama_cuti }}</td>
-                            <td class="py-4 px-6">{{ $d->dari_tanggal }}</td>
-                            <td class="py-4 px-6">{{ $d->sampai_dengan }}</td>
-                            <td class="py-4 px-6 text-center">
+                            <td class="whitespace-nowrap text-sm py-4 px-6">{{ $loop->iteration }}</td>
+                            <td class="whitespace-nowrap text-sm py-4 px-6">{{ $d->pegawai->nama_pegawai }}</td>
+                            <td class="whitespace-nowrap text-sm py-4 px-6">{{ $d->jenis_cuti }}</td>
+                            <td class="whitespace-nowrap text-sm py-4 px-6">{{ $d->alasan_cuti }}</td>
+                            <td class="whitespace-nowrap text-sm py-4 px-6">{{ $d->lama_cuti }} {{ $d->ket_lama_cuti }}</td>
+                            <td class="whitespace-nowrap text-sm py-4 px-6">{{ $d->dari_tanggal }}</td>
+                            <td class="whitespace-nowrap text-sm py-4 px-6">{{ $d->sampai_dengan }}</td>
+                            <td class="whitespace-nowrap text-sm py-4 px-6 text-center">
                                 <span class="px-3 py-1 rounded-full text-xs 
                                     {{ $d->status_cuti == 'Diajukan' || $d->status_cuti == 'Disetujui' ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800' }}">
                                     {{ $d->status_cuti }}
                                 </span>
                             </td>
-                            <td class="py-4 px-6 text-center">
+                            <td class="whitespace-nowrap text-sm py-4 px-6 text-center">
                                 <span class="px-3 py-1 rounded-full text-xs bg-blue-200 text-blue-800">
                                     {{ $d->ket_status_cuti }}
                                 </span>
                             </td>
-                            <td class="py-4 px-6 text-center">
+                            <td class="whitespace-nowrap text-sm py-4 px-6 text-center">
                                 @if($d->status_cuti == 'Disetujui')
                                     <a href="cetak_pdf.php?id={{ $d->id_cutipegawai }}" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded flex items-center justify-center">
                                         <i class="fa fa-print mr-1"></i> Print PDF

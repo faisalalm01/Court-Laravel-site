@@ -2,48 +2,29 @@
 
 @section('content')
     <div class="p-3">
-        <div class="d-flex justify-content-between align-items-center">
-            <!-- Title Kiri -->
+        <div class="flex justify-between items-center">
             <div class="title_left">
-                <h3 class="text-2xl">Cuti Tidak Disetujui</h3>
+                <h3 class="text-2xl font-semibold">Cuti Tidak Disetujui</h3>
             </div>
-
-            <!-- Breadcrumb Kanan -->
             <div class="title_right">
-                <nav aria-label="">
-                    <ol class="">
-                        <li class=""><a href="#">Home /</a></li>
-                        <li class="active" aria-current="page">Cuti Tidak Disetujui</li>
+                <nav aria-label="breadcrumb">
+                    <ol class="flex space-x-2 text-gray-600">
+                        <li><a href="#" class="hover:underline">Home</a> /</li>
+                        <li class="text-gray-800 font-medium">Cuti Tidak Disetujui</li>
                     </ol>
                 </nav>
             </div>
         </div>
     </div>
 
-    <div class="">
-        <div class="">
-            <div class="x_panel">
-                <div class="x_title">
-                    <h2>Daftar Cuti Tidak Disetujui </h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Settings 1</a>
-                                </li>
-                                <li><a href="#">Settings 2</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                        </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
+<disv class="p-3">
+    <div class="bg-white shadow rounded-lg p-4">
+        <div class="flex justify-between items-center mb-4">
+            <div>
+                <h2 class="text-xl font-bold">Daftar Cuti Tidak Disetujui</h2>
+            </div>
+        </div>
+            <div class="overflow-x-auto">
                     <table id="data-tables" class="min-w-full table-auto border-collapse border border-gray-200">
                         <thead>
                             <tr class="bg-gray-100">

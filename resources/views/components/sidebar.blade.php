@@ -1,5 +1,5 @@
 <div :class="open ? 'translate-x-0' : '-translate-x-full'"
-    class="fixed h-screen lg:static inset-y-0 left-0 w-64 bg-green-700 text-white flex-shrink-0 transform transition-transform duration-300 lg:translate-x-0"
+    class="fixed h-screen lg:static inset-y-0 left-0 w-64  text-white flex-shrink-0 transform transition-transform duration-300 lg:translate-x-0"
     id="main-nav">
     <!-- Logo -->
     <div class="w-full h-20 flex items-center px-4 mb-4">

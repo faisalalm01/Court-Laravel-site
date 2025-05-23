@@ -297,15 +297,15 @@
     <div class="bg-white shadow rounded-lg p-4">
         <div class="flex justify-between items-center mb-4">
             <div>
-                <h2 class="text-xl font-bold">KGB</h2>
+                <h2 class="text-xl font-bold">Daftar KGB</h2>
                 <p class="text-sm text-gray-500">Kenaikan Gaji Berkala Pengadilan Negeri Purwokerto</p>
             </div>
             <div class="flex space-x-2">
+                <a href="#" class="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded flex items-center" data-toggle="modal" data-target=".btn-tambah-kgb">
+                    <i class="fa fa-plus-circle mr-2"></i> Tambah KGB
+                </a>
                 <a href="export_kgb.php" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded flex items-center">
                     <i class="fa fa-download mr-2"></i> Export Excel
-                </a>
-                <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded flex items-center" data-toggle="modal" data-target=".btn-tambah-kgb">
-                    <i class="fa fa-plus-circle mr-2"></i> Tambah KGB
                 </a>
             </div>
         </div>
