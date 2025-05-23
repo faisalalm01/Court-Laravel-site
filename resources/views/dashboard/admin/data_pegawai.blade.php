@@ -90,7 +90,7 @@
                                                                                                                                                                                                                                                                                                                                                                                                                                                                             </td> -->
                             </tr>
 
-                            <!-- Modal -->
+                            <!-- Modal view -->
                             <div id="modalviewpegawai{{ $pegawai->nip }}"
                                 class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
                                 <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
@@ -111,7 +111,7 @@
                                     </div>
 
                                     <div class="bg-gray-50 px-6 py-3 flex justify-end">
-                                        <button type="button" data-modal-hide="modaleditpegawai{{ $pegawai->nip }}"
+                                        <button type="button" data-modal-hide="modalviewpegawai{{ $pegawai->nip }}"
                                             class="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded-lg">
                                             Tutup
                                         </button>
@@ -120,105 +120,205 @@
                             </div>
 
                             <!-- modal edit -->
-                             <div id="modaleditpegawai{{ $pegawai->nip }}"
-                                class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
-                                <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
-                                    <div class="p-6">
-                                        modal edit
-                                    </div>
-                                    <div class="bg-gray-50 px-6 py-3 flex justify-end">
-                                        <button type="button" data-modal-hide="modaleditpegawai{{ $pegawai->nip }}"
-                                            class="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded-lg">
-                                            Tutup
+                             <div id="modaleditpegawai{{ $pegawai->nip }}" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50 p-4">
+                                <div class="w-full max-w-2xl rounded-lg bg-white shadow-xl">
+                                    <div class="border-b p-4">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="text-xl font-semibold text-gray-800">Form Edit Pegawai</h3>
+                                        <button type="button" class="text-gray-400 hover:text-gray-500" data-modal-hide="modaleditpegawai{{ $pegawai->nip }}">
+                                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
                                         </button>
                                     </div>
+                                    </div>
+                                    <div class="p-6">
+                                    <form class="" action="edit_pegawai.php" method="get">
+                                        <div class="space-y-4">
+                                        <input type="hidden" name="nip" value="{{ $pegawai->nip }}">
+                                        
+                                        <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+                                            <div class="md:col-span-3">
+                                            <label class="block text-sm font-medium text-gray-700">Nama Pegawai</label>
+                                            </div>
+                                            <div class="md:col-span-9">
+                                            <input type="text" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-blue-500" 
+                                                    name="pegawai" value="{{ $pegawai->nama_pegawai }}" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+                                            <div class="md:col-span-3">
+                                            <label class="block text-sm font-medium text-gray-700">Jabatan</label>
+                                            </div>
+                                            <div class="md:col-span-9">
+                                            <select class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-blue-500" name="jabatan" required>
+                                                <option value="{{ $pegawai->nip }}" selected disabled>{{ $pegawai->jabatan->nama_jabatan }}</option>
+                                                @foreach ($jabatan as $jab)
+                                                <option value="{{ $jab->id_jabatan }}">
+                                                    {{ $jab->nama_jabatan }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+                                            <div class="md:col-span-3">
+                                            <label class="block text-sm font-medium text-gray-700">Golongan</label>
+                                            </div>
+                                            <div class="md:col-span-9">
+                                            <select class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-blue-500" name="golongan" required>
+                                                <option value="{{ $pegawai->nip }}" selected disabled>{{ $pegawai->golongan->nama_golongan }}</option>
+                                                @foreach ($golongan as $gol)
+                                                <option value="{{ $gol->id_golongan }}">
+                                                    {{ $gol->nama_golongan }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="border-t pt-4">
+                                            <div class="flex justify-end gap-x-3">
+                                            <button type="button" data-modal-hide="modaleditpegawai{{ $pegawai->nip }}" 
+                                                    class="rounded-md bg-gray-500 px-4 py-2 text-sm font-medium text-white hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+                                                Batal
+                                            </button>
+                                            <button type="submit" class="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                                                Simpan Perubahan
+                                            </button>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </form>
+                                    </div>
                                 </div>
-                            </div>
+                                </div>
 
                             <!-- modal delete -->
-                             <div id="modaldeletepegawai{{ $pegawai->nip }}"
-                                class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
-                                <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
+                                <div id="modaldeletepegawai{{ $pegawai->nip }}" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50 p-4">
+                                <div class="w-full max-w-md rounded-lg bg-white shadow-xl">
+                                    <div class="border-b p-4">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="text-sm font-semibold text-gray-800">Hapus Pegawai {{ $pegawai->nama_pegawai }}</h3>
+                                        <button type="button" class="text-gray-400 hover:text-gray-500" data-modal-hide="modaldeletepegawai{{ $pegawai->nip}}">
+                                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                        </button>
+                                    </div>
+                                    </div>
                                     <div class="p-6">
-                                        modal delete
-                                    </div>
-                                    <div class="bg-gray-50 px-6 py-3 flex justify-end">
-                                        <button type="button" data-modal-hide="modaldeletepegawai{{ $pegawai->nip }}"
-                                            class="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded-lg">
-                                            batal
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            
-                            <!-- modal tambah -->
-                            <div id="modaltambahpegawai"
-                                class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
-                                <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
-                                    <div class="px-6 py-3">
-                                        <div class="">
-                                            <fo action="{{ route('dashboard.admin.add-pegawai') }}" data-parsley-validate
-                                                class="form-horizontal form-label-left" method="POST">
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama
-                                                        Pegawai</label>
-                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input class="form-control col-md-7 col-xs-12" type="text"
-                                                            name="nama" placeholder="Nama Pegawai">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">NIP</label>
-                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input class="form-control col-md-7 col-xs-12" type="text"
-                                                            name="nip" placeholder="NIP">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Jabatan</label>
-                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <select class="form-control" name="jabatan">
-                                                            <option selected disabled>-- Pilih Jabatan--</option>
-                                                            @foreach ($jabatan as $jab)
-                                                                <option value="{{ $jab->id_jabatan }}">
-                                                                    {{ $jab->nama_jabatan }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label
-                                                        class="control-label col-md-3 col-sm-3 col-xs-12">Golongan</label>
-                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <select class="form-control" name="golongan">
-                                                            <option selected disabled>-- Pilih Golongan--</option>
-                                                            @foreach ($golongan as $gol)
-                                                                <option value="{{ $gol->id_golongan }}">
-                                                                    {{ $gol->nama_golongan }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="ln_solid"></div>
-                                                <div class="form-group">
-                                                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                                        <button type="submit" class="btn btn-primary"
-                                                            name="submit">Submit</button>
-                                                    </div>
-                                                </div>
-                                                </form>
+                                    <form action="delete_pegawai.php" method="get">
+                                        <input type="hidden" name="id_pegawai" value="{{ $pegawai->id_pegawai }}">
+                                        
+                                        <div class="space-y-4">
+                                        <div class="text-center">
+                                            <svg class="mx-auto h-12 w-12 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                            </svg>
+                                            <h4 class="mt-2 text-lg font-medium text-gray-900">Konfirmasi Penghapusan</h4>
+                                            <p class="mt-1 text-gray-600">Anda ingin menghapus Pegawai {{ $pegawai->nama_pegawai }}</p>
+                                            <p class="mt-1 text-sm text-red-600">Semua data user, cuti, knp dan kgb akan hilang!</p>
                                         </div>
-                                        <button class="p-2 my-3 bg-gray-200 text-2xl rounded-md" type="button"
-                                            data-modal-hide="modaltambahpegawai">
-                                            <span aria-hidden="true">X</span>
-                                        </button>
+
+                                        <div class="mt-6 flex justify-center space-x-4">
+                                            <button type="button" data-modal-hide="modaldeletepegawai{{ $pegawai->nip }}" 
+                                                    class="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+                                            Tidak
+                                            </button>
+                                            <button type="submit" 
+                                                    class="rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                                            Ya, Hapus
+                                            </button>
+                                        </div>
+                                        </div>
+                                    </form>
                                     </div>
                                 </div>
-                            </div>
-            </div>
+                                </div>
+                            <!-- end modal delete -->
+
+
+                                <!-- modal tambah -->
+                                <div id="modaltambahpegawai" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50 p-4">
+                                <div class="w-full max-w-2xl rounded-lg bg-white shadow-xl">
+                                    <div class="border-b p-4">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="text-xl font-semibold text-gray-800">Form Tambah Pegawai</h3>
+                                        <button type="button" class="text-gray-400 hover:text-gray-500" data-modal-hide="modaltambahpegawai">
+                                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                        </button>
+                                    </div>
+                                    </div>
+                                    <div class="p-6">
+                                    <form class="" action="{{ route('dashboard.admin.add-pegawai') }}" method="POST" data-parsley-validate>
+                                        <div class="space-y-4">
+                                        <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+                                        <div class="md:col-span-3">
+                                            <label class="block text-sm font-medium text-gray-700">Nama Pegawai</label>
+                                        </div>
+                                        <div class="md:col-span-9">
+                                            <input type="text" name="nama" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-blue-500" placeholder="Nama Pegawai" required>
+                                        </div>
+                                        </div>
+
+                                        <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+                                        <div class="md:col-span-3">
+                                            <label class="block text-sm font-medium text-gray-700">Nip</label>
+                                        </div>
+                                        <div class="md:col-span-9">
+                                            <input type="number" name="nip" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-blue-500" placeholder="NIP" required>
+                                        </div>
+                                        </div>
+
+                                        <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+                                        <div class="md:col-span-3">
+                                            <label class="block text-sm font-medium text-gray-700">Hak Akses</label>
+                                        </div>
+                                        <div class="md:col-span-9">
+                                            <select class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-blue-500" name="pegawai" required>
+                                            <option value="" selected disabled>-- Pilih Jabatan --</option>
+                                            @foreach ($jabatan as $jab)
+                                                <option value="{{ $jab->id_jabatan }}">
+                                                    {{ $jab->nama_jabatan }}
+                                                </option>
+                                            @endforeach
+                                            </select>
+                                        </div>
+                                        </div>
+
+                                        <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+                                        <div class="md:col-span-3">
+                                            <label class="block text-sm font-medium text-gray-700">Hak Akses</label>
+                                        </div>
+                                        <div class="md:col-span-9">
+                                            <select class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-blue-500" name="pegawai" required>
+                                            <option value="" selected disabled>-- Pilih Golongan --</option>
+                                            @foreach ($golongan as $gol)
+                                                <option value="{{ $gol->id_golongan }}">
+                                                    {{ $gol->nama_golongan }}
+                                                </option>
+                                            @endforeach
+                                            </select>
+                                        </div>
+                                        </div>
+                                        <div class="border-t pt-4">
+                                        <div class="flex justify-end">
+                                            <button type="submit" class="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" name="submit">
+                                            Submit
+                                            </button>
+                                        </div>
+                                        </div>
+                                       </div>
+                                    </form>
+                                    </div>
+                                </div>
+                                </div>
+                                <!-- end modal tambah -->
             @endforeach
             </tbody>
             </table>

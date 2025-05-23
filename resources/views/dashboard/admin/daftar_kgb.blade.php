@@ -293,7 +293,7 @@
     </div>
 </div>
 
-<div class="p-3">
+<section class="p-3">
     <div class="bg-white shadow rounded-lg p-4">
         <div class="flex justify-between items-center mb-4">
             <div>
@@ -301,7 +301,7 @@
                 <p class="text-sm text-gray-500">Kenaikan Gaji Berkala Pengadilan Negeri Purwokerto</p>
             </div>
             <div class="flex space-x-2">
-                <a href="#" class="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded flex items-center" data-toggle="modal" data-target=".btn-tambah-kgb">
+                <a href="#" class="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded flex items-center" data-toggle="modal" data-modal-toggle="modaltambahkgb">
                     <i class="fa fa-plus-circle mr-2"></i> Tambah KGB
                 </a>
                 <a href="export_kgb.php" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded flex items-center">
@@ -413,6 +413,93 @@
                             </div>
                         </div>
 
+                        <!-- modal tambah -->
+                                <div id="modaltambahkgb" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50 p-4">
+                                    <div class="w-full max-w-2xl rounded-lg bg-white shadow-xl">
+                                        <div class="border-b p-4">
+                                            <div class="flex items-center justify-between">
+                                                <h3 class="text-xl font-semibold text-gray-800">Form Tambah KGB</h3>
+                                                <button type="button" class="text-gray-400 hover:text-gray-500" data-modal-hide="modaltambahkgb">
+                                                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="p-6">
+                                            <form method="POST" action="{{ route('kgb.store') }}">
+                                                @csrf
+                                                <div class="space-y-4">
+                                                    <!-- Pegawai -->
+                                                    <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+                                                        <div class="md:col-span-3">
+                                                            <label class="block text-sm font-medium text-gray-700">Pegawai</label>
+                                                        </div>
+                                                        <div class="md:col-span-9">
+                                                            <select class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-blue-500" 
+                                                                    name="id_pegawai" required>
+                                                                <option value="" selected disabled>-- Pilih Pegawai --</option>
+                                                                @foreach($pegawai as $peg)
+                                                                <option value="{{ $peg->id_pegawai }}">
+                                                                    {{ $peg->nama_pegawai }} | {{ $peg->nip }}
+                                                                </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- KGB Terakhir -->
+                                                    <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+                                                        <div class="md:col-span-3">
+                                                            <label class="block text-sm font-medium text-gray-700">KGB Terakhir</label>
+                                                        </div>
+                                                        <div class="md:col-span-9">
+                                                            <input type="date" name="kgb_terakhir" 
+                                                                class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                                                                required>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- KGB Datang -->
+                                                    <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+                                                        <div class="md:col-span-3">
+                                                            <label class="block text-sm font-medium text-gray-700">KGB Yang Akan Datang</label>
+                                                        </div>
+                                                        <div class="md:col-span-9">
+                                                            <input type="date" name="kgb_datang" 
+                                                                class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                                                                required>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Keterangan -->
+                                                    <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+                                                        <div class="md:col-span-3">
+                                                            <label class="block text-sm font-medium text-gray-700">Keterangan</label>
+                                                        </div>
+                                                        <div class="md:col-span-9">
+                                                            <input type="text" name="keterangan" 
+                                                                class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                                                                placeholder="Masukkan Keterangan">
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Submit Button -->
+                                                    <div class="border-t pt-4">
+                                                        <div class="flex justify-end">
+                                                            <button type="submit" 
+                                                                    class="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                                                                Submit
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end modal -->
+
                         <!-- Edit Modal -->
                         <div id="modaleditkgb{{ $d->nip }}" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
                             <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
@@ -464,57 +551,15 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- end delete modal -->
+
+                        
+                        
                     @endforeach
                 </tbody>
             </table>
         </div>
     </div>
-</div>
-
-<!-- Tambah KGB Modal -->
-<div class="modal hidden fade btn-tambah-kgb" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="text-xl font-bold">Tambah Kenaikan Gaji Berkala</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="mb-4">
-                            <label class="block text-gray-700 mb-2">Pegawai</label>
-                            <select class="w-full px-3 py-2 border rounded">
-                                <option>Pilih Pegawai</option>
-                                <!-- Options would be populated here -->
-                            </select>
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-gray-700 mb-2">KGB Terakhir</label>
-                            <input type="date" class="w-full px-3 py-2 border rounded">
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-gray-700 mb-2">KGB Yang Akan Datang</label>
-                            <input type="date" class="w-full px-3 py-2 border rounded">
-                        </div>
-                        <div class="col-span-2 mb-4">
-                            <label class="block text-gray-700 mb-2">Keterangan</label>
-                            <textarea class="w-full px-3 py-2 border rounded"></textarea>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer bg-gray-50 px-6 py-3 flex justify-end space-x-2">
-                <button type="button" class="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded-lg" data-dismiss="modal">
-                    Batal
-                </button>
-                <button type="button" class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg">
-                    Simpan
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
+</section>
 @endsection
+                                

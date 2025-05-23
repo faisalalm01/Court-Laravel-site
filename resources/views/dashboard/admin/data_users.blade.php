@@ -113,78 +113,144 @@
 
 
                             <!-- modal edit  -->
-                            <div id="modaledituser{{ $user->nip }}"  class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
-                                <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
+                                <div id="modaledituser{{ $user->nip }}" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50 p-4">
+                                <div class="w-full max-w-2xl rounded-lg bg-white shadow-xl">
+                                    <div class="border-b p-4">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="text-xl font-semibold text-gray-800">Edit User</h3>
+                                        <button type="button" class="text-gray-400 hover:text-gray-500" data-modal-hide="modaledituser{{ $user->nip }}">
+                                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                        </button>
+                                    </div>
+                                    </div>
                                     <div class="p-6">
-                                        <h1>User Edit</h1>
-                                    </div>
-
-                                    <div class="bg-gray-50 px-6 py-3 flex justify-end">
-                                        <button type="button" data-modal-hide="modaledituser{{ $user->nip }}"
-                                            class="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded-lg">
-                                            Tutup
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- <div id="modaltambahuser"
-                                class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
-
-                                <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
-                                    <div class="px-6 py-3">
-                                        <div class="">
-                                            <fo action="{{ route('dashboard.admin.add-users') }}" data-parsley-validate
-                                                class="form-horizontal form-label-left" method="POST">
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Pegawai</label>
-                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <select class="form-control" name="nip">
-                                                            <option selected disabled>-- Pilih Pegawai--</option>
-                                                            @foreach ($pegawai as $peg)
-                                                                <option value="{{ $peg->nip }}">
-                                                                    {{ $peg->nama_pegawai }}
-                                                                    |
-                                                                    {{ $peg->nip }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label
-                                                        class="control-label col-md-3 col-sm-3 col-xs-12">Password</label>
-                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input class="form-control col-md-7 col-xs-12" type="password"
-                                                            name="password" placeholder="Masukkan Password">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Hak
-                                                        Akses</label>
-                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <select class="form-control" name="role">
-                                                            <option selected disabled>-- Pilih Hak Akses--</option>
-                                                            <option value="User">User</option>
-                                                            <option value="Admin">Admin</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="ln_solid"></div>
-                                                <div class="form-group">
-                                                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                                        <button type="submit" class="btn btn-primary"
-                                                            name="submit">Submit</button>
-                                                    </div>
-                                                </div>
-                                                </form>
+                                    <form class="" method="POST">
+                                        <div class="space-y-4">
+                                        <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+                                        <div class="md:col-span-3">
+                                            <label class="block text-sm font-medium text-gray-700">Pegawai</label>
                                         </div>
-                                        <button class="p-2 my-3 bg-gray-200 text-2xl rounded-md" type="button"
-                                            data-modal-hide="modaltambahuser">
-                                            <span aria-hidden="true">X</span>
-                                        </button>
+                                        <div class="md:col-span-9">
+                                            <select class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-blue-500" name="pegawai" required>
+                                                 <option value="{{ $user->nip }}">{{ $user->pegawai->nama_pegawai }}</option>
+                                            </select>
+                                        </div>
+                                        </div>
+
+                                        <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+                                        <div class="md:col-span-3">
+                                            <label class="block text-sm font-medium text-gray-700">Password</label>
+                                        </div>
+                                        <div class="md:col-span-9">
+                                            <input type="password" name="password" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-blue-500" placeholder="Masukkan Password" required>
+                                        </div>
+                                        </div>
+
+                                        <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+                                        <div class="md:col-span-3">
+                                            <label class="block text-sm font-medium text-gray-700">Hak Akses</label>
+                                        </div>
+                                        <div class="md:col-span-9">
+                                            <select class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-blue-500" name="hak_akses" required>
+                                            <option value="" selected disabled>-- Hak Akses --</option>
+                                            @if($user->role == "User")
+                                            <option value="User" selected>User</option>
+                                            <option value="Admin">Admin</option>
+                                            @else
+                                            <option value="User">User</option>
+                                            <option value="Admin" selected>Admin</option>
+                                            @endif
+                                            </select>
+                                        </div>
+                                        </div>
+
+                                        <div class="border-t pt-4">
+                                        <div class="flex justify-end gap-x-3">
+                                            <button type="modal" data-modal-hide="modaledituser{{ $user->nip }}" class="rounded-md bg-gray-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" name="submit">
+                                            Cancel
+                                            </button>
+                                            <button type="submit" class="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" name="submit">
+                                            Save Changes
+                                            </button>
+                                        </div>
+                                        </div>
+                                       </div>
+                                    </form>
                                     </div>
                                 </div>
-                            </div>
-            </div> -->
+                                </div>
+
+                                
+
+                                <!-- modal tambah -->
+                                <div id="modaltambahuser" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50 p-4">
+                                <div class="w-full max-w-2xl rounded-lg bg-white shadow-xl">
+                                    <div class="border-b p-4">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="text-xl font-semibold text-gray-800">Form Tambah User</h3>
+                                        <button type="button" class="text-gray-400 hover:text-gray-500" data-modal-hide="modaltambahuser">
+                                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                        </button>
+                                    </div>
+                                    </div>
+                                    <div class="p-6">
+                                    <form class="" method="POST">
+                                        <div class="space-y-4">
+                                        <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+                                        <div class="md:col-span-3">
+                                            <label class="block text-sm font-medium text-gray-700">Pegawai</label>
+                                        </div>
+                                        <div class="md:col-span-9">
+                                            <select class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-blue-500" name="pegawai" required>
+                                            <option value="" selected disabled>-- Pilih Pegawai --</option>
+                                            @foreach ($pegawai as $peg)
+                                                <option value="{{ $peg->nip }}">
+                                                    {{ $peg->nama_pegawai }} | {{ $peg->nip }}
+                                                </option>
+                                            @endforeach
+                                            </select>
+                                        </div>
+                                        </div>
+
+                                        <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+                                        <div class="md:col-span-3">
+                                            <label class="block text-sm font-medium text-gray-700">Password</label>
+                                        </div>
+                                        <div class="md:col-span-9">
+                                            <input type="password" name="password" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-blue-500" placeholder="Masukkan Password" required>
+                                        </div>
+                                        </div>
+
+                                        <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+                                        <div class="md:col-span-3">
+                                            <label class="block text-sm font-medium text-gray-700">Hak Akses</label>
+                                        </div>
+                                        <div class="md:col-span-9">
+                                            <select class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-blue-500" name="hak_akses" required>
+                                            <option value="" selected disabled>-- Pilih Hak Akses --</option>
+                                            <option value="User">User</option>
+                                            <option value="Admin">Admin</option>
+                                            </select>
+                                        </div>
+                                        </div>
+
+                                        <div class="border-t pt-4">
+                                        <div class="flex justify-end">
+                                            <button type="submit" class="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" name="submit">
+                                            Submit
+                                            </button>
+                                        </div>
+                                        </div>
+                                       </div>
+                                    </form>
+                                    </div>
+                                </div>
+                                </div>
+
             @endforeach
             </tbody>
             </table>
@@ -194,7 +260,7 @@
 @endsection
 
 <!-- modal tambah -->
-<div id="modaltambahuser" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
+<!-- <div id="modaltambahuser" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
     <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
         <div class="p-6">
             <h3 class="text-xl font-bold mb-4">Tambah User</h3>
@@ -235,4 +301,4 @@
             </button>
         </div>
     </div>
-</div>
+</div> -->

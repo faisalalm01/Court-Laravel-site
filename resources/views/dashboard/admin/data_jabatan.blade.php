@@ -104,55 +104,86 @@
                             </div>
 
                             <!-- modal edit -->
-                            <div id="modaleditjabatan{{ $jabatan->id_jabatan }}"
-                                class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
-                                <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
-                                    <div class="p-6">
-                                        modal jabatan edit
-                                    </div>
-                                    <div class="bg-gray-50 px-6 py-3 flex justify-end">
-                                        <button type="button" data-modal-hide="modaleditjabatan{{ $jabatan->id_jabatan }}"
-                                            class="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded-lg">
-                                            Tutup
+                            <div id="modaleditjabatan{{ $jabatan->id_jabatan }}" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50 p-4">
+                                <div class="w-full max-w-2xl rounded-lg bg-white shadow-xl">
+                                    <div class="border-b p-4">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="text-xl font-semibold text-gray-800">Form Edit Jabatan</h3>
+                                        <button type="button" class="text-gray-400 hover:text-gray-500" data-modal-hide="modaleditjabatan{{ $jabatan->id_jabatan }}">
+                                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
                                         </button>
                                     </div>
+                                    </div>
+                                    <div class="p-6">
+                                    <form class="" action="edit_pegawai.php" method="get">
+                                        <div class="space-y-4">
+                                        <input type="hidden" name="nip" value="{{ $jabatan->id_jabatan }}">
+                                        
+                                        <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+                                            <div class="md:col-span-3">
+                                            <label class="block text-sm font-medium text-gray-700">Nama Jabatan</label>
+                                            </div>
+                                            <div class="md:col-span-9">
+                                            <input type="text" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-blue-500" 
+                                                    name="jabatan" value="{{ $jabatan->nama_jabatan }}" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="border-t pt-4">
+                                            <div class="flex justify-end gap-x-3">
+                                            <button type="button" data-modal-hide="modaleditjabatan{{ $jabatan->id_jabatan }}" 
+                                                    class="rounded-md bg-gray-500 px-4 py-2 text-sm font-medium text-white hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+                                                Batal
+                                            </button>
+                                            <button type="submit" class="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                                                Simpan Perubahan
+                                            </button>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </form>
+                                    </div>
                                 </div>
-                            </div>
+                                </div>
 
                             <!-- modal tambah -->
-                            <div id="modaltambahjabatan"
-                                class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
-
-                                <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
-                                    <div class="px-6 py-3">
-                                        <div class="">
-                                            <fo action="{{ route('dashboard.admin.add-users') }}" data-parsley-validate
-                                                class="form-horizontal form-label-left" method="POST">
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama
-                                                        Jabatan</label>
-                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input class="form-control col-md-7 col-xs-12" type="text"
-                                                            name="nama_jabatan" placeholder="Masukkan nama jabatan">
-                                                    </div>
-                                                </div>
-                                                <div class="ln_solid"></div>
-                                                <div class="form-group">
-                                                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                                        <button type="submit" class="btn btn-primary"
-                                                            name="submit">Submit</button>
-                                                    </div>
-                                                </div>
-                                                </form>
-                                        </div>
-                                        <button class="p-2 my-3 bg-gray-200 text-2xl rounded-md" type="button"
-                                            data-modal-hide="modaltambahjabatan">
-                                            <span aria-hidden="true">X</span>
+                            <div id="modaltambahjabatan" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50 p-4">
+                                <div class="w-full max-w-2xl rounded-lg bg-white shadow-xl">
+                                    <div class="border-b p-4">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="text-xl font-semibold text-gray-800">Form Tambah Jabatan</h3>
+                                        <button type="button" class="text-gray-400 hover:text-gray-500" data-modal-hide="modaltambahjabatan">
+                                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
                                         </button>
                                     </div>
+                                    </div>
+                                    <div class="p-6">
+                                    <form class="" action="{{ route('dashboard.admin.add-pegawai') }}" method="POST" data-parsley-validate>
+                                        <div class="space-y-4">
+                                        <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+                                        <div class="md:col-span-3">
+                                            <label class="block text-sm font-medium text-gray-700">Nama Jabatan</label>
+                                        </div>
+                                        <div class="md:col-span-9">
+                                            <input type="text" name="nama" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-blue-500" placeholder="Nama Jabatan" required>
+                                        </div>
+                                        </div>
+                                        <div class="border-t pt-4">
+                                        <div class="flex justify-end">
+                                            <button type="submit" class="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" name="submit">
+                                            Submit
+                                            </button>
+                                        </div>
+                                        </div>
+                                       </div>
+                                    </form>
+                                    </div>
                                 </div>
-                            </div>
-            </div>
+                                </div>
             @endforeach
             </tbody>
             </table>
