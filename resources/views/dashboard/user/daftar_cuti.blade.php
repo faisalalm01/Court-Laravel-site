@@ -1,8 +1,8 @@
 @extends('dashboard.index')
 
 @section('content')
-<div class="mb-10">
-    <div class="justify-between">
+    <div class="mb-10">
+        <div class="justify-between">
             <!-- Title Kiri -->
             <div class="title_left">
                 <h3 class="text-2xl">Cuti</h3>
@@ -109,43 +109,43 @@
                                                 <p class="text-muted"> {{ $d->pegawai->nip }}</p>
                                                 <hr>
                                                 <strong>Jabatan</strong>
-                                                <p class="text-muted"><?php echo $row['jabatan']; ?></p>
+                                                <p class="text-muted"><?php echo $d->pegawai->jabatan->nama_jabatan; ?></p>
                                                 <hr>
                                                 <strong>Golongan</strong>
                                                 <p class="text-muted"> {{ $d->pegawai->golongan->nama_golongan }}</p>
                                                 <hr>
                                                 <strong>Cuti tahunan</strong>
-                                                <p class="text-muted"><?php echo $row['cuti_tahunan']; ?></p>
+                                                <p class="text-muted"><?php echo $d['cuti_tahunan']; ?></p>
                                                 <hr>
                                                 <strong>Cuti sakit</strong>
-                                                <p class="text-muted"><?php echo $row['cuti_sakit']; ?></p>
+                                                <p class="text-muted"><?php echo $d['cuti_sakit']; ?></p>
                                                 <hr>
                                                 <strong>Cuti bersalin</strong>
-                                                <p class="text-muted"><?php echo $row['cuti_bersalin']; ?></p>
+                                                <p class="text-muted"><?php echo $d['cuti_bersalin']; ?></p>
                                                 <hr>
                                                 <strong>Cuti bersalin anak ke-3</strong>
-                                                <p class="text-muted"><?php echo $row['cuti_bersalin_anakketiga']; ?></p>
+                                                <p class="text-muted"><?php echo $d['cuti_bersalin_anakketiga']; ?></p>
                                                 <hr>
                                                 <strong>Cuti musibah</strong>
-                                                <p class="text-muted"><?php echo $row['cuti_musibah']; ?></p>
+                                                <p class="text-muted"><?php echo $d['cuti_musibah']; ?></p>
                                                 <hr>
                                                 <strong>Keterangan cuti musibah</strong>
-                                                <p class="text-muted"><?php echo $row['ket_cuti_musibah']; ?></p>
+                                                <p class="text-muted"><?php echo $d['ket_cuti_musibah']; ?></p>
                                                 <hr>
                                                 <strong>Cuti selain musibah</strong>
-                                                <p class="text-muted"><?php echo $row['cuti_selain_musibah']; ?></p>
+                                                <p class="text-muted"><?php echo $d['cuti_selain_musibah']; ?></p>
                                                 <hr>
                                                 <strong>Keterangan cuti selain musibah</strong>
-                                                <p class="text-muted"><?php echo $row['ket_cuti_selain_musibah']; ?></p>
+                                                <p class="text-muted"><?php echo $d['ket_cuti_selain_musibah']; ?></p>
                                                 <hr>
                                                 <strong>Cuti besar</strong>
-                                                <p class="text-muted"><?php echo $row['cuti_besar']; ?></p>
+                                                <p class="text-muted"><?php echo $d['cuti_besar']; ?></p>
                                                 <hr>
                                                 <strong>Cuti diluar tanggungan negara</strong>
-                                                <p class="text-muted"><?php echo $row['cuti_diluar_tanggungan_negara']; ?></p>
+                                                <p class="text-muted"><?php echo $d['cuti_diluar_tanggungan_negara']; ?></p>
                                                 <hr>
                                                 <strong>Penetapan</strong>
-                                                <p class="text-muted"><?php echo $row['tgl']; ?></p>
+                                                <p class="text-muted"><?php echo $d['tgl']; ?></p>
                                                 <hr>
                                             </div>
                                         </div>
