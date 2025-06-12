@@ -76,7 +76,11 @@
         <div class="">
             <div class="x_panel rounded-lg shadow-md mb-20">
                 <div class="x_title">
-                    <h2 class="text-xl">Daftar Pengajuan Cuti Anda<small>Daftar Menunggu approval cuti dari atasan</small>
+                    @if(Auth::user()->role === 'admin' || Auth::user()->nip === '00')
+                        <h2 class="text-xl">Data Pegawai<small>Daftar pegawai pengadilan Negeri Purwokerto</small>
+                    @else
+                        <h2 class="text-xl">Daftar Pengajuan Cuti Anda<small>Daftar Menunggu approval cuti dari atasan</small>
+                    @endif
                     </h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -96,6 +100,51 @@
                     </ul>
                     <div class="clearfix"></div>
                 </div>
+
+            @if(Auth::user()->role === 'admin' || Auth::user()->nip === '00')
+                <div class="x_content">
+                    <table id="data-tables" class="table-auto w-full">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="py-2 px-4">No</th>
+                                <th class="py-2 px-4">Nama</th>
+                                <th class="py-2 px-4">NIP</th>
+                                <th class="py-2 px-4">Jabatan</th>
+                                <th class="py-2 px-4">Golongan</th>
+                                <th class="py-2 px-4">Cuti</th>
+                                <th class="py-2 px-4">KNP</th>
+                                <th class="py-2 px-4">KGB</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($dataPeg as $user)
+                                <tr class="border-b hover:bg-gray-50">
+                                    <td class="py-3 px-4">{{ $loop->iteration }}</td>
+                                    <td class="py-3 px-4">{{ $user->nama_pegawai }}</td>
+                                    <td class="py-3 px-4">{{ $user->nip }}</td>
+                                    <td class="py-3 px-4">{{ $user->jabatan->nama_jabatan }}</td>
+                                    <td class="py-3 px-4">{{ $user->golongan->nama_golongan }}</td>
+                                    <td class="py-3 px-4">
+                                        <a href="#" class="bg-green-500 rounded-md px-2 py-1 text-xs text-white" data-toggle="modal"
+                                        data-modal-toggle="">
+                                        lihat detail</a>
+                                    </td>
+                                    <td class="py-3 px-4">
+                                        <a href="#" class="bg-green-500 rounded-md px-2 py-1 text-xs text-white" data-toggle="modal"
+                                        data-modal-toggle="">
+                                        lihat detail</a>
+                                    </td>
+                                    <td class="py-3 px-4">
+                                        <a href="#" class="bg-green-500 rounded-md px-2 py-1 text-xs text-white" data-toggle="modal"
+                                        data-modal-toggle="">
+                                        lihat detail</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @else
                 <div class="x_content">
                     <table id="data-tables" class="table-auto w-full">
                         <thead>
@@ -156,6 +205,8 @@
                         </tbody>
                     </table>
                 </div>
+            @endif
+
             </div>
         </div>
     </div>

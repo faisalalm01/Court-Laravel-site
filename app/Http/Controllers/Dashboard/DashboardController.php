@@ -13,6 +13,7 @@ class DashboardController extends Controller
     public function index()
     {
         $user = Auth::user();
+        $dataPeg = Pegawai::all();
         $pegawai = Pegawai::where('nip', $user->nip)->first();
         $title = $user->role === 'Admin' ? 'Dashboard Admin' : 'Dashboard User';
         $userCount = $user::count();
@@ -29,6 +30,6 @@ class DashboardController extends Controller
         } else {
             $data = CutiPegawai::where('id_pegawai', $pegawai->id_pegawai)->where('status_cuti', 'Diajukan')->get();
         }
-        return view('dashboard.user.dashboard', ['title' => $title, 'data' =>  $data, 'userCount' => $userCount, 'pegawaiCount' => $pegawaiCount]);
+        return view('dashboard.user.dashboard', ['title' => $title, 'data' =>  $data, 'userCount' => $userCount, 'pegawaiCount' => $pegawaiCount, 'dataPeg' => $dataPeg]);
     }
 }

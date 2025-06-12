@@ -56,11 +56,20 @@
                                         {{ $cuti->status_cuti }}
                                     </span>
                                 </td>
-                                <td class="p-3 border-b">
-                                    <a href="#" class="text-blue-600 hover:underline"
+                                <td class="p-3 border-b gap-2 flex">
+                                    <div>
+                                        <a href="#" class="text-blue-600" data-modal-toggle="modalviewcuti{{ $cuti->id_cutipegawai }}"><i class="fa fa-eye"></i>
+                                        View</a>
+                                    </div>
+                                    |
+                                    <div>
+                                        <a href="/dashboard/user/approve-update-cuti/{{ $cuti->id_cutipegawai }}" class="text-green-600" data-toggle="modal"><i class="fa fa-check"></i>
+                                        Aprrove</a>
+                                    </div>
+                                    <!-- <a href="#" class="text-blue-600 hover:underline"
                                         data-modal-toggle="modalviewcuti{{ $cuti->id_cutipegawai }}">View</a> |
                                     <a href="/dashboard/user/approve-update-cuti/{{ $cuti->id_cutipegawai }}"
-                                        class="text-green-600 hover:underline">Approve</a>
+                                        class="text-green-600 hover:underline">Approve</a> -->
                                 </td>
                             </tr>
 

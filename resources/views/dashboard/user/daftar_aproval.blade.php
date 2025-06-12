@@ -55,13 +55,13 @@
                                     <td> {{ $d->sampai_dengan }}</td>
                                     <td> {{ $d->alamat }}</td>
                                     <td class="p-3 border-b">
-                                        <span class="px-2 py-1 rounded bg-yellow-200 text-yellow-800">
+                                        <span class="px-2 py-1 rounded bg-green-200 text-green-800">
                                             {{ $d->status_cuti }}
                                         </span>
                                     </td>
                                     @if ($d->ket_status_cuti)
                                         <td class="p-3 border-b">
-                                            <span class="px-2 py-1 rounded  text-black">
+                                            <span class="px-2 py-1 rounded bg-blue-200 text-blue-800">
                                                 {{ $d->ket_status_cuti }}
                                             </span>
                                         </td>
