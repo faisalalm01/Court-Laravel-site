@@ -10,6 +10,7 @@ use App\Http\Controllers\Dashboard\User\ApproveCutiController;
 use App\Http\Controllers\Dashboard\User\DataCutiController;
 use App\Http\Controllers\Dashboard\User\HistoryController;
 use App\Http\Controllers\Dashboard\Admin\HistoryController as AdminHistoryController;
+use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\User\PengajuanCutiController;
 use Illuminate\Support\Facades\Route;
 
@@ -87,4 +88,7 @@ Route::get('/dashboard/admin/daftar-knp', [AdminHistoryController::class, 'showD
 Route::get('/dashboard/admin/daftar-kgb', [AdminHistoryController::class, 'showDaftarKGB'])->name('dashboard.admin.daftar-kgb')->middleware('auth');
 
 
-Route::get('/dashboard/profile', [DataCutiController::class, 'profile'])->name('dashboard.profile')->middleware('auth');
+// dashboard profile
+Route::get('/dashboard/profile', [ProfileController::class, 'index'])->name('dashboard.profile')->middleware('auth');
+Route::post('/dashboard/profile/update-photo', [ProfileController::class, 'updatePhoto'])->name('dashboard.profile.update-photo')->middleware('auth');
+Route::post('/dashboard/profile/reset-password', [ProfileController::class, 'resetPassword'])->name('dashboard.profile.reset-password')->middleware('auth');

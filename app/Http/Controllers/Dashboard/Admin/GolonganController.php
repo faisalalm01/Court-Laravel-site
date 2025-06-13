@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AddGolonganRequest;
 use App\Models\Golongan;
+use App\Models\Pegawai;
 use Illuminate\Http\Request;
 
 class GolonganController extends Controller
@@ -38,7 +39,7 @@ class GolonganController extends Controller
 
         return redirect()->route('dashboard.admin.data-golongan')->with('success', 'Data Golongan berhasil diubah!');
     }
-    
+
     public function delete(Request $request)
     {
         $request->validate([
