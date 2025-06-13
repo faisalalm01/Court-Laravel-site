@@ -212,3 +212,42 @@ document.addEventListener("DOMContentLoaded", function () {
     initializeDataTable();
     setupModals();
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    initializeDataTable();
+    setupModals();
+    setupAlerts();
+    autoShowModalOnError();
+});
+
+// 🔧 Fungsi dismiss alert manual
+function setupAlerts() {
+    document.querySelectorAll('[data-dismiss="alert"]').forEach((btn) => {
+        btn.addEventListener('click', function () {
+            const alert = this.closest('.alert');
+            if (alert) alert.remove();
+        });
+    });
+
+    // Optional: auto-dismiss after 5s
+    setTimeout(() => {
+        document.querySelectorAll('.alert').forEach(alert => {
+            alert.remove();
+        });
+    }, 5000);
+}
+
+// 🔧 Fungsi buka otomatis modal kalau ada error
+function autoShowModalOnError() {
+    const hasError = document.getElementById('alert-error');
+    const hasValidationError = document.querySelector('.alert-danger');
+
+    if ((hasError || hasValidationError)) {
+        const modalsToShow = document.querySelectorAll('.auto-show-if-error');
+        modalsToShow.forEach((modal) => {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        });
+    }
+}

@@ -66,14 +66,21 @@ Route::put('/dashboard/admin/edit-users/{nip}', [UserController::class, 'editUse
 // dashboard admin data pegawai
 Route::get('/dashboard/admin/data-pegawai', [PegawaiController::class, 'index'])->name('dashboard.admin.data-pegawai')->middleware('auth');
 Route::post('/dashboard/admin/add-pegawai', [PegawaiController::class, 'add'])->name('dashboard.admin.add-pegawai')->middleware('auth');
+Route::put('/dashboard/admin/edit-pegawai', [PegawaiController::class, 'edit'])->name('dashboard.admin.edit-pegawai')->middleware('auth');
+Route::delete('/dashboard/admin/delete-pegawai', [PegawaiController::class, 'delete'])->name('dashboard.admin.delete-pegawai')->middleware('auth');
 
 // dashboard admin data jabatan
 Route::get('/dashboard/admin/data-jabatan', [JabatanController::class, 'index'])->name('dashboard.admin.data-jabatan')->middleware('auth');
 Route::post('/dashboard/admin/add-jabatan', [JabatanController::class, 'add'])->name('dashboard.admin.add-jabatan')->middleware('auth');
+Route::delete('/dashboard/admin/delete-jabatan', [JabatanController::class, 'delete'])->name('dashboard.admin.delete-jabatan')->middleware('auth');
+Route::put('/dashboard/admin/edit-jabatan', [JabatanController::class, 'edit'])->name('dashboard.admin.edit-jabatan')->middleware('auth');
 
 // dashboard admin data golongan
 Route::get('/dashboard/admin/data-golongan', [GolonganController::class, 'index'])->name('dashboard.admin.data-golongan')->middleware('auth');
 Route::post('/dashboard/admin/add-golongan', [GolonganController::class, 'add'])->name('dashboard.admin.add-golongan')->middleware('auth');
+Route::delete('/dashboard/admin/delete-golongan', [GolonganController::class, 'delete'])->name('dashboard.admin.delete-golongan')->middleware('auth');
+Route::put('/dashboard/admin/edit-golongan', [GolonganController::class, 'edit'])->name('dashboard.admin.edit-golongan')->middleware('auth');
+
 // dashboard admin data history
 Route::get('/dashboard/admin/daftar-cuti', [AdminHistoryController::class, 'showDaftarCuti'])->name('dashboard.admin.daftar-cuti')->middleware('auth');
 Route::get('/dashboard/admin/daftar-knp', [AdminHistoryController::class, 'showDaftarKNP'])->name('dashboard.admin.daftar-knp')->middleware('auth');

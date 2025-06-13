@@ -36,19 +36,19 @@
                     data-modal-toggle="modaltambahuser"><i class="fa fa-plus-circle"></i> Tambah
                     User</button> -->
                 @if (session('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <div class="alert alert-success bg-green-100 border border-green-300 text-green-800 px-4 py-3 rounded relative mb-4" role="alert" id="alert-success">
                         {{ session('success') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                        <button type="button" class="absolute top-1 right-2 text-green-800 hover:text-green-900" data-dismiss="alert">
+                            &times;
                         </button>
                     </div>
                 @endif
 
                 @if (session('error'))
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <div class="alert alert-danger bg-red-100 border border-red-300 text-red-800 px-4 py-3 rounded relative mb-4" role="alert" id="alert-error">
                         {{ session('error') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                        <button type="button" class="absolute top-1 right-2 text-red-800 hover:text-red-900" data-dismiss="alert">
+                            &times;
                         </button>
                     </div>
                 @endif

@@ -23,4 +23,31 @@ class GolonganController extends Controller
         ]);
         return redirect()->route('dashboard.admin.data-golongan')->with(['success' => 'Data Golongan Berhasil Disimpan!']);
     }
+
+    public function edit(Request $request)
+    {
+
+        $request->validate([
+            'id_golongan' => 'required|exists:golongan,id_golongan',
+            'nama_golongan' => 'required|string|max:255',
+        ]);
+
+        Golongan::find($request->id_golongan)->update([
+            'nama_golongan' => $request->nama_golongan,
+        ]);
+
+        return redirect()->route('dashboard.admin.data-golongan')->with('success', 'Data Golongan berhasil diubah!');
+    }
+    
+    public function delete(Request $request)
+    {
+        $request->validate([
+            'id_golongan' => 'required|exists:golongan,id_golongan',
+        ]);
+
+        // Hapus data pegawai
+        Pegawai::where('id_golongan', $request->id_golongan)->delete();
+
+        return redirect()->route('dashboard.admin.data-pegawai')->with('success', 'Data golongan Berhasil Dihapus!');
+    }
 }
