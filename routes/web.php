@@ -33,6 +33,7 @@ Route::post('/auth/logout', [AuthController::class, 'logout'])->name('auth.logou
 
 // dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
+Route::get('/dashboard/admin/cuti-modal/{nip}', [DataCutiController::class, 'getCutiByNip'])->middleware('auth');
 
 // dashboard user approve cuti
 Route::get('/dashboard/user/approve-cuti', [ApproveCutiController::class, 'index'])->name('dashboard.user.daftar-approve-cuti')->middleware('auth');

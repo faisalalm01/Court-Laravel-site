@@ -19,6 +19,11 @@ class Pegawai extends Model
         'jenis_kelamin'
     ];
 
+    public function pegawai()
+    {
+        return $this->hasOne(Pegawai::class, 'nip', 'nip');
+    }
+
     // Relasi ke Jabatan
     public function jabatan()
     {

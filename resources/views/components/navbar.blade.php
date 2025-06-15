@@ -5,8 +5,8 @@
                 class="gap-3 flex items-center text-sm rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                 id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
                 data-dropdown-placement="bottom">
-                <img class="w-8 h-8 rounded-full"
-                    src="https://st.depositphotos.com/1537427/3571/v/450/depositphotos_35717211-stock-illustration-vector-user-icon.jpg"
+                <img class="w-8 h-8 rounded-full border border-gray-700"
+                    src="{{ Auth::user()->foto ? asset('images/profile/' . Auth::user()->foto) : asset('https://st.depositphotos.com/1537427/3571/v/450/depositphotos_35717211-stock-illustration-vector-user-icon.jpg') }}"
                     alt="">
                 <div class="pr-4">
                     <p class="font-semibold">{{ Auth::user()->pegawai->nama_pegawai }}</p>

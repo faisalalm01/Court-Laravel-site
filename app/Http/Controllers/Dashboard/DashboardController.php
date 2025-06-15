@@ -32,4 +32,21 @@ class DashboardController extends Controller
         }
         return view('dashboard.user.dashboard', ['title' => $title, 'data' =>  $data, 'userCount' => $userCount, 'pegawaiCount' => $pegawaiCount, 'dataPeg' => $dataPeg]);
     }
+
+    public function getCutiByNip($nip)
+    {
+        $user = Auth::user();
+        $pegawai = $user->pegawai;
+
+        if (!$pegawai) {
+            return response()->json(['error' => 'Pegawai tidak ditemukan'], 404);
+        }
+
+        $cuti = CutiPegawai::where('id_pegawai', $pegawai->id_pegawai)->get();
+
+        return view('dashboard.admin.dashboard', [
+            'pegawai' => $pegawai,
+            'cuti' => $cuti
+        ]);
+    }
 }
