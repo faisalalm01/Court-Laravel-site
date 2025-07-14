@@ -22,7 +22,7 @@ class AddUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nip' => ['required', 'numeric'],
+            'pegawai' => ['required', 'numeric'],
             'password' => ['required'],
             'role' => ['required']
         ];
