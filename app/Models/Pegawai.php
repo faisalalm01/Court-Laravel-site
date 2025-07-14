@@ -53,4 +53,21 @@ class Pegawai extends Model
     {
         return $this->hasMany(KnpPegawai::class, 'id_pegawai', 'id_pegawai');
     }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'id_pegawai');
+    }
+
+    public function cutiHistories()
+    {
+        return $this->hasMany(CutiHistory::class, 'id_pegawai');
+    }
+
+    public function sisaCutiTahunIni()
+    {
+        $tahun = date('Y');
+        return $this->cutiHistories()->where('tahun', $tahun)->first();
+    }
+
 }

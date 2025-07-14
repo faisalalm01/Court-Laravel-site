@@ -16,7 +16,7 @@ class PegawaiController extends Controller
         $data = Pegawai::all();
         $jabatan = Jabatan::all();
         $golongan = Golongan::all();
-        return view('dashboard.admin.data_pegawai', ['title' => 'Dashboard Admin | Data Pegawai', 'data' => $data, 'jabatan' => $jabatan, 'golongan' => $golongan]);
+        return view('dashboard.admin.data_pegawai', ['title' => 'Dashboard | Data Pegawai', 'data' => $data, 'jabatan' => $jabatan, 'golongan' => $golongan]);
     }
     public function add(AddPegawaiRequest $request)
     {

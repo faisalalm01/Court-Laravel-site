@@ -25,6 +25,9 @@ class CutiPegawai extends Model
         'status_cuti',
         'ket_status_cuti'
     ];
+    protected $casts = [
+            'lama_cuti' => 'integer',
+    ];
 
     // Relasi ke Pegawai
     public function pegawai()

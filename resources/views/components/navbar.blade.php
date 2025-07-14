@@ -30,15 +30,15 @@
                         </a>
                     </li>
                     <li>
-                        <button action={{ route('dashboard.profile') }}
-                            class="flex items-center w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                            <svg class="w-4 h-4 mr-3 text-gray-500 dark:text-gray-300" fill="none"
-                                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path d="M12 6V4m0 0a8 8 0 00-8 8v8a2 2 0 002 2h12a2 2 0 002-2v-8a8 8 0 00-8-8zm0 0v2">
-                                </path>
-                            </svg>
-                            User Manual
-                        </button>
+                            <!-- <button action={{ route('dashboard.profile') }}
+                                class="flex items-center w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                <svg class="w-4 h-4 mr-3 text-gray-500 dark:text-gray-300" fill="none"
+                                    stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M12 6V4m0 0a8 8 0 00-8 8v8a2 2 0 002 2h12a2 2 0 002-2v-8a8 8 0 00-8-8zm0 0v2">
+                                    </path>
+                                </svg>
+                                User Manual
+                            </button> -->
                     </li>
                     <li>
                         <form method="POST" action="{{ route('auth.logout') }}">

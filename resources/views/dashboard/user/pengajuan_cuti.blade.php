@@ -4,37 +4,21 @@
 
     <div role="main">
         <div class="px-3">
-            <!-- <div class="p-3">
-                <div class="d-flex justify-content-between align-items-center">
+            <div class="p-3">
+                <div class="flex justify-between items-center">
                     <div class="title_left">
-                        <h3 class="text-2xl">Pengajuan Cuti</h3>
+                        <h3 class="text-2xl font-semibold">Pengajuan Cuti</h3>
                     </div>
-
                     <div class="title_right">
                         <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb float-sm-right m-0">
-                                <li class="breadcrumb-item"><a href="#">Home /</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Ajukan Cuti</li>
+                            <ol class="flex space-x-2 text-gray-600">
+                                <li><a href="#" class="hover:underline">Home</a> /</li>
+                                <li class="text-gray-800 font-medium">Ajukan Cuti</li>
                             </ol>
                         </nav>
                     </div>
                 </div>
-            </div> -->
-                <div class="p-3">
-                    <div class="flex justify-between items-center">
-                        <div class="title_left">
-                            <h3 class="text-2xl font-semibold">Pengajuan Cuti</h3>
-                        </div>
-                        <div class="title_right">
-                            <nav aria-label="breadcrumb">
-                                <ol class="flex space-x-2 text-gray-600">
-                                    <li><a href="#" class="hover:underline">Home</a> /</li>
-                                    <li class="text-gray-800 font-medium">Ajukan Cuti</li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
+            </div>
 
             <div class="clearfix"></div>
 
@@ -57,99 +41,123 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
-                            <form method="POST" action="{{ route('dashboard.user.tambah.pengajuan-cuti') }}" id="cutiForm">
-                                @csrf
-                                <div class="form-group">
-                                    <label>Jenis cuti yang diambil</label>
-                                    <select class="form-control" name="jenis_cuti" id="jenis_cuti" required>
-                                        <option disabled selected>-- Pilih jenis cuti --</option>
-                                        <option value="Cuti Tahunan">Cuti Tahunan</option>
-                                        <option value="Cuti Besar">Cuti Besar</option>
-                                        <option value="Cuti Sakit">Cuti Sakit</option>
-                                        @if (auth()->user()->pegawai->jenis_kelamin === 'P')
-                                            <option value="Cuti Melahirkan">Cuti Melahirkan</option>
-                                        @else
-                                            <option value="Cuti Melahirkan" disabled class="bg-gray-300">Cuti Melahirkan
-                                            </option>
+                            <div class="bg-white shadow-md rounded-lg px-6 py-5">
+                                <form method="POST" action="{{ route('dashboard.user.tambah.pengajuan-cuti') }}" id="cutiForm">
+                                    @csrf
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div class="form-group">
+                                            <label>Jenis cuti yang diambil</label>
+                                            <select class="form-control" name="jenis_cuti" id="jenis_cuti" required>
+                                                <option disabled selected>-- Pilih jenis cuti --</option>
+                                                <option value="Cuti Tahunan">Cuti Tahunan</option>
+                                                <option value="Cuti Besar">Cuti Besar</option>
+                                                <option value="Cuti Sakit">Cuti Sakit</option>
+                                                @if (auth()->user()->pegawai->jenis_kelamin === 'P')
+                                                    <option value="Cuti Melahirkan">Cuti Melahirkan</option>
+                                                @else
+                                                    <option value="Cuti Melahirkan" disabled class="bg-gray-300">Cuti Melahirkan</option>
+                                                @endif
+                                                <option value="Cuti Karena Alasan Penting">Cuti Karena Alasan Penting</option>
+                                                <option value="Cuti diluar Tanggungan Negara">Cuti diluar Tanggungan Negara</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="">Alasan Cuti</label>
+                                            <input type="text" required class="form-control" placeholder="Masukkan alasan cuti"
+                                                name="alasan_cuti">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="">Lamanya cuti</label>
+                                            <input type="number" required class="form-control" placeholder="Masukan berapa lama"
+                                                name="lama_cuti" id="lama_cuti" min="1">
+                                            <select name="ket_lamacuti" class="form-control select2 mt-2" id="ket_lamacuti" required>
+                                                <option disabled selected>-- Pilih Hari, Bulan, Tahun --</option>
+                                                <option value="Hari">Hari</option>
+                                                <option value="Minggu">Minggu</option>
+                                                <option value="Bulan">Bulan</option>
+                                                <option value="Tahun">Tahun</option>
+                                            </select>
+                                            <small id="max_cuti_info" class="text-muted block mt-1"></small>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="">Dari tanggal</label>
+                                            <input type="date" required class="form-control" name="dari_tanggal" id="dari_tanggal"
+                                                min="{{ date('Y-m-d') }}">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="">Sampai dengan</label>
+                                            <input type="date" required class="form-control" name="sampai_dengan" id="sampai_dengan" disabled>
+                                            <small id="date_error" class="text-danger"></small>
+                                        </div>
+
+                                        <div class="form-group md:col-span-2">
+                                            <label for="">Alamat selama cuti</label>
+                                            <textarea class="form-control" placeholder="Masukkan alamat lengkap selama cuti" name="alamat" required></textarea>
+                                        </div>
+
+                                        <div class="form-group md:col-span-2">
+                                            <label for="">Atasan</label>
+                                            <select class="form-control" name="atasan">
+                                                @php
+                                                    $jabatan = auth()->user()->pegawai->jabatan->nama_jabatan;
+                                                @endphp
+                                                @if (in_array($jabatan, ['KETUA']))
+                                                    <option value="ketualangsung">-</option>
+                                                @elseif (in_array($jabatan, ['WAKIL KETUA', 'HAKIM UTAMA MUDA', 'HAKIM MADYA UTAMA', 'PANITERA', 'SEKRETARIS']))
+                                                    <option value="ketua">KETUA</option>
+                                                @elseif (in_array($jabatan, ['PANMUD HUKUM', 'PANMUD GUGATAN', 'PANMUD PERMOHONAN']))
+                                                    <option value="panitera">PANITERA</option>
+                                                @elseif (in_array($jabatan, ['JURU SITA']))
+                                                    <option value="panitera">PANITERA</option>
+                                                @elseif (in_array($jabatan, ['PANITERA PENGGANTI', 'JURU SITA PENGGANTI']))
+                                                    <option value="panitera">PANITERA</option>
+                                                @elseif (in_array($jabatan, ['KASUBAG KEPEGAWAIAN DAN ORTALA', 'KASUBAG PERNCANAAN, IT DAN PELAPORAN', 'KASUBAG UMUM DAN KEUANGAN']))
+                                                    <option value="sekretaris">SEKRETARIS</option>
+                                                @elseif ($jabatan === 'STAFF PELAKSANA PANMUD HUKUM')
+                                                    <option value="panmudhukum">PANMUD HUKUM</option>
+                                                @elseif ($jabatan === 'STAFF PELAKSANA PANMUD GUGATAN')
+                                                    <option value="panmudgugatan">PANMUD GUGATAN</option>
+                                                @elseif ($jabatan === 'STAFF PELAKSANA PANMUD PERMOHONAN')
+                                                    <option value="panmudpermohonan">PANMUD PERMOHONAN</option>
+                                                @elseif ($jabatan === 'STAFF PELAKSANA KEPEGAWAIAN DAN ORTALA')
+                                                    <option value="kasubagortala">KASUBAG KEPEGAWAIAN DAN ORTALA</option>
+                                                @elseif ($jabatan === 'STAFF PELAKSANA PERNCANAAN, IT DAN PELAPORAN')
+                                                    <option value="kasubagit">KASUBAG PERNCANAAN, IT DAN PELAPORAN</option>
+                                                @elseif ($jabatan === 'STAFF PELAKSANA UMUM DAN KEUANGAN')
+                                                    <option value="kasubagkeuangan">KASUBAG UMUM DAN KEUANGAN</option>
+                                                @elseif ($jabatan === 'STAFF PELAKSANA PRAKOM')
+                                                    <option value="sekretaris">SEKRETARIS</option>
+                                                @endif
+                                            </select>
+                                        </div>
+                                        @php
+                                        $langsungKetua = in_array($jabatan, [
+                                            'KETUA',
+                                            'WAKIL KETUA',
+                                            'HAKIM UTAMA MUDA',
+                                            'HAKIM MADYA UTAMA',
+                                            'PANITERA',
+                                            'SEKRETARIS'
+                                        ]);
+                                        @endphp
+                                        @if(!$langsungKetua)
+                                            <input type="hidden" name="app_ketua" value="0">
                                         @endif
-                                        <option value="Cuti Karena Alasan Penting">Cuti Karena Alasan Penting</option>
-                                        <option value="Cuti diluar Tanggungan Negara">Cuti diluar Tanggungan Negara</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Alasan Cuti</label>
-                                    <input type="text" required class="form-control" placeholder="Masukkan alasan cuti"
-                                        name="alasan_cuti">
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Lamanya cuti</label>
-                                    <input type="number" required class="form-control" placeholder="Masukan berapa lama"
-                                        name="lama_cuti" id="lama_cuti" min="1">
-                                    <select name="ket_lamacuti" class="form-control select2" id="ket_lamacuti" required>
-                                        <option disabled selected>-- Pilih Hari, Bulan, Tahun --</option>
-                                        <option value="Hari">Hari</option>
-                                        <option value="Minggu">Minggu</option>
-                                        <option value="Bulan">Bulan</option>
-                                        <option value="Tahun">Tahun</option>
-                                    </select>
-                                    <small id="max_cuti_info" class="text-muted"></small>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Dari tanggal</label>
-                                    <input type="date" required class="form-control" name="dari_tanggal" id="dari_tanggal" min="{{ date('Y-m-d') }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Sampai dengan</label>
-                                    <input type="date" required class="form-control" name="sampai_dengan" id="sampai_dengan" disabled>
-                                    <small id="date_error" class="text-danger"></small>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Alamat selama cuti</label>
-                                    <textarea class="form-control" placeholder="Masukkan alamat lengkap selama cuti" name="alamat" required></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Atasan</label>
-                                    <select class="form-control" name="atasan">
-                                        @if (auth()->user()->pegawai->jabatan->nama_jabatan === 'JURU SITA' ||
-                                                auth()->user()->pegawai->jabatan->nama_jabatan === 'JURU SITA PENGGANTI' ||
-                                                auth()->user()->pegawai->jabatan->nama_jabatan === 'PANITERA PENGGANTI' ||
-                                                auth()->user()->pegawai->jabatan->nama_jabatan === 'PANMUD HUKUM' ||
-                                                auth()->user()->pegawai->jabatan->nama_jabatan === 'PANMUD GUGATAN')
-                                            <option value="panitera">PANITERA</option>
-                                        @elseif (auth()->user()->pegawai->jabatan->nama_jabatan === 'KASUBAG KEPEGAWAIAN DAN ORTALA' ||
-                                                auth()->user()->pegawai->jabatan->nama_jabatan === 'KASUBAG PERNCANAAN, IT DAN PELAPORAN' ||
-                                                auth()->user()->pegawai->jabatan->nama_jabatan === 'KASUBAG UMUM DAN KEUANGAN')
-                                            <option value="sekretaris">SEKRETARIS</option>
-                                        @elseif (auth()->user()->pegawai->jabatan->nama_jabatan === 'PANITERA' ||
-                                                auth()->user()->pegawai->jabatan->nama_jabatan === 'SEKRETARIS' ||
-                                                auth()->user()->pegawai->jabatan->nama_jabatan === 'HAKIM UTAMA MUDA' ||
-                                                auth()->user()->pegawai->jabatan->nama_jabatan === 'HAKIM MADYA UTAMA' ||
-                                                auth()->user()->pegawai->jabatan->nama_jabatan === 'WAKIL KETUA')
-                                            <option value="ketua">KETUA</option>
-                                        @elseif (auth()->user()->pegawai->jabatan->nama_jabatan === 'STAFF PELAKSANA PANMUD HUKUM')
-                                            <option value="panmudhukum">PANMUD HUKUM</option>
-                                        @elseif (auth()->user()->pegawai->jabatan->nama_jabatan === 'STAFF PELAKSANA PANMUD GUGATAN')
-                                            <option value="panmudgugatan">PANMUD GUGATAN</option>
-                                        @elseif (auth()->user()->pegawai->jabatan->nama_jabatan === 'STAFF PELAKSANA PANMUD PERMOHONAN')
-                                            <option value="panmudpermohonan">PANMUD PERMOHONAN</option>
-                                        @elseif (auth()->user()->pegawai->jabatan->nama_jabatan === 'STAFF PELAKSANA KEPEGAWAIAN DAN ORTALA')
-                                            <option value="kasubagortala">KASUBAG KEPEGAWAIAN DAN ORTALA</option>
-                                        @elseif (auth()->user()->pegawai->jabatan->nama_jabatan === 'STAFF PELAKSANA PERNCANAAN, IT DAN PELAPORAN')
-                                            <option value="kasubagit">KASUBAG PERNCANAAN, IT DAN PELAPORAN</option>
-                                        @elseif (auth()->user()->pegawai->jabatan->nama_jabatan === 'STAFF PELAKSANA PRAKOM')
-                                            <option value="sekretaris">SEKRETARIS</option>
-                                        @elseif (auth()->user()->pegawai->jabatan->nama_jabatan === 'STAFF PELAKSANA UMUM DAN KEUANGAN')
-                                            <option value="kasubagkeuangan">KASUBAG UMUM DAN KEUANGAN</option>
-                                        @elseif (auth()->user()->pegawai->jabatan->nama_jabatan === 'KETUA')
-                                            <option value="ketualangsung">-</option>
-                                        @endif
-                                    </select>
-                                </div>
-                                <hr>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary" id="submitBtn">Ajukan Cuti</button>
-                                </div>
-                            </form>
+                                    </div>
+
+                                    <hr class="my-6">
+
+                                    <div class="text-right">
+                                        <button type="submit" class="bg-green-600 rounded-lg text-white px-6 py-3 hover:bg-green-700">
+                                            Ajukan Cuti
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

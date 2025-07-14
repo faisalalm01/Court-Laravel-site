@@ -27,7 +27,7 @@
 </div>
 
 <!-- Admin Card Section -->
-@if(Auth::user()->role === 'admin' || Auth::user()->nip === '00')
+@if(Auth::user()->role === 'admin' || Auth::user()->nip === '00' || Auth::user()->nip === '199009122020122010')
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
     <!-- Users -->
     <div class="bg-white shadow rounded-lg p-4 transform transition hover:scale-[1.02]">
@@ -71,11 +71,38 @@
 </div>
 @endif
 
+<!-- jatah cuti -->
+@if(Auth::user()->role !== 'Admin' && $cutiTahunIni)
+<div class="bg-white shadow-md rounded-lg p-4 mb-6">
+    <h3 class="text-lg font-semibold mb-3">Sisa Cuti Anda Tahun {{ now()->year }}</h3>
+    <table class="w-full table-auto border border-gray-200">
+        <thead class="bg-gray-100">
+            <tr>
+                <th class="px-4 py-2 text-left">Jenis Cuti</th>
+                <th class="px-4 py-2 text-center">Jatah</th>
+                <th class="px-4 py-2 text-center">Terpakai</th>
+                <th class="px-4 py-2 text-center">Sisa</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($cutiTahunIni as $c)
+                <tr>
+                    <td class="px-4 py-2">{{ $c->jenis_cuti }}</td>
+                    <td class="px-4 py-2 text-center">{{ $c->jatah }}</td>
+                    <td class="px-4 py-2 text-center font-semibold text-red-600">{{ $c->terpakai }}</td>
+                    <td class="px-4 py-2 text-center font-semibold text-green-600">{{ $c->jatah - $c->terpakai }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+@endif
+
 <!-- Tabel Data -->
 <div class="w-full mb-5">
     <div class="rounded-lg shadow-md p-4 bg-white">
         <h2 class="text-xl mb-4">
-            @if(Auth::user()->role === 'admin' || Auth::user()->nip === '00')
+            @if(Auth::user()->role === 'admin' || Auth::user()->nip === '00' || Auth::user()->nip === '199009122020122010')
                 Data Pegawai <small class="text-sm text-gray-500">Daftar pegawai Pengadilan Negeri Purwokerto</small>
             @else
                 Daftar Pengajuan Cuti Anda <small class="text-sm text-gray-500">Menunggu approval atasan</small>
@@ -86,7 +113,7 @@
             <table id="data-tables" class="table-auto w-full">
                 <thead>
                     <tr class="bg-gray-100">
-                        @if(Auth::user()->role === 'admin' || Auth::user()->nip === '00')
+                        @if(Auth::user()->role === 'admin' || Auth::user()->nip === '00' || Auth::user()->nip === '199009122020122010')
                             <th class="py-2 px-4">No</th>
                             <th class="py-2 px-4">Nama</th>
                             <th class="py-2 px-4">NIP</th>
@@ -109,7 +136,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if(Auth::user()->role === 'admin' || Auth::user()->nip === '00')
+                    @if(Auth::user()->role === 'admin' || Auth::user()->nip === '00' || Auth::user()->nip === '199009122020122010')
                         @foreach ($dataPeg as $user)
                         <tr class="border-b hover:bg-gray-50">
                             <td class="py-3 px-4">{{ $loop->iteration }}</td>
@@ -143,7 +170,11 @@
                                     {{ $d->status_cuti }}
                                 </span>
                             </td>
-                            <td class="py-3 px-4">{{ $d->ket_status_cuti ?? '-' }}</td>
+                            <td class="py-3 px-4">
+                                <span class="px-2 py-1 rounded bg-blue-300 text-blue-700">
+                                    {{ $d->ket_status_cuti ?? '-' }}        
+                                </span>
+                            </td>
                         </tr>
                         @endforeach
                     @endif
@@ -154,7 +185,7 @@
 </div>
 
 <!-- Modal Detail Pegawai -->
-@if(Auth::user()->role === 'admin' || Auth::user()->nip === '00')
+@if(Auth::user()->role === 'admin' || Auth::user()->nip === '00' || Auth::user()->nip === '199009122020122010')
     @foreach ($dataPeg as $user)
     <div id="pegawaidetail{{ $user->nip }}" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
         <div class="bg-white rounded-lg shadow-xl mx-auto my-10">

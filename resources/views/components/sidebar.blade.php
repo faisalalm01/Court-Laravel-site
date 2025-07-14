@@ -21,8 +21,8 @@
             'SEKRETARIS',
             'KETUA',
             'PANMUD HUKUM',
-            'PANMUD HUKUM GUGATAN',
-            'PANMUD HUKUM PERMOHONAN',
+            'PANMUD GUGATAN',
+            'PANMUD PERMOHONAN',
             'KASUBAG KEPEGAWAIAN DAN ORTALA',
             'KASUBAG PERNCANAAN, IT DAN PELAPORAN',
             'KASUBAG UMUM DAN KEUANGAN',
@@ -57,7 +57,7 @@
     @endif
 
     <!-- Cuti -->
-    @if (auth()->user()->role == 'Admin')
+    <!-- @if (auth()->user()->role == 'Admin')
         <div class="mb-8 px-2 border-b mx-4 pb-3">
             <p class="pl-4 text-xs font-semibold text-gray-100 mb-1">CUTI</p>
             <div class="flex flex-col space-y-2">
@@ -123,7 +123,7 @@
 
             </div>
         </div>
-    @endif
+    @endif -->
 
 
     <!-- Management Super Admin -->
@@ -131,7 +131,7 @@
         <p class="pl-4 text-xs font-semibold text-gray-100 mb-1">MANAGEMENT</p>
         <div class="flex flex-col space-y-2">
 
-            @if (auth()->user()->role == 'Admin')
+            @if (auth()->user()->role == 'Admin' || auth()->user()->nip == '199009122020122010')
                 <div class="flex items-center text-blue-400 h-10 pl-4 hover:bg-green-600 rounded-lg cursor-pointer">
                     <i class="fa fa-user text-white mr-2"></i>
                     <a class="text-gray-100" href="{{ route('dashboard.admin.data-users') }}">Data User</a>
@@ -165,6 +165,27 @@
                         <a href="{{ route('dashboard.admin.data-golongan') }}"
                             class="flex items-center w-full p-2 text-md font-normal text-white hover:text-black transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Data
                             Golongan</a>
+                    </li>
+                </ul>
+                @elseif(auth()->user()->pegawai?->jabatan?->nama_jabatan === 'KETUA')
+                <div class="flex items-center text-blue-400 h-10 pl-4 hover:bg-green-600 rounded-lg cursor-pointer justify-between"
+                    aria-controls="dropdown-pegawai" data-collapse-toggle="dropdown-pegawai">
+                    <div>
+                        <i class="fa fa-database text-white mr-2"></i>
+                        <button class="text-gray-100">Data Pegawai</button>
+                    </div>
+                    <svg sidebar-toggle-item class="w-6 h-6 mr-5 text-white" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <ul id="dropdown-pegawai" class="hidden py-2 space-y-2">
+                    <li>
+                        <a href="{{ route('dashboard.admin.data-pegawai') }}"
+                            class="flex items-center w-full p-2 text-md font-normal text-white hover:text-black transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">
+                            Data Pegawai</a>
                     </li>
                 </ul>
             @endif

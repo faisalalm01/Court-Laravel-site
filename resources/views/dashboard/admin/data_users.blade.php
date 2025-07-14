@@ -126,7 +126,9 @@
                                     </div>
                                     </div>
                                     <div class="p-6">
-                                    <form class="" method="POST">
+                                    <form action="{{ route('dashboard.admin.edit-users', ['nip' => $user->nip]) }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
                                         <div class="space-y-4">
                                         <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
                                         <div class="md:col-span-3">
@@ -198,7 +200,8 @@
                                     </div>
                                     </div>
                                     <div class="p-6">
-                                    <form class="" method="POST">
+                                    <form class="" method="POST" action="{{ route('dashboard.admin.add-users') }}">
+                                        @csrf
                                         <div class="space-y-4">
                                         <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
                                         <div class="md:col-span-3">

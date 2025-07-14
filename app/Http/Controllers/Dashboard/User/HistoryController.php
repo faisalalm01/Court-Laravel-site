@@ -18,12 +18,32 @@ class HistoryController extends Controller
         $user = Auth::user();
         return  Pegawai::where('nip', $user->nip)->first();
     }
-    public function showDaftarCuti()
+    public function showDaftarCuti(Request $request)
     {
         $pegawai = $this->getPegawai();
-        $data =  CutiPegawai::where('id_pegawai', $pegawai->id_pegawai)->get();
+        $tahunDipilih = $request->get('tahun', date('Y'));
 
-        return view('dashboard.user.daftar_cuti', ['title' => 'Dashboard User | Daftar Cuti', 'data' => $data]);
+        if ($tahunDipilih === 'all') {
+            $data = CutiPegawai::where('id_pegawai', $pegawai->id_pegawai)->get();
+        } else {
+            $data = CutiPegawai::where('id_pegawai', $pegawai->id_pegawai)
+                    ->whereYear('dari_tanggal', $tahunDipilih)
+                    ->get();
+        }
+
+        // Ambil semua tahun unik dari data cuti
+        $tahunList = CutiPegawai::where('id_pegawai', $pegawai->id_pegawai)
+            ->selectRaw('YEAR(dari_tanggal) as tahun')
+            ->distinct()
+            ->pluck('tahun')
+            ->sortDesc();
+
+        return view('dashboard.user.daftar_cuti', [
+            'title' => 'Dashboard User | Daftar Cuti',
+            'data' => $data,
+            'tahunList' => $tahunList,
+            'tahunDipilih' => $tahunDipilih
+        ]);
     }
     public function showDaftarKGB()
     {

@@ -81,7 +81,7 @@
                 </div>
 
                 <div class="flex space-x-4 mt-8">
-                    <button type="submit" class="btn btn-success">
+                    <button type="submit" class="bg-green-600 px-5 py-3 text-white rounded-lg">
                         Simpan Approval
                     </button>
                     <a href="/dashboard/user/daftar-approval" class="btn btn-secondary">

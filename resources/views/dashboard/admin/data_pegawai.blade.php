@@ -75,16 +75,21 @@
                                 <td>{{ $pegawai->golongan->nama_golongan }}</td>
                                 <td>{{ $pegawai->unit_kerja }}</td>
                                 <td class="text-center">
-                                    <a href="#" class="btn btn-info" data-toggle="modal"
-                                        data-modal-toggle="modalviewpegawai{{ $pegawai->nip }}"><i class="fa fa-eye"></i>
-                                        View</a>
-                                    <a href="#" class="btn btn-info" data-toggle="modal"
-                                        data-modal-toggle="modaleditpegawai{{ $pegawai->nip }}"><i class="fa fa-edit"></i>
-                                        Edit</a>
-                                    <a href="#" class="btn btn-info" data-toggle="modal"
-                                        data-modal-toggle="modaldeletepegawai{{ $pegawai->nip }}"><i
-                                            class="fa fa-trash"></i>
-                                        delete</a>
+                                    @if (auth()->user()->pegawai?->jabatan?->nama_jabatan === 'KETUA')
+                                        <a href="#" class="btn btn-info" data-toggle="modal"
+                                            data-modal-toggle="modalviewpegawai{{ $pegawai->nip }}"><i class="fa fa-eye"></i>
+                                            View</a>
+                                    @else
+                                        <a href="#" class="btn btn-info" data-toggle="modal"
+                                            data-modal-toggle="modalviewpegawai{{ $pegawai->nip }}"><i class="fa fa-eye"></i>
+                                            View</a>
+                                        <a href="#" class="btn btn-info" data-toggle="modal"
+                                            data-modal-toggle="modaleditpegawai{{ $pegawai->nip }}"><i class="fa fa-edit"></i>
+                                            Edit</a>
+                                        <a href="#" class="btn btn-info" data-toggle="modal"
+                                            data-modal-toggle="modaldeletepegawai{{ $pegawai->nip }}"><i class="fa fa-trash"></i>
+                                            Delete</a>
+                                    @endif
                                 </td>
                                 <!-- <td class="text-center">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                             </td> -->

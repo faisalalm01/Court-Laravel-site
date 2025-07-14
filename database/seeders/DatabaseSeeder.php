@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             GolonganSeeder::class,
             PegawaiSeeder::class,
             UserSeeder::class,
+            CutiHistorySeeder::class,
         ]);
     }
 }
