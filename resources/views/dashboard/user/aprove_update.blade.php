@@ -84,7 +84,7 @@
                     <button type="submit" class="bg-green-600 px-5 py-3 text-white rounded-lg">
                         Simpan Approval
                     </button>
-                    <a href="/dashboard/user/daftar-approval" class="btn btn-secondary">
+                    <a href="/dashboard/user/approve-cuti" class="btn btn-secondary">
                         Batal
                     </a>
                 </div>

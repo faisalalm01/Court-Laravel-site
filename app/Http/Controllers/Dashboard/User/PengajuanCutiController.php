@@ -127,7 +127,7 @@ class PengajuanCutiController extends Controller
                 'ketua' => null,
                 'app_panmud_kasubag' => 0,
                 'app_panitera_sekretaris' => 0,
-                'app_ketua' => 1,
+                'app_ketua' => 0,
                 'status_cuti' => 'Diajukan',
                 'ket_status_cuti' => 'Menunggu Approval Panmud Hukum',
             ]);
@@ -147,7 +147,7 @@ class PengajuanCutiController extends Controller
                 'ketua' => null,
                 'app_panmud_kasubag' => 0,
                 'app_panitera_sekretaris' => 0,
-                'app_ketua' => 1,
+                'app_ketua' => 0,
                 'status_cuti' => 'Diajukan',
                 'ket_status_cuti' => 'Menunggu Approval Panmud Gugatan',
             ]);
@@ -167,7 +167,7 @@ class PengajuanCutiController extends Controller
                 'ketua' => null,
                 'app_panmud_kasubag' => 0,
                 'app_panitera_sekretaris' => 0,
-                'app_ketua' => 1,
+                'app_ketua' => 0,
                 'status_cuti' => 'Diajukan',
                 'ket_status_cuti' => 'Menunggu Approval Panmud Permohonan',
             ]);
@@ -187,7 +187,7 @@ class PengajuanCutiController extends Controller
                 'ketua' => null,
                 'app_panmud_kasubag' => 0,
                 'app_panitera_sekretaris' => 0,
-                'app_ketua' => 1,
+                'app_ketua' => 0,
                 'status_cuti' => 'Diajukan',
                 'ket_status_cuti' => 'Menunggu Approval Kasubag Kepegawaian dan Ortala',
             ]);
@@ -207,7 +207,7 @@ class PengajuanCutiController extends Controller
                 'ketua' => null,
                 'app_panmud_kasubag' => 0,
                 'app_panitera_sekretaris' => 0,
-                'app_ketua' => 1,
+                'app_ketua' => 0,
                 'status_cuti' => 'Diajukan',
                 'ket_status_cuti' => 'Menunggu Approval Kasubag Perencanaan, IT dan Pelaporan',
             ]);
@@ -227,7 +227,7 @@ class PengajuanCutiController extends Controller
                 'ketua' => null,
                 'app_panmud_kasubag' => 0,
                 'app_panitera_sekretaris' => 0,
-                'app_ketua' => 1,
+                'app_ketua' => 0,
                 'status_cuti' => 'Diajukan',
                 'ket_status_cuti' => 'Menunggu Approval Kasubag Umum dan Keuangan',
             ]);
@@ -235,3 +235,4 @@ class PengajuanCutiController extends Controller
         return redirect()->route('dashboard.user.daftar-approval')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 }
+        

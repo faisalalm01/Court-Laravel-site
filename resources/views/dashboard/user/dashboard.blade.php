@@ -105,7 +105,11 @@
             @if(Auth::user()->role === 'admin' || Auth::user()->nip === '00' || Auth::user()->nip === '199009122020122010')
                 Data Pegawai <small class="text-sm text-gray-500">Daftar pegawai Pengadilan Negeri Purwokerto</small>
             @else
-                Daftar Pengajuan Cuti Anda <small class="text-sm text-gray-500">Menunggu approval atasan</small>
+                <div>
+                    <h2 class="text-xl font-bold">Daftar Pengajuan Cuti Anda</h2>
+                    <p class="text-sm text-gray-500">Menunggu approval atasan</p>
+                </div>
+                <!-- Daftar Pengajuan Cuti Anda <small class="text-sm text-gray-500">Menunggu approval atasan</small> -->
             @endif
         </h2>
 

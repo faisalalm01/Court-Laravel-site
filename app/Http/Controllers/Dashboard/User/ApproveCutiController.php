@@ -68,6 +68,13 @@ class ApproveCutiController extends Controller
         ]);
     }
 
+    private function getPegawaiByJabatan($namaJabatan)
+    {
+        return Pegawai::whereHas('jabatan', function ($query) use ($namaJabatan) {
+            $query->where('nama_jabatan', $namaJabatan);
+        })->first();
+    }
+
     public function updateApprovalCuti(Request $request, string $cutiId)
     {
         $cuti = CutiPegawai::findOrFail($cutiId);
@@ -93,13 +100,13 @@ class ApproveCutiController extends Controller
                     'app_ketua' => 1,
                     'status_cuti' => 'Diajukan'
                 ]);
-                $next = $this->getPegawaiByJabatan('PANITERA');
-                if ($next) {
-                    Notification::create([
-                        'id_pegawai' => $next->id_pegawai,
-                        'pesan' => "Ada cuti menunggu approval dari PANITERA.",
-                    ]);
-                }
+                // $next = $this->getPegawaiByJabatan('PANITERA');
+                // if ($next) {
+                //     Notification::create([
+                //         'id_pegawai' => $next->id_pegawai,
+                //         'pesan' => "Ada cuti menunggu approval dari PANITERA.",
+                //     ]);
+                // }
             } elseif (in_array($jabatan, ['PANITERA', 'SEKRETARIS'])) {
                 $cuti->update([
                     'app_panitera_sekretaris' => 1,
@@ -108,13 +115,13 @@ class ApproveCutiController extends Controller
                     'app_ketua' => 0,
                     'status_cuti' => 'Diajukan'
                 ]);
-                $next = $this->getPegawaiByJabatan('KETUA');
-                if ($next) {
-                    Notification::create([
-                        'id_pegawai' => $next->id_pegawai,
-                        'pesan' => "Ada cuti menunggu approval dari KETUA.",
-                    ]);
-                }
+                // $next = $this->getPegawaiByJabatan('KETUA');
+                // if ($next) {
+                //     Notification::create([
+                //         'id_pegawai' => $next->id_pegawai,
+                //         'pesan' => "Ada cuti menunggu approval dari KETUA.",
+                //     ]);
+                // }
             } elseif ($jabatan === 'KETUA') {
                 $cuti->update([
                     'app_ketua' => 1,

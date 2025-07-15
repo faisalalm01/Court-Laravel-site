@@ -25,9 +25,11 @@
                 <p class="text-sm text-gray-500">Daftar pegawai pengadilan Negeri Purwokerto</p>
             </div>
             <div class="flex gap-2">
+                @if (auth()->user()->pegawai?->jabatan?->nama_jabatan !== 'KETUA')
                 <a href="#" data-toggle="modal" data-modal-toggle="modaltambahpegawai" class="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded flex items-center" data-toggle="modal" data-target=".btn-tambah-kgb">
                     <i class="fa fa-plus-circle mr-2"></i> Tambah Pegawai
                 </a>
+                @endif
                 <a href="export_kgb.php" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded flex items-center">
                     <i class="fa fa-download mr-2"></i> Export Excel
                 </a>
