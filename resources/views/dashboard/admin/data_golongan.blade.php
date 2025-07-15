@@ -24,9 +24,6 @@
             <div>
                 <h2 class="text-xl font-bold">Daftar Golongan</h2>
                 <p class="text-sm text-gray-500">Data golongan pegawai Pengadilan Negeri Purwokerto</p>
-            </div>            <div>
-                <h2 class="text-xl font-bold">Daftar KGB</h2>
-                <p class="text-sm text-gray-500">Kenaikan Gaji Berkala Pengadilan Negeri Purwokerto</p>
             </div>
             <div class="flex space-x-2">
                 <a href="#" data-toggle="modal" data-modal-toggle="modaltambahgolongan" class="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded flex items-center" data-toggle="modal" data-target=".btn-tambah-kgb">

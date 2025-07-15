@@ -27,6 +27,7 @@ class PegawaiController extends Controller
             'nip' => $validatedData['nip'],
             'id_jabatan' => $validatedData['jabatan'],
             'id_golongan' => $validatedData['golongan'],
+            'unit_kerja' => $validatedData['unit_kerja'],
         ]);
         return redirect()->route('dashboard.admin.data-pegawai')->with(['success' => 'Data Pegawai Berhasil Disimpan!']);
     }
@@ -39,6 +40,7 @@ class PegawaiController extends Controller
             'pegawai' => 'required|string|max:255',
             'jabatan' => 'required|exists:jabatan,id_jabatan',
             'golongan' => 'required|exists:golongan,id_golongan',
+            'unit_kerja' => 'required|exists:pegawai,unit_kerja',
         ]);
 
         $pegawai = Pegawai::where('nip', $request->nip)->first();
@@ -51,6 +53,7 @@ class PegawaiController extends Controller
             'nama_pegawai' => $request->pegawai,
             'id_jabatan' => $request->jabatan,
             'id_golongan' => $request->golongan,
+            'unit_kerja' => $request->unit_kerja,
         ]);
 
         return redirect()->route('dashboard.admin.data-pegawai')->with('success', 'Data Pegawai berhasil diupdate!');

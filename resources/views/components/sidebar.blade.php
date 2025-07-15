@@ -281,11 +281,11 @@
                             class="flex items-center w-full p-2 text-md font-normal text-white hover:text-black transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Daftar
                             KNP</a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="{{ route('dashboard.user.daftar-kgb') }}"
                             class="flex items-center w-full p-2 text-md font-normal text-white hover:text-black transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Daftar
                             KGB</a>
-                    </li>
+                    </li> -->
                 </ul>
             @else
                 <ul id="dropdown-history" class="hidden py-2 space-y-2">
@@ -299,11 +299,11 @@
                             class="flex items-center w-full p-2 text-md font-normal text-white hover:text-black transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Daftar
                             KNP</a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="{{ route('dashboard.admin.daftar-kgb') }}"
                             class="flex items-center w-full p-2 text-md font-normal text-white hover:text-black transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Daftar
                             KGB</a>
-                    </li>
+                    </li> -->
                 </ul>
             @endif
 

@@ -173,6 +173,20 @@
                                         </div>
 
                                         <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+                                        <div class="md:col-span-3">
+                                            <label class="block text-sm font-medium text-gray-700">Unit Kerja</label>
+                                        </div>
+                                        <div class="md:col-span-9">
+                                            <select class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-blue-500" name="unit_kerja" required>
+                                            <option value="{{ $pegawai->unit_kerja }}" selected>{{ $pegawai->unit_kerja }}</option>
+                                                <option value="{{ $pegawai->unit_kerja }}">
+                                                    {{ $pegawai->unit_kerja }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        </div>
+
+                                        <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
                                             <div class="md:col-span-3">
                                             <label class="block text-sm font-medium text-gray-700">Golongan</label>
                                             </div>
@@ -268,6 +282,7 @@
                                     <div class="p-6">
                                     <form class="" action="{{ route('dashboard.admin.add-pegawai') }}" method="POST" data-parsley-validate>
                                         @csrf
+                                        @method('POST')
                                         <div class="space-y-4">
                                         <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
                                         <div class="md:col-span-3">
@@ -289,7 +304,7 @@
 
                                         <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
                                         <div class="md:col-span-3">
-                                            <label class="block text-sm font-medium text-gray-700">Hak Akses</label>
+                                            <label class="block text-sm font-medium text-gray-700">Jabatan</label>
                                         </div>
                                         <div class="md:col-span-9">
                                             <select class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-blue-500" name="jabatan" required>
@@ -305,7 +320,7 @@
 
                                         <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
                                         <div class="md:col-span-3">
-                                            <label class="block text-sm font-medium text-gray-700">Hak Akses</label>
+                                            <label class="block text-sm font-medium text-gray-700">Golongan</label>
                                         </div>
                                         <div class="md:col-span-9">
                                             <select class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-blue-500" name="golongan" required>
@@ -318,6 +333,21 @@
                                             </select>
                                         </div>
                                         </div>
+
+                                        <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+                                        <div class="md:col-span-3">
+                                            <label class="block text-sm font-medium text-gray-700">Unit Kerja</label>
+                                        </div>
+                                        <div class="md:col-span-9">
+                                            <select class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-blue-500" name="unit_kerja" required>
+                                            <option value="" selected disabled>-- Pilih --</option>
+                                                <option value="PENGADILAN NEGERI PURWOKERTO">
+                                                    PENGADILAN NEGERI PURWOKERTO
+                                                </option>
+                                            </select>
+                                        </div>
+                                        </div>
+
                                         <div class="border-t pt-4">
                                         <div class="flex justify-end">
                                             <button type="submit" class="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" name="submit">

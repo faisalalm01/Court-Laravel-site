@@ -1,7 +1,6 @@
 @extends('dashboard.index')
 
 @section('content')
-
     <div role="main">
         <div class="px-3">
             <div class="p-3">
@@ -19,25 +18,28 @@
                     </div>
                 </div>
             </div>
+            @if ($masihAktif)
+                <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4" role="alert">
+                    <p class="font-bold">Pengajuan Cuti Ditangguhkan</p>
+                    <p>Anda masih memiliki pengajuan cuti yang sedang diproses. Tidak dapat mengajukan cuti baru sampai cuti sebelumnya selesai.</p>
+                </div>
+            @endif
+            {{-- Alert jika melebihi sisa cuti --}}
+            @if ($errors->has('lama_cuti'))
+                <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4" role="alert">
+                    <p class="font-bold">Error Cuti</p>
+                    <p>{{ $errors->first('lama_cuti') }}</p>
+                </div>
+            @endif
+
 
             <div class="clearfix"></div>
 
             <div class="">
-                <div class=""></div>
                 <div class="">
                     <div class="x_panel">
                         <div class="x_title">
                             <h2 class="text-xl">Form Pengajuan Cuti</h2>
-                            <ul class="nav navbar-right panel_toolbox">
-                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                        aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                </li>
-                                <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                </li>
-                            </ul>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
@@ -45,6 +47,7 @@
                                 <form method="POST" action="{{ route('dashboard.user.tambah.pengajuan-cuti') }}" id="cutiForm">
                                     @csrf
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        {{-- Jenis cuti --}}
                                         <div class="form-group">
                                             <label>Jenis cuti yang diambil</label>
                                             <select class="form-control" name="jenis_cuti" id="jenis_cuti" required>
@@ -62,18 +65,20 @@
                                             </select>
                                         </div>
 
+                                        {{-- Alasan cuti --}}
                                         <div class="form-group">
                                             <label for="">Alasan Cuti</label>
                                             <input type="text" required class="form-control" placeholder="Masukkan alasan cuti"
                                                 name="alasan_cuti">
                                         </div>
 
+                                        {{-- Lama cuti --}}
                                         <div class="form-group">
                                             <label for="">Lamanya cuti</label>
                                             <input type="number" required class="form-control" placeholder="Masukan berapa lama"
                                                 name="lama_cuti" id="lama_cuti" min="1">
                                             <select name="ket_lamacuti" class="form-control select2 mt-2" id="ket_lamacuti" required>
-                                                <option disabled selected>-- Pilih Hari, Bulan, Tahun --</option>
+                                                <option disabled selected>-- Pilih Hari, Minggu, Bulan, Tahun --</option>
                                                 <option value="Hari">Hari</option>
                                                 <option value="Minggu">Minggu</option>
                                                 <option value="Bulan">Bulan</option>
@@ -82,23 +87,27 @@
                                             <small id="max_cuti_info" class="text-muted block mt-1"></small>
                                         </div>
 
+                                        {{-- Dari tanggal --}}
                                         <div class="form-group">
                                             <label for="">Dari tanggal</label>
                                             <input type="date" required class="form-control" name="dari_tanggal" id="dari_tanggal"
                                                 min="{{ date('Y-m-d') }}">
                                         </div>
 
+                                        {{-- Sampai dengan --}}
                                         <div class="form-group">
                                             <label for="">Sampai dengan</label>
                                             <input type="date" required class="form-control" name="sampai_dengan" id="sampai_dengan" disabled>
                                             <small id="date_error" class="text-danger"></small>
                                         </div>
 
+                                        {{-- Alamat selama cuti --}}
                                         <div class="form-group md:col-span-2">
                                             <label for="">Alamat selama cuti</label>
                                             <textarea class="form-control" placeholder="Masukkan alamat lengkap selama cuti" name="alamat" required></textarea>
                                         </div>
 
+                                        {{-- Atasan --}}
                                         <div class="form-group md:col-span-2">
                                             <label for="">Atasan</label>
                                             <select class="form-control" name="atasan">
@@ -134,25 +143,24 @@
                                                 @endif
                                             </select>
                                         </div>
+
                                         @php
-                                        $langsungKetua = in_array($jabatan, [
-                                            'KETUA',
-                                            'WAKIL KETUA',
-                                            'HAKIM UTAMA MUDA',
-                                            'HAKIM MADYA UTAMA',
-                                            'PANITERA',
-                                            'SEKRETARIS'
-                                        ]);
+                                            $langsungKetua = in_array($jabatan, [
+                                                'KETUA', 'WAKIL KETUA', 'HAKIM UTAMA MUDA', 'HAKIM MADYA UTAMA', 'PANITERA', 'SEKRETARIS'
+                                            ]);
                                         @endphp
-                                        @if(!$langsungKetua)
+                                        @if (!$langsungKetua)
                                             <input type="hidden" name="app_ketua" value="0">
                                         @endif
                                     </div>
 
                                     <hr class="my-6">
 
+                                    {{-- Tombol Ajukan --}}
                                     <div class="text-right">
-                                        <button type="submit" class="bg-green-600 rounded-lg text-white px-6 py-3 hover:bg-green-700">
+                                        <button type="submit" id="submitBtn"
+                                            class="bg-green-600 rounded-lg text-white px-6 py-3 hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                                            {{ $masihAktif ? 'disabled' : '' }}>
                                             Ajukan Cuti
                                         </button>
                                     </div>
@@ -165,7 +173,45 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const lamaCutiInput = document.querySelector('input[name="lama_cuti"]');
+            const submitBtn = document.querySelector('button[type="submit"]');
 
+            lamaCutiInput.addEventListener("input", function () {
+                const jatah = {{ $sisaCuti }};
+                const inputVal = parseInt(this.value);
+                if (inputVal > jatah) {
+                    alert(`Jumlah hari cuti melebihi sisa cuti tahunan Anda ({{ $sisaCuti }} hari).`);
+                    submitBtn.disabled = true;
+                } else {
+                    submitBtn.disabled = false;
+                }
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const lamaCutiInput = document.querySelector('input[name="lama_cuti"]');
+            const submitBtn = document.querySelector('button[type="submit"]');
+            const sisaCuti = {{ $sisaCuti }};
+
+            const checkCuti = () => {
+                const value = parseInt(lamaCutiInput.value) || 0;
+                if (value > sisaCuti) {
+                    alert(`Jumlah hari cuti melebihi sisa cuti tahunan Anda ({{ $sisaCuti }} hari).`);
+                    submitBtn.disabled = true;
+                } else {
+                    submitBtn.disabled = false;
+                }
+            };
+
+            lamaCutiInput.addEventListener("input", checkCuti);
+
+            // Cek awal saat load, kalau ada old value
+            checkCuti();
+        });
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const jenisCuti = document.getElementById('jenis_cuti');

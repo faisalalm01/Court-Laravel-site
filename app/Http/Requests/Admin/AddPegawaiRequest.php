@@ -26,6 +26,7 @@ class AddPegawaiRequest extends FormRequest
             'nip' => ['required'],
             'jabatan' => ['required'],
             'golongan' => ['required'],
+            'unit_kerja' => ['required']
         ];
     }
 }
