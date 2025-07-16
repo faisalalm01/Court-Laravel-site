@@ -93,3 +93,6 @@ Route::get('/dashboard/admin/daftar-kgb', [AdminHistoryController::class, 'showD
 Route::get('/dashboard/profile', [ProfileController::class, 'index'])->name('dashboard.profile')->middleware('auth');
 Route::post('/dashboard/profile/update-photo', [ProfileController::class, 'updatePhoto'])->name('dashboard.profile.update-photo')->middleware('auth');
 Route::post('/dashboard/profile/reset-password', [ProfileController::class, 'resetPassword'])->name('dashboard.profile.reset-password')->middleware('auth');
+
+//knp
+// Route::get('/dashboard/admin/', [ProfileController::class, 'index'])->name('dashboard.profile')->middleware('auth');
