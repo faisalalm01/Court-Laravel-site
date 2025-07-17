@@ -43,4 +43,16 @@ class HistoryController extends Controller
         ]);
         return redirect()->route('dashboard.admin.daftar-knp')->with(['success' => 'Data KNP Berhasil Disimpan!']);
     }
+    public function editKNP(Request $request, $idPegawai)
+    {
+        $data = $request->all();
+        KnpPegawai::where('id_pegawai', $idPegawai)->update([
+            'id_pegawai' => $data['id_pegawai'],
+            'knp_terakhir' => $data['knp_terakhir'],
+            'knp_datang' => $data['knp_datang'],
+            'keterangan' => $data['keterangan'],
+            'timestamp' => $data['timestamp'],
+        ]);
+        return redirect()->route('dashboard.admin.daftar-knp')->with(['success' => 'Data KNP Berhasil Disimpan!']);
+    }
 }

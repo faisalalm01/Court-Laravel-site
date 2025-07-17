@@ -87,6 +87,8 @@ Route::put('/dashboard/admin/edit-golongan', [GolonganController::class, 'edit']
 Route::get('/dashboard/admin/daftar-cuti', [AdminHistoryController::class, 'showDaftarCuti'])->name('dashboard.admin.daftar-cuti')->middleware('auth');
 Route::get('/dashboard/admin/daftar-knp', [AdminHistoryController::class, 'showDaftarKNP'])->name('dashboard.admin.daftar-knp')->middleware('auth');
 Route::get('/dashboard/admin/daftar-kgb', [AdminHistoryController::class, 'showDaftarKGB'])->name('dashboard.admin.daftar-kgb')->middleware('auth');
+Route::post('/dashboard/admin/daftar-knp', [AdminHistoryController::class, 'addKNP'])->name('dashboard.admin.add.daftar-knp')->middleware('auth');
+Route::put('/dashboard/admin/daftar-knp/{idPegawai}', [AdminHistoryController::class, 'editKNP'])->name('dashboard.admin.edit.daftar-knp')->middleware('auth');
 
 
 // dashboard profile
