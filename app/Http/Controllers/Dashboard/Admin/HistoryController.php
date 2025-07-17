@@ -31,4 +31,16 @@ class HistoryController extends Controller
         $pegawai = Pegawai::all();
         return view('dashboard.admin.daftar_knp', ['title' => 'Dashboard Admin | Daftar KNP', 'data' => $data, 'golongan' => $golongan, 'pegawai' => $pegawai]);
     }
+    public function addKNP(Request $request)
+    {
+        $data = $request->all();
+        KnpPegawai::create([
+            'id_pegawai' => $data['id_pegawai'],
+            'knp_terakhir' => $data['knp_terakhir'],
+            'knp_datang' => $data['knp_datang'],
+            'keterangan' => $data['keterangan'],
+            'timestamp' => $data['timestamp'],
+        ]);
+        return redirect()->route('dashboard.admin.daftar-knp')->with(['success' => 'Data KNP Berhasil Disimpan!']);
+    }
 }
