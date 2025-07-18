@@ -89,6 +89,7 @@ Route::get('/dashboard/admin/daftar-knp', [AdminHistoryController::class, 'showD
 Route::get('/dashboard/admin/daftar-kgb', [AdminHistoryController::class, 'showDaftarKGB'])->name('dashboard.admin.daftar-kgb')->middleware('auth');
 Route::post('/dashboard/admin/daftar-knp', [AdminHistoryController::class, 'addKNP'])->name('dashboard.admin.add.daftar-knp')->middleware('auth');
 Route::put('/dashboard/admin/daftar-knp/{idPegawai}', [AdminHistoryController::class, 'editKNP'])->name('dashboard.admin.edit.daftar-knp')->middleware('auth');
+Route::delete('/dashboard/admin/daftar-knp/delete', [AdminHistoryController::class, 'deleteKnp'])->name('dashboard.admin.delete.daftar-knp');
 
 
 // dashboard profile

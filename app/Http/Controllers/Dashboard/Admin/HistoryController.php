@@ -39,7 +39,8 @@ class HistoryController extends Controller
             'knp_terakhir' => $data['knp_terakhir'],
             'knp_datang' => $data['knp_datang'],
             'keterangan' => $data['keterangan'],
-            'timestamp' => $data['timestamp'],
+            'pensiun' => $data['pensiun'],
+            // 'timestamp' => now(),
         ]);
         return redirect()->route('dashboard.admin.daftar-knp')->with(['success' => 'Data KNP Berhasil Disimpan!']);
     }
@@ -54,5 +55,19 @@ class HistoryController extends Controller
             'timestamp' => $data['timestamp'],
         ]);
         return redirect()->route('dashboard.admin.daftar-knp')->with(['success' => 'Data KNP Berhasil Disimpan!']);
+    }
+    public function deleteKnp(Request $request)
+    {
+        $id = $request->input('id_knppegawai');
+        
+        // Cek jika data ditemukan
+        $data = KnpPegawai::where('id_knppegawai', $id)->first();
+
+        if ($data) {
+            $data->delete();
+            return redirect()->back()->with('success', 'Data berhasil dihapus.');
+        } else {
+            return redirect()->back()->with('error', 'Data tidak ditemukan.');
+        }
     }
 }
