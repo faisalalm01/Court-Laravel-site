@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\CutiPegawai;
+use App\Models\Golongan;
 use App\Models\KgbPegawai;
 use App\Models\KnpPegawai;
 use App\Models\Pegawai;
@@ -27,8 +28,8 @@ class HistoryController extends Controller
             $data = CutiPegawai::where('id_pegawai', $pegawai->id_pegawai)->get();
         } else {
             $data = CutiPegawai::where('id_pegawai', $pegawai->id_pegawai)
-                    ->whereYear('dari_tanggal', $tahunDipilih)
-                    ->get();
+                ->whereYear('dari_tanggal', $tahunDipilih)
+                ->get();
         }
 
         // Ambil semua tahun unik dari data cuti
@@ -45,16 +46,17 @@ class HistoryController extends Controller
             'tahunDipilih' => $tahunDipilih
         ]);
     }
-    public function showDaftarKGB()
-    {
-        $pegawai = $this->getPegawai();
-        $data =  KgbPegawai::where('id_pegawai', $pegawai->id_pegawai)->get();
-        return view('dashboard.user.daftar_kgb', ['title' => 'Dashboard User | Daftar KGB', 'data' => $data]);
-    }
+    // public function showDaftarKGB()
+    // {
+    //     $pegawai = $this->getPegawai();
+    //     $data =  KgbPegawai::where('id_pegawai', $pegawai->id_pegawai)->get();
+    //     return view('dashboard.user.daftar_kgb', ['title' => 'Dashboard User | Daftar KGB', 'data' => $data]);
+    // }
     public function showDaftarKNP()
     {
         $pegawai = $this->getPegawai();
         $data =  KnpPegawai::where('id_pegawai', $pegawai->id_pegawai)->get();
-        return view('dashboard.user.daftar_knp', ['title' => 'Dashboard User | Daftar KNP', 'data' => $data]);
+        $golongan = Golongan::all();
+        return view('dashboard.user.daftar_knp', ['title' => 'Dashboard User | Daftar KNP', 'data' => $data, 'golongan' => $golongan]);
     }
 }
