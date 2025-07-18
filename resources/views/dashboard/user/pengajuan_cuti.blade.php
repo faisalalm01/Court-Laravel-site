@@ -38,11 +38,12 @@
             <div class="">
                 <div class="">
                     <div class="x_panel">
+                        @if (!$masihAktif)
                         <div class="x_title">
                             <h2 class="text-xl">Form Pengajuan Cuti</h2>
                             <div class="clearfix"></div>
                         </div>
-                        <div class="x_content">
+                        <divs class="x_content">
                             <div class="bg-white shadow-md rounded-lg px-6 py-5">
                                 <form method="POST" action="{{ route('dashboard.user.tambah.pengajuan-cuti') }}" id="cutiForm">
                                     @csrf
@@ -166,7 +167,9 @@
                                     </div>
                                 </form>
                             </div>
-                        </div>
+                        </divs>
+                       @endif 
+
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-3"></div>
