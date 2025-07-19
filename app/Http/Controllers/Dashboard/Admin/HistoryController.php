@@ -44,24 +44,34 @@ class HistoryController extends Controller
         ]);
         return redirect()->route('dashboard.admin.daftar-knp')->with(['success' => 'Data KNP Berhasil Disimpan!']);
     }
-    public function editKNP(Request $request, $idPegawai)
+    public function updateKnp(Request $request, $idKnppegawai)
     {
-        $data = $request->all();
-        KnpPegawai::where('id_pegawai', $idPegawai)->update([
-            'id_pegawai' => $data['id_pegawai'],
-            'knp_terakhir' => $data['knp_terakhir'],
-            'knp_datang' => $data['knp_datang'],
-            'keterangan' => $data['keterangan'],
-            'timestamp' => $data['timestamp'],
+        $request->validate([
+            'knp_terakhir' => 'required|date',
+            'knp_datang' => 'required|date',
+            'keterangan' => 'nullable|string',
+            'pensiun' => 'nullable|date',
         ]);
-        return redirect()->route('dashboard.admin.daftar-knp')->with(['success' => 'Data KNP Berhasil Disimpan!']);
+
+        $data = KnpPegawai::where('id_knppegawai', $idKnppegawai)->first();
+
+        if (!$data) {
+            return redirect()->back()->with('error', 'Data tidak ditemukan.');
+        }
+
+        $data->knp_terakhir = $request->knp_terakhir;
+        $data->knp_datang = $request->knp_datang;
+        $data->keterangan = $request->keterangan;
+        $data->pensiun = $request->pensiun;
+        $data->save();
+
+        return redirect()->back()->with('success', 'Data KNP berhasil diperbarui.');
     }
-    public function deleteKnp(Request $request)
+
+    public function deleteKnp($idKnppegawai)
     {
-        $id = $request->input('id_knppegawai');
-        
         // Cek jika data ditemukan
-        $data = KnpPegawai::where('id_knppegawai', $id)->first();
+        $data = KnpPegawai::where('id_knppegawai', $idKnppegawai)->first();
 
         if ($data) {
             $data->delete();

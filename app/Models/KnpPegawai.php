@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class KnpPegawai extends Model
 {
     protected $table = 'knp_pegawai';
+    protected $primaryKey = 'id_knppegawai';
     protected $fillable = [
         'id_pegawai',
         'knp_terakhir',

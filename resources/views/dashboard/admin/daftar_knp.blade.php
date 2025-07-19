@@ -111,13 +111,13 @@
                                 </td>
                                 <td class="px-6 py-4 text-sm whitespace-nowrap">{{ $d->pegawai->golongan->nama_golongan }}
                                 </td>
-                                <td class="px-6 py-4 text-sm whitespace-nowrap">{{ $d->id_knppegawai }}</td>
-                                <td class="px-6 py-4 text-sm whitespace-nowrap">{{ $d->knp_datang }}</td>
+                                <td class="px-6 py-4 text-sm whitespace-nowrap">{{ $d->knp_terakhir }}</td>
                                 <td class="max-w-xs px-6 py-4 overflow-hidden text-sm overflow-ellipsis">
-                                    <div class="line-clamp-2">{{ $d->keterangan }}</div>
+                                    <div class="line-clamp-2">{{ $d->knp_datang }}</div>
                                 </td>
+                                <td class="px-6 py-4 text-sm whitespace-nowrap">{{ $d->keterangan }}</td>
                                 <td class="px-6 py-4 text-sm whitespace-nowrap">{{ $d->pensiun }}</td>
-                                <td class="px-6 py-4 text-sm whitespace-nowrap">{{ $d->timestamp }}</td>
+                                <td class="px-6 py-4 text-sm whitespace-nowrap"></td>
                                 <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">
                                     <div class="flex space-x-2">
                                         <a href="#" class="text-blue-600 hover:text-blue-900" data-toggle="modal"
@@ -125,7 +125,7 @@
                                             <i class="mr-1 fas fa-eye"></i> View
                                         </a>
                                         <a href="#" class="text-yellow-600 hover:text-yellow-900" data-toggle="modal"
-                                            data-modal-toggle="modaleditknp{{ $d->pegawai->nip }}">
+                                            data-modal-toggle="modaleditknp{{ $d->id_knppegawai }}">
                                             <i class="mr-1 fas fa-edit"></i> Edit
                                         </a>
                                         <a href="#" class="text-red-600 hover:text-red-900" data-toggle="modal"
@@ -135,7 +135,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            
+
                             <!-- view -->
                             <div id="modalviewknp{{ $d->pegawai->nip }}"
                                 class="fixed inset-0 z-50 items-center justify-center hidden bg-black bg-opacity-50">
@@ -153,7 +153,6 @@
                                             <p><strong>KNP Datang:</strong> {{ $d->knp_datang }}</p>
                                             <p><strong>Keterangan:</strong> {{ $d->keterangan }}</p>
                                             <p><strong>Pensiun:</strong> {{ $d->pensiun }}</p>
-                                            <p><strong>Date:</strong> {{ $d->timestamp }}</p>
                                             <!-- Data lainnya -->
                                         </div>
                                     </div>
@@ -168,139 +167,164 @@
                             </div>
                             <!-- end modal view -->
 
-                            
+
 
                             <!-- modal delete -->
-                             <div id="modaldeleteknp{{ $d->id_knppegawai }}" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50 p-4">
+                            <div id="modaldeleteknp{{ $d->id_knppegawai }}"
+                                class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50 p-4">
                                 <div class="w-full max-w-md rounded-lg bg-white shadow-xl">
                                     <div class="border-b p-4">
-                                    <div class="flex items-center justify-between">
-                                        <h3 class="text-sm font-semibold text-gray-800">Hapus Pegawai {{ $d->id_knppegawai }}</h3>
-                                        <button type="button" class="text-gray-400 hover:text-gray-500" data-modal-hide="modaldeleteknp{{ $d->id_knppegawai }}"">
-                                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                        </svg>
-                                        </button>
-                                    </div>
-                                    </div>
-                                    <div class="p-6">
-                                    <form action="{{ route('dashboard.admin.delete.daftar-knp') }}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input type="hidden" name="id_pegawai" value="{{ $d->pegawai->idknppegawai }}">
-                                        
-                                        <div class="space-y-4">
-                                        <div class="text-center">
-                                            <svg class="mx-auto h-12 w-12 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                                            </svg>
-                                            <h4 class="mt-2 text-lg font-medium text-gray-900">Konfirmasi Penghapusan - {{ $d->pegawai->nama_pegawai }}</h4>
-                                            <p class="mt-1 text-gray-600">Anda ingin menghapus Pegawai</p>
-                                            <p class="mt-1 text-sm text-red-600">Semua data user, cuti, knp dan kgb akan hilang!</p>
-                                        </div>
-
-                                        <div class="mt-6 flex justify-center space-x-4">
-                                            <button type="button" data-modal-hide="modaldeleteknp{{ $d->id_knppegawai }}" 
-                                                    class="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
-                                            Tidak
-                                            </button>
-                                            <button type="submit" 
-                                                    class="rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
-                                            Ya, Hapus
-                                            </button>
-                                        </div>
-                                        </div>
-                                    </form>
-                                    </div>
-                                </div>
-                                </div>
-                            <!-- modal delete end -->
-                        @endforeach
-
-                        <!-- !-- modal add --> 
-                            <div id="modaltambahknp" class="fixed inset-0 z-50 items-center justify-center hidden p-4 bg-black bg-opacity-50">
-                                <div class="w-full max-w-3xl bg-white rounded-lg shadow-xl">
-                                    <div class="p-4 border-b">
                                         <div class="flex items-center justify-between">
-                                            <h3 class="text-xl font-semibold text-gray-800">Form Tambah KNP</h3>
-                                            <button type="button" class="text-gray-400 hover:text-gray-500" data-modal-hide="modaltambahknp">
-                                                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <h3 class="text-sm font-semibold text-gray-800">Hapus Pegawai
+                                                {{ $d->id_knppegawai }}</h3>
+                                            <button type="button" class="text-gray-400 hover:text-gray-500"
+                                                data-modal-hide="modaldeleteknp{{ $d->id_knppegawai }}"">
+                                                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                                    stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                         d="M6 18L18 6M6 6l12 12" />
                                                 </svg>
                                             </button>
                                         </div>
                                     </div>
-
                                     <div class="p-6">
-                                        <form method="POST" action="{{ route('dashboard.admin.daftar-knp') }}">
+                                        <form action="{{ route('dashboard.admin.delete.daftar-knp', $d->id_knppegawai) }}"
+                                            method="post">
                                             @csrf
+                                            @method('DELETE')
                                             <div class="space-y-4">
+                                                <div class="text-center">
+                                                    <svg class="mx-auto h-12 w-12 text-red-500" fill="none"
+                                                        viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                                    </svg>
+                                                    <h4 class="mt-2 text-lg font-medium text-gray-900">Konfirmasi
+                                                        Penghapusan - {{ $d->pegawai->nama_pegawai }}</h4>
+                                                    <p class="mt-1 text-gray-600">Anda ingin menghapus KNP Pegawaiini?</p>
+                                                    {{-- <p class="mt-1 text-sm text-red-600">Semua data user, cuti, knp dan kgb
+                                                        akan hilang!</p> --}}
+                                                </div>
 
-                                                {{-- Pegawai --}}
+                                                <div class="mt-6 flex justify-center space-x-4">
+                                                    <button type="button"
+                                                        data-modal-hide="modaldeleteknp{{ $d->id_knppegawai }}"
+                                                        class="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+                                                        Tidak
+                                                    </button>
+                                                    <button type="submit"
+                                                        class="rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                                                        Ya, Hapus
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- modal delete end -->
+                            <!-- !-- modal edit -->
+                            <div id="modaleditknp{{ $d->id_knppegawai }}"
+                                class="fixed inset-0 z-50 items-center justify-center hidden p-4 bg-black bg-opacity-50">
+                                <div class="w-full max-w-3xl bg-white rounded-lg shadow-xl">
+                                    <div class="p-4 border-b">
+                                        <div class="flex items-center justify-between">
+                                            <h3 class="text-xl font-semibold text-gray-800">Form Edit KNP</h3>
+                                            <button type="button" class="text-gray-400 hover:text-gray-500"
+                                                data-modal-hide="modaltambahknp">
+                                                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                                                    stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="p-6">
+                                        <form method="POST"
+                                            action="{{ route('dashboard.admin.update.daftar-knp', $d->id_knppegawai) }}">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="space-y-4">
                                                 <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
                                                     <div class="md:col-span-3">
-                                                        <label class="block text-sm font-medium text-gray-700">Pegawai</label>
+                                                        <label
+                                                            class="block text-sm font-medium text-gray-700">Pegawai</label>
                                                     </div>
                                                     <div class="md:col-span-9">
                                                         <select name="id_pegawai" required
                                                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-500">
-                                                            <option value="" selected disabled>-- Pilih Pegawai --</option>
+                                                            <option value="" selected disabled>-- Pilih Pegawai --
+                                                            </option>
                                                             @foreach ($pegawai as $peg)
-                                                                <option value="{{ $peg->id_pegawai }}">
+                                                                <option value="{{ $peg->id_pegawai }}" name="id_pegawai"
+                                                                    {{ $d->id_pegawai == $peg->id_pegawai ? 'selected' : '' }}>
                                                                     {{ $peg->nama_pegawai }} | {{ $peg->nip }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
-
                                                 {{-- KNP Terakhir --}}
                                                 <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
                                                     <div class="md:col-span-3">
-                                                        <label class="block text-sm font-medium text-gray-700">KNP Terakhir</label>
+                                                        <label class="block text-sm font-medium text-gray-700">KNP
+                                                            Terakhir</label>
                                                     </div>
                                                     <div class="md:col-span-9">
                                                         <input type="date" name="knp_terakhir" required
-                                                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-500">
+                                                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-500"
+                                                            value="{{ $d->knp_terakhir }}">
                                                     </div>
                                                 </div>
 
                                                 {{-- KNP Datang --}}
                                                 <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
                                                     <div class="md:col-span-3">
-                                                        <label class="block text-sm font-medium text-gray-700">KNP Yang Akan Datang</label>
+                                                        <label class="block text-sm font-medium text-gray-700">KNP Yang
+                                                            Akan
+                                                            Datang</label>
                                                     </div>
                                                     <div class="md:col-span-9">
                                                         <input type="date" name="knp_datang" required
-                                                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-500">
+                                                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-500"
+                                                            value="{{ $d->knp_datang }}">
                                                     </div>
                                                 </div>
 
                                                 {{-- Keterangan / Golongan --}}
                                                 <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
                                                     <div class="md:col-span-3">
-                                                        <label class="block text-sm font-medium text-gray-700">Keterangan (Golongan)</label>
+                                                        <label class="block text-sm font-medium text-gray-700">Keterangan
+                                                            (Golongan)
+                                                        </label>
                                                     </div>
                                                     <div class="md:col-span-9">
                                                         <select name="keterangan"
                                                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-500">
-                                                            <option value="" selected disabled>-- Pilih Golongan --</option>
+                                                            <option value="" disabled>-- Pilih Golongan --</option>
                                                             @foreach ($golongan as $gol)
-                                                                <option value="{{ $gol->nama_golongan }}">{{ $gol->nama_golongan }}</option>
+                                                                <option value="{{ $gol->nama_golongan }}"
+                                                                    {{ $d->keterangan == $gol->nama_golongan ? 'selected' : '' }}>
+                                                                    {{ $gol->nama_golongan }}
+                                                                </option>
                                                             @endforeach
                                                         </select>
+
                                                     </div>
                                                 </div>
 
                                                 {{-- Pensiun --}}
                                                 <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
                                                     <div class="md:col-span-3">
-                                                        <label class="block text-sm font-medium text-gray-700">Pensiun</label>
+                                                        <label
+                                                            class="block text-sm font-medium text-gray-700">Pensiun</label>
                                                     </div>
                                                     <div class="md:col-span-9">
                                                         <input type="date" name="pensiun"
-                                                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-500">
+                                                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-500"
+                                                            value="{{ $d->pensiun }}">
                                                     </div>
                                                 </div>
 
@@ -319,7 +343,122 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- end add modal -->
+                            <!-- end edit modal -->
+                        @endforeach
+
+                        <!-- !-- modal add -->
+                        <div id="modaltambahknp"
+                            class="fixed inset-0 z-50 items-center justify-center hidden p-4 bg-black bg-opacity-50">
+                            <div class="w-full max-w-3xl bg-white rounded-lg shadow-xl">
+                                <div class="p-4 border-b">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="text-xl font-semibold text-gray-800">Form Tambah KNP</h3>
+                                        <button type="button" class="text-gray-400 hover:text-gray-500"
+                                            data-modal-hide="modaltambahknp">
+                                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                                                stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M6 18L18 6M6 6l12 12" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="p-6">
+                                    <form method="POST" action="{{ route('dashboard.admin.daftar-knp') }}">
+                                        @csrf
+                                        <div class="space-y-4">
+
+                                            {{-- Pegawai --}}
+                                            <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+                                                <div class="md:col-span-3">
+                                                    <label class="block text-sm font-medium text-gray-700">Pegawai</label>
+                                                </div>
+                                                <div class="md:col-span-9">
+                                                    <select name="id_pegawai" required
+                                                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-500">
+                                                        <option value="" selected disabled>-- Pilih Pegawai --
+                                                        </option>
+                                                        @foreach ($pegawai as $peg)
+                                                            <option value="{{ $peg->id_pegawai }}">
+                                                                {{ $peg->nama_pegawai }} | {{ $peg->nip }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            {{-- KNP Terakhir --}}
+                                            <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+                                                <div class="md:col-span-3">
+                                                    <label class="block text-sm font-medium text-gray-700">KNP
+                                                        Terakhir</label>
+                                                </div>
+                                                <div class="md:col-span-9">
+                                                    <input type="date" name="knp_terakhir" required
+                                                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-500">
+                                                </div>
+                                            </div>
+
+                                            {{-- KNP Datang --}}
+                                            <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+                                                <div class="md:col-span-3">
+                                                    <label class="block text-sm font-medium text-gray-700">KNP Yang Akan
+                                                        Datang</label>
+                                                </div>
+                                                <div class="md:col-span-9">
+                                                    <input type="date" name="knp_datang" required
+                                                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-500">
+                                                </div>
+                                            </div>
+
+                                            {{-- Keterangan / Golongan --}}
+                                            <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+                                                <div class="md:col-span-3">
+                                                    <label class="block text-sm font-medium text-gray-700">Keterangan
+                                                        (Golongan)</label>
+                                                </div>
+                                                <div class="md:col-span-9">
+                                                    <select name="keterangan"
+                                                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-500">
+                                                        <option value="" selected disabled>-- Pilih Golongan --
+                                                        </option>
+                                                        @foreach ($golongan as $gol)
+                                                            <option value="{{ $gol->nama_golongan }}">
+                                                                {{ $gol->nama_golongan }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            {{-- Pensiun --}}
+                                            <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+                                                <div class="md:col-span-3">
+                                                    <label class="block text-sm font-medium text-gray-700">Pensiun</label>
+                                                </div>
+                                                <div class="md:col-span-9">
+                                                    <input type="date" name="pensiun"
+                                                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-500">
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        {{-- Tombol Submit --}}
+                                        <div class="pt-6 mt-4 border-t">
+                                            <div class="flex justify-end">
+                                                <button type="submit"
+                                                    class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                    Submit
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end add modal -->
+
 
                     </tbody>
                 </table>
