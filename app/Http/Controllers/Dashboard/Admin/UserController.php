@@ -27,7 +27,8 @@ class UserController extends Controller
         User::create([
             'nip' => $validatedData['nip'],
             'password' => md5($validatedData['password']),
-            'role' => $validatedData['role']
+            'role' => $validatedData['role'],
+            'status' => 'active'
         ]);
         return redirect()->route('dashboard.admin.data-users')->with(['success' => 'Data User Berhasil Disimpan!']);
     }
@@ -40,6 +41,9 @@ class UserController extends Controller
         }
         if (isset($validatedData['role'])) {
             $user->role = $validatedData['role'];
+        }
+        if (isset($validatedData['status'])) {
+            $user->status = $validatedData['status'];
         }
         $user->save();
         return redirect()->route('dashboard.admin.data-users')->with(['success' => 'Data User Berhasil Diubah!']);
