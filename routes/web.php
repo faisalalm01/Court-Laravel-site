@@ -12,6 +12,7 @@ use App\Http\Controllers\Dashboard\User\HistoryController;
 use App\Http\Controllers\Dashboard\Admin\HistoryController as AdminHistoryController;
 use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\User\PengajuanCutiController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -102,3 +103,9 @@ Route::post('/dashboard/profile/reset-password', [ProfileController::class, 'res
 
 //knp
 // Route::get('/dashboard/admin/', [ProfileController::class, 'index'])->name('dashboard.profile')->middleware('auth');
+
+// notifikasi
+Route::get('/dashboard/user/notifikasi', [NotificationController::class, 'index'])->name('dashboard.notifications.index')->middleware('auth');
+Route::post('/dashboard/user/notifikasi/{id_notification}/read', [NotificationController::class, 'markNotifRead'])->name('dashboard.notifications.read')->middleware('auth');
+Route::post('/dashboard/user/notifikasi-read-all', [NotificationController::class, 'markAllRead'])->name('dashboard.notifications.readAll')->middleware('auth');
+    

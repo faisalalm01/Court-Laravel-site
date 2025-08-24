@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CutiHistory;
 use App\Helpers\FlowPengajuanCuti;
+use App\Models\Notification;
 use Illuminate\Support\Str;
 
 class PengajuanCutiController extends Controller
@@ -71,6 +72,7 @@ class PengajuanCutiController extends Controller
             ]);
         }
         $atasan = FlowPengajuanCuti::getFirstApproval($pegawai);
+
         $approvalFields = [
             'panmud_kasubag' => null,
             'panitera_sekretaris' => null,
@@ -111,7 +113,7 @@ class PengajuanCutiController extends Controller
             );
             $cutiHistory->increment('terpakai', $data['lama_cuti']);
         }
-        CutiPegawai::create(array_merge([
+        $cuti =  CutiPegawai::create(array_merge([
             'id_pegawai' => $pegawai->id_pegawai,
             'jenis_cuti' => $data['jenis_cuti'],
             'alasan_cuti' => $data['alasan_cuti'],
@@ -121,6 +123,40 @@ class PengajuanCutiController extends Controller
             'sampai_dengan' => $data['sampai_dengan'],
             'alamat' => $data['alamat'],
         ], $approvalFields));
+
+        Notification::create([
+            'id_user'   => $atasan->user->id_user,
+            'id_pegawai' => $pegawai->id_pegawai,
+            'id_cutipegawai'   => $cuti->id_cutipegawai,
+            'tipe'      => 'pengajuan_cuti',
+            'pesan'      => "{$pegawai->nama_pegawai} mengajukan " . strtolower($data['jenis_cuti']) . " selama {$data['lama_cuti']} hari. Menunggu persetujuan Anda.",
+        ]);
+        // hitung total pegawai aktif di jabatan tsb
+        $totalPegawai = Pegawai::whereHas('user', fn($q) => $q->where('status', 'active'))
+            ->whereHas('jabatan', fn($q) => $q->where('nama_jabatan', $pegawai->jabatan->nama_jabatan))
+            ->count();
+        // hitung yg sedang cuti aktif
+        $sedangCuti = CutiPegawai::whereHas('pegawai.user', fn($q) => $q->where('status', 'active'))
+            ->whereHas('pegawai.jabatan', fn($q) => $q->where('nama_jabatan', $pegawai->jabatan->nama_jabatan))
+            ->where('status_cuti', 'Disetujui')
+            ->whereDate('dari_tanggal', '<=', now())
+            ->whereDate('sampai_dengan', '>=', now())
+            ->count();
+
+        $persentase = $totalPegawai > 0 ? ($sedangCuti / $totalPegawai) * 100 : 0;
+        if ($persentase > 50) {
+            $ketua = Pegawai::whereHas('jabatan', fn($q) => $q->where('nama_jabatan', 'KETUA'))
+                ->with('user')
+                ->first();
+            if ($ketua && $ketua->user) {
+                Notification::create([
+                    'id_user'        => $ketua->user->id_user,
+                    'id_pegawai'     => $ketua->id_pegawai,
+                    'tipe'           => 'batasan_cuti',
+                    'pesan'          => "Lebih dari 50% pegawai dengan jabatan {$pegawai->jabatan->nama_jabatan} sedang cuti.",
+                ]);
+            }
+        }
         return redirect()->route('dashboard.user.daftar-approval')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 }

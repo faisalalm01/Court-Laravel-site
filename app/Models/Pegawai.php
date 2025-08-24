@@ -54,11 +54,6 @@ class Pegawai extends Model
         return $this->hasMany(KnpPegawai::class, 'id_pegawai', 'id_pegawai');
     }
 
-    public function notifications()
-    {
-        return $this->hasMany(Notification::class, 'id_pegawai');
-    }
-
     public function cutiHistories()
     {
         return $this->hasMany(CutiHistory::class, 'id_pegawai');
@@ -72,5 +67,9 @@ class Pegawai extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'nip', 'nip');
+    }
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'id_pegawai', 'id_pegawai');
     }
 }

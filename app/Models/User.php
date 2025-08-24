@@ -20,6 +20,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Pegawai::class, 'nip', 'nip');
     }
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'id_user', 'id_user');
+    }
     protected $hidden = [
         'password',
         'remember_token',

@@ -9,6 +9,7 @@ use App\Models\Pegawai;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Helpers\FlowPengajuanCuti;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -52,12 +53,7 @@ class ApproveCutiController extends Controller
         ]);
     }
 
-    private function getPegawaiByJabatan($namaJabatan)
-    {
-        return Pegawai::whereHas('jabatan', function ($query) use ($namaJabatan) {
-            $query->where('nama_jabatan', $namaJabatan);
-        })->first();
-    }
+
 
     public function updateApprovalCuti(Request $request, string $cutiId)
     {
@@ -77,6 +73,14 @@ class ApproveCutiController extends Controller
                     $map['user_field'] => $nip,
                     'status_cuti'      => 'Diajukan',
                     'ket_status_cuti'  => 'Menunggu Approval ' . ucwords(strtolower($nextAtasan->jabatan->nama_jabatan)),
+                ]);
+                Notification::create([
+                    'id_user'        => $nextAtasan->user->id_user,
+                    'id_pegawai'     => $cuti->id_pegawai,
+                    'id_cutipegawai' => $cuti->id_cutipegawai,
+                    'tipe'           => 'approval_cuti',
+                    'pesan'          => "{$cuti->pegawai->nama_pegawai} mengajukan " . strtolower($cuti->jenis_cuti) .
+                        " selama {$cuti->lama_cuti} hari. Menunggu persetujuan Anda.",
                 ]);
             } else {
                 // approval terakhir (Ketua)
@@ -114,6 +118,14 @@ class ApproveCutiController extends Controller
                         ]);
                     }
                 }
+                Notification::create([
+                    'id_user'        => $cuti->pegawai->user->id_user,
+                    'id_pegawai'     => $cuti->id_pegawai,
+                    'id_cutipegawai' => $cuti->id_cutipegawai,
+                    'tipe'           => 'cuti_disetujui',
+                    'pesan'          => "Pengajuan " . strtolower($cuti->jenis_cuti) .
+                        " Anda selama {$cuti->lama_cuti} hari telah disetujui.",
+                ]);
             }
         } elseif ($status === 'Ditolak') {
             $cuti->update([
@@ -122,15 +134,39 @@ class ApproveCutiController extends Controller
                 $map['user_field'] => $nip,
                 $map['app_field']  => 0
             ]);
+            Notification::create([
+                'id_user'        => $cuti->pegawai->user->id_user,
+                'id_pegawai'     => $cuti->id_pegawai,
+                'id_cutipegawai' => $cuti->id_cutipegawai,
+                'tipe'           => 'cuti_ditolak',
+                'pesan'          => "Pengajuan " . strtolower($cuti->jenis_cuti) .
+                    " Anda selama {$cuti->lama_cuti} hari ditolak",
+            ]);
         } elseif ($status === 'Ditangguhkan') {
             $cuti->update([
                 'status_cuti'     => 'Ditangguhkan',
                 'ket_status_cuti' => $catatan,
             ]);
+            Notification::create([
+                'id_user'        => $cuti->pegawai->user->id_user,
+                'id_pegawai'     => $cuti->id_pegawai,
+                'id_cutipegawai' => $cuti->id_cutipegawai,
+                'tipe'           => 'cuti_ditangguhkan',
+                'pesan'          => "Pengajuan " . strtolower($cuti->jenis_cuti) .
+                    " Anda selama {$cuti->lama_cuti} hari ditangguhkan",
+            ]);
         } else {
             $cuti->update([
                 'status_cuti'     => 'Perubahan',
                 'ket_status_cuti' => $catatan,
+            ]);
+            Notification::create([
+                'id_user'        => $cuti->pegawai->user->id_user,
+                'id_pegawai'     => $cuti->id_pegawai,
+                'id_cutipegawai' => $cuti->id_cutipegawai,
+                'tipe'           => 'cuti_perubahan',
+                'pesan'          => "Pengajuan " . strtolower($cuti->jenis_cuti) .
+                    " Anda selama {$cuti->lama_cuti} hari memerlukan perubahan. Catatan: {$catatan}",
             ]);
         }
 

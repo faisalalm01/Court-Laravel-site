@@ -26,12 +26,16 @@ class CutiPegawai extends Model
         'ket_status_cuti'
     ];
     protected $casts = [
-            'lama_cuti' => 'integer',
+        'lama_cuti' => 'integer',
     ];
 
     // Relasi ke Pegawai
     public function pegawai()
     {
         return $this->belongsTo(Pegawai::class, 'id_pegawai', 'id_pegawai');
+    }
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'id_cutipegawai', 'id_cutipegawai');
     }
 }
