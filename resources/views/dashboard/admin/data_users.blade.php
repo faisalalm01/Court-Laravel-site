@@ -34,8 +34,8 @@
 
             <div class="overflow-x-auto">
                 <!-- <button href="#" title="Tambah User" type="button" class="btn btn-info pull-right"
-                                                                                                                                                                                    data-modal-toggle="modaltambahuser"><i class="fa fa-plus-circle"></i> Tambah
-                                                                                                                                                                                    User</button> -->
+                                                                                                                                                                                                                                    data-modal-toggle="modaltambahuser"><i class="fa fa-plus-circle"></i> Tambah
+                                                                                                                                                                                                                                    User</button> -->
                 @if (session('success'))
                     <div class="relative px-4 py-3 mb-4 text-green-800 bg-green-100 border border-green-300 rounded alert alert-success"
                         role="alert" id="alert-success">
@@ -84,9 +84,22 @@
                                     <a href="#" class="btn btn-info" data-toggle="modal"
                                         data-modal-toggle="modaledituser{{ $user->nip }}"><i class="fa fa-edit"></i>
                                         Edit</a>
+                                    <form action="{{ route('dashboard.admin.toggle-status', $user->nip) }}" method="POST"
+                                        class="inline">
+                                        @csrf
+                                        @method('PUT')
+                                        <button type="submit" class="btn btn-info"
+                                            title="{{ $user->status === 'active' ? 'Nonaktifkan User' : 'Aktifkan User' }}">
+                                            @if ($user->status === 'active')
+                                                <i class="text-green-500 fa fa-toggle-on"></i>
+                                            @else
+                                                <i class="text-gray-500 fa fa-toggle-off"></i>
+                                            @endif
+                                        </button>
+                                    </form>
                                 </td>
                                 <!-- <td class="text-center">
-                                                                                                                                                                                                                        </td> -->
+                                                                                                                                                                                                                                                                        </td> -->
                             </tr>
 
                             <!-- Modal -->

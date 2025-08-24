@@ -60,6 +60,9 @@ Route::get('/dashboard/user/daftar-knp', [HistoryController::class, 'showDaftarK
 // dashboard admin data users
 Route::get('/dashboard/admin/data-users', [UserController::class, 'index'])->name('dashboard.admin.data-users')->middleware('auth');
 Route::post('/dashboard/admin/add-users', [UserController::class, 'addUser'])->name('dashboard.admin.add-users')->middleware('auth');
+Route::put('/dashboard/admin/users/{nip}/toggle-status', [UserController::class, 'toggleStatus'])
+    ->name('dashboard.admin.toggle-status')->middleware('auth');
+
 
 Route::put('/dashboard/admin/edit-users/{nip}', [UserController::class, 'editUser'])
     ->name('dashboard.admin.edit-users')

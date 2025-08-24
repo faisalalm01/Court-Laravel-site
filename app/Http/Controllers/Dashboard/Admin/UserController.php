@@ -44,4 +44,14 @@ class UserController extends Controller
         $user->save();
         return redirect()->route('dashboard.admin.data-users')->with(['success' => 'Data User Berhasil Diubah!']);
     }
+    public function toggleStatus($nip)
+    {
+        $user = User::where('nip', $nip)->firstOrFail();
+
+        $user->status = $user->status === 'active' ? 'inactive' : 'active';
+        $user->save();
+
+        return redirect()->route('dashboard.admin.data-users')
+            ->with(['success' => 'Status user berhasil diubah menjadi ' . $user->status . '!']);
+    }
 }
