@@ -24,7 +24,7 @@ class AddUserRequest extends FormRequest
         return [
             'pegawai' => ['required', 'numeric'],
             'password' => ['required'],
-            'role' => ['required']
+            'role' => ['required'],
         ];
     }
 }

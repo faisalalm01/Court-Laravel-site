@@ -34,8 +34,8 @@
 
             <div class="overflow-x-auto">
                 <!-- <button href="#" title="Tambah User" type="button" class="btn btn-info pull-right"
-                                                                                                                                                                                                                                    data-modal-toggle="modaltambahuser"><i class="fa fa-plus-circle"></i> Tambah
-                                                                                                                                                                                                                                    User</button> -->
+                                                                                                                                                                                                                                                                                data-modal-toggle="modaltambahuser"><i class="fa fa-plus-circle"></i> Tambah
+                                                                                                                                                                                                                                                                                User</button> -->
                 @if (session('success'))
                     <div class="relative px-4 py-3 mb-4 text-green-800 bg-green-100 border border-green-300 rounded alert alert-success"
                         role="alert" id="alert-success">
@@ -99,7 +99,7 @@
                                     </form>
                                 </td>
                                 <!-- <td class="text-center">
-                                                                                                                                                                                                                                                                        </td> -->
+                                                                                                                                                                                                                                                                                                                    </td> -->
                             </tr>
 
                             <!-- Modal -->
@@ -197,6 +197,25 @@
                                                             @else
                                                                 <option value="User">User</option>
                                                                 <option value="Admin" selected>Admin</option>
+                                                            @endif
+                                                        </select>
+                                                    </div>
+                                                    <div class="md:col-span-3">
+                                                        <label
+                                                            class="block text-sm font-medium text-gray-700">Status</label>
+                                                    </div>
+                                                    <div class="md:col-span-9">
+                                                        <select
+                                                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                                                            name="status" required>
+                                                            <option value="" selected disabled>-- Status --
+                                                            </option>
+                                                            @if ($user->status == 'active')
+                                                                <option value="active" selected>Active</option>
+                                                                <option value="inactive">Inactive</option>
+                                                            @else
+                                                                <option value="inactive">Inactive</option>
+                                                                <option value="active" selected>Active</option>
                                                             @endif
                                                         </select>
                                                     </div>

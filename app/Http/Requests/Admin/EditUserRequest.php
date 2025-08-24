@@ -24,7 +24,7 @@ class EditUserRequest extends FormRequest
         return [
             'password' => ['nullable'],
             'role' => ['required'],
-            'status' => ['enum:active,inactive', 'nullable'],
+            'status' => ['nullable'],
         ];
     }
 }
