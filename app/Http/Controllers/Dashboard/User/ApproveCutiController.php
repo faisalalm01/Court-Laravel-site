@@ -8,6 +8,9 @@ use App\Models\CutiHistory;
 use App\Models\Pegawai;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Helpers\FlowPengajuanCuti;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class ApproveCutiController extends Controller
 {
@@ -19,42 +22,23 @@ class ApproveCutiController extends Controller
 
     public function index()
     {
-        $nip = Auth::user()->pegawai->nip;
-        $jabatan = Auth::user()->pegawai->jabatan->nama_jabatan;
+        $pegawai = Auth::user()->pegawai;
+        $jabatan = $pegawai->jabatan->nama_jabatan;
 
-        if ($jabatan == 'KETUA') {
-            $data = CutiPegawai::where('app_panitera_sekretaris', 1)
-                ->where('app_ketua', 0)
-                ->where('status_cuti', 'Diajukan')
-                ->get();
-        } elseif ($jabatan == 'PANITERA') {
-            $data = CutiPegawai::where('app_panmud_kasubag', 1)
-                ->where('app_panitera_sekretaris', 0)
-                ->where('status_cuti', 'Diajukan')
-                ->get();
-        } elseif ($jabatan == 'SEKRETARIS') {
-            $data = CutiPegawai::where('app_panmud_kasubag', 1)
-                ->where('app_panitera_sekretaris', 0)
-                ->where('status_cuti', 'Diajukan')
-                ->get();
-        } elseif (in_array($jabatan, [
-            'PANMUD HUKUM',
-            'PANMUD GUGATAN',
-            'PANMUD PERMOHONAN',
-            'KASUBAG KEPEGAWAIAN DAN ORTALA',
-            'KASUBAG PERNCANAAN, IT DAN PELAPORAN',
-            'KASUBAG UMUM DAN KEUANGAN'
-        ])) {
-            $data = CutiPegawai::where('app_panmud_kasubag', 0)
+        // mapping field berdasarkan jabatan approver
+        $map = FlowPengajuanCuti::mapJabatanToField($jabatan);
+
+        if ($map) {
+            $data = CutiPegawai::where($map['app_field'], 0)
                 ->where('status_cuti', 'Diajukan')
                 ->get();
         } else {
-            $data = collect(); // Pegawai tanpa akses approval
+            $data = collect(); // kalau jabatannya tidak termasuk flow approval
         }
 
         return view('dashboard.user.aprove_cuti', [
             'title' => 'Dashboard User | Daftar Approval Cuti',
-            'data' => $data
+            'data'  => $data
         ]);
     }
 
@@ -83,60 +67,32 @@ class ApproveCutiController extends Controller
         $jabatan = $pegawai->jabatan->nama_jabatan;
         $status = $request->input('status_cuti');
         $catatan = $request->input('catatan');
-
+        $map = FlowPengajuanCuti::mapJabatanToField($jabatan);
         if ($status === 'Disetujui') {
-            if (in_array($jabatan, [
-                'PANMUD HUKUM',
-                'PANMUD GUGATAN',
-                'PANMUD PERMOHONAN',
-                'KASUBAG KEPEGAWAIAN DAN ORTALA',
-                'KASUBAG PERNCANAAN, IT DAN PELAPORAN',
-                'KASUBAG UMUM DAN KEUANGAN'
-            ])) {
+            $nextAtasan = FlowPengajuanCuti::getNextApproval($cuti->pegawai, $jabatan);
+            if ($nextAtasan) {
+                // masih ada approval berikutnya
                 $cuti->update([
-                    'app_panmud_kasubag' => 1,
-                    'panmud_kasubag' => $nip,
-                    'ket_status_cuti' => 'Menunggu Approval Panitera / Sekretaris',
-                    'app_ketua' => 1,
-                    'status_cuti' => 'Diajukan'
+                    $map['app_field']  => 1,
+                    $map['user_field'] => $nip,
+                    'status_cuti'      => 'Diajukan',
+                    'ket_status_cuti'  => 'Menunggu Approval ' . ucwords(strtolower($nextAtasan->jabatan->nama_jabatan)),
                 ]);
-                // $next = $this->getPegawaiByJabatan('PANITERA');
-                // if ($next) {
-                //     Notification::create([
-                //         'id_pegawai' => $next->id_pegawai,
-                //         'pesan' => "Ada cuti menunggu approval dari PANITERA.",
-                //     ]);
-                // }
-            } elseif (in_array($jabatan, ['PANITERA', 'SEKRETARIS'])) {
+            } else {
+                // approval terakhir (Ketua)
                 $cuti->update([
-                    'app_panitera_sekretaris' => 1,
-                    'panitera_sekretaris' => $nip,
-                    'ket_status_cuti' => 'Menunggu Approval Ketua',
-                    'app_ketua' => 0,
-                    'status_cuti' => 'Diajukan'
+                    $map['app_field']  => 1,
+                    $map['user_field'] => $nip,
+                    'status_cuti'      => 'Disetujui',
+                    'ket_status_cuti'  => 'Pengajuan Cuti Diterima',
                 ]);
-                // $next = $this->getPegawaiByJabatan('KETUA');
-                // if ($next) {
-                //     Notification::create([
-                //         'id_pegawai' => $next->id_pegawai,
-                //         'pesan' => "Ada cuti menunggu approval dari KETUA.",
-                //     ]);
-                // }
-            } elseif ($jabatan === 'KETUA') {
-                $cuti->update([
-                    'app_ketua' => 1,
-                    'ketua' => $nip,
-                    'status_cuti' => 'Disetujui',
-                    'ket_status_cuti' => 'Pengajuan Cuti Diterima'
-                ]);
-
-                // ✅ Kurangi jatah cuti di CutiHistory
+                // update cuti history
                 $jenisCutiMap = [
-                    'Cuti Tahunan' => 'Tahunan',
-                    'Cuti Besar' => 'Besar',
-                    'Cuti Sakit' => 'Sakit',
-                    'Cuti Melahirkan' => 'Melahirkan',
-                    'Cuti Karena Alasan Penting' => 'Alasan Penting',
+                    'Cuti Tahunan'                 => 'Tahunan',
+                    'Cuti Besar'                   => 'Besar',
+                    'Cuti Sakit'                   => 'Sakit',
+                    'Cuti Melahirkan'              => 'Melahirkan',
+                    'Cuti Karena Alasan Penting'   => 'Alasan Penting',
                     'Cuti diluar Tanggungan Negara' => 'Luar Tanggungan'
                 ];
 
@@ -151,30 +107,30 @@ class ApproveCutiController extends Controller
                     if ($cutiHistory) {
                         $cutiHistory->increment('terpakai', (int) $cuti->lama_cuti);
                     } else {
-                        \Log::warning('CutiHistory tidak ditemukan saat pengurangan jatah cuti', [
+                        Log::warning('CutiHistory tidak ditemukan saat pengurangan jatah cuti', [
                             'id_pegawai' => $cuti->id_pegawai,
                             'jenis_cuti' => $normalizedJenis,
-                            'tahun' => now()->year
+                            'tahun'      => now()->year
                         ]);
                     }
                 }
             }
         } elseif ($status === 'Ditolak') {
             $cuti->update([
-                'status_cuti' => 'Tidak Disetujui',
-                'ket_status_cuti' => $catatan,
-                strtolower(str_replace(' ', '_', $jabatan)) => $nip,
-                'app_ketua' => 0
+                'status_cuti'      => 'Tidak Disetujui',
+                'ket_status_cuti'  => $catatan,
+                $map['user_field'] => $nip,
+                $map['app_field']  => 0
             ]);
         } elseif ($status === 'Ditangguhkan') {
             $cuti->update([
-                'status_cuti' => 'Ditangguhkan',
-                'ket_status_cuti' => $catatan
+                'status_cuti'     => 'Ditangguhkan',
+                'ket_status_cuti' => $catatan,
             ]);
         } else {
             $cuti->update([
-                'status_cuti' => 'Perubahan',
-                'ket_status_cuti' => $catatan
+                'status_cuti'     => 'Perubahan',
+                'ket_status_cuti' => $catatan,
             ]);
         }
 

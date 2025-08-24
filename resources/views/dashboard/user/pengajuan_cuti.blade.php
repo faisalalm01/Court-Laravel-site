@@ -21,7 +21,8 @@
             @if ($masihAktif)
                 <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4" role="alert">
                     <p class="font-bold">Pengajuan Cuti Ditangguhkan</p>
-                    <p>Anda masih memiliki pengajuan cuti yang sedang diproses. Tidak dapat mengajukan cuti baru sampai cuti sebelumnya selesai.</p>
+                    <p>Anda masih memiliki pengajuan cuti yang sedang diproses. Tidak dapat mengajukan cuti baru sampai cuti
+                        sebelumnya selesai.</p>
                 </div>
             @endif
             {{-- Alert jika melebihi sisa cuti --}}
@@ -39,136 +40,147 @@
                 <div class="">
                     <div class="x_panel">
                         @if (!$masihAktif)
-                        <div class="x_title">
-                            <h2 class="text-xl">Form Pengajuan Cuti</h2>
-                            <div class="clearfix"></div>
-                        </div>
-                        <divs class="x_content">
-                            <div class="bg-white shadow-md rounded-lg px-6 py-5">
-                                <form method="POST" action="{{ route('dashboard.user.tambah.pengajuan-cuti') }}" id="cutiForm">
-                                    @csrf
-                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                        {{-- Jenis cuti --}}
-                                        <div class="form-group">
-                                            <label>Jenis cuti yang diambil</label>
-                                            <select class="form-control" name="jenis_cuti" id="jenis_cuti" required>
-                                                <option disabled selected>-- Pilih jenis cuti --</option>
-                                                <option value="Cuti Tahunan">Cuti Tahunan</option>
-                                                <option value="Cuti Besar">Cuti Besar</option>
-                                                <option value="Cuti Sakit">Cuti Sakit</option>
-                                                @if (auth()->user()->pegawai->jenis_kelamin === 'P')
-                                                    <option value="Cuti Melahirkan">Cuti Melahirkan</option>
-                                                @else
-                                                    <option value="Cuti Melahirkan" disabled class="bg-gray-300">Cuti Melahirkan</option>
-                                                @endif
-                                                <option value="Cuti Karena Alasan Penting">Cuti Karena Alasan Penting</option>
-                                                <option value="Cuti diluar Tanggungan Negara">Cuti diluar Tanggungan Negara</option>
-                                            </select>
-                                        </div>
-
-                                        {{-- Alasan cuti --}}
-                                        <div class="form-group">
-                                            <label for="">Alasan Cuti</label>
-                                            <input type="text" required class="form-control" placeholder="Masukkan alasan cuti"
-                                                name="alasan_cuti">
-                                        </div>
-
-                                        {{-- Lama cuti --}}
-                                        <div class="form-group">
-                                            <label for="">Lamanya cuti</label>
-                                            <input type="number" required class="form-control" placeholder="Masukan berapa lama"
-                                                name="lama_cuti" id="lama_cuti" min="1">
-                                            <select name="ket_lamacuti" class="form-control select2 mt-2" id="ket_lamacuti" required>
-                                                <option disabled selected>-- Pilih Hari, Minggu, Bulan, Tahun --</option>
-                                                <option value="Hari">Hari</option>
-                                                <option value="Minggu">Minggu</option>
-                                                <option value="Bulan">Bulan</option>
-                                                <option value="Tahun">Tahun</option>
-                                            </select>
-                                            <small id="max_cuti_info" class="text-muted block mt-1"></small>
-                                        </div>
-
-                                        {{-- Dari tanggal --}}
-                                        <div class="form-group">
-                                            <label for="">Dari tanggal</label>
-                                            <input type="date" required class="form-control" name="dari_tanggal" id="dari_tanggal"
-                                                min="{{ date('Y-m-d') }}">
-                                        </div>
-
-                                        {{-- Sampai dengan --}}
-                                        <div class="form-group">
-                                            <label for="">Sampai dengan</label>
-                                            <input type="date" required class="form-control" name="sampai_dengan" id="sampai_dengan" disabled>
-                                            <small id="date_error" class="text-danger"></small>
-                                        </div>
-
-                                        {{-- Alamat selama cuti --}}
-                                        <div class="form-group md:col-span-2">
-                                            <label for="">Alamat selama cuti</label>
-                                            <textarea class="form-control" placeholder="Masukkan alamat lengkap selama cuti" name="alamat" required></textarea>
-                                        </div>
-
-                                        {{-- Atasan --}}
-                                        <div class="form-group md:col-span-2">
-                                            <label for="">Atasan</label>
-                                            <select class="form-control" name="atasan">
-                                                @php
-                                                    $jabatan = auth()->user()->pegawai->jabatan->nama_jabatan;
-                                                @endphp
-                                                @if (in_array($jabatan, ['KETUA']))
-                                                    <option value="ketualangsung">-</option>
-                                                @elseif (in_array($jabatan, ['WAKIL KETUA', 'HAKIM UTAMA MUDA', 'HAKIM MADYA UTAMA', 'PANITERA', 'SEKRETARIS']))
-                                                    <option value="ketua">KETUA</option>
-                                                @elseif (in_array($jabatan, ['PANMUD HUKUM', 'PANMUD GUGATAN', 'PANMUD PERMOHONAN']))
-                                                    <option value="panitera">PANITERA</option>
-                                                @elseif (in_array($jabatan, ['JURU SITA']))
-                                                    <option value="panitera">PANITERA</option>
-                                                @elseif (in_array($jabatan, ['PANITERA PENGGANTI', 'JURU SITA PENGGANTI']))
-                                                    <option value="panitera">PANITERA</option>
-                                                @elseif (in_array($jabatan, ['KASUBAG KEPEGAWAIAN DAN ORTALA', 'KASUBAG PERNCANAAN, IT DAN PELAPORAN', 'KASUBAG UMUM DAN KEUANGAN']))
-                                                    <option value="sekretaris">SEKRETARIS</option>
-                                                @elseif ($jabatan === 'STAFF PELAKSANA PANMUD HUKUM')
-                                                    <option value="panmudhukum">PANMUD HUKUM</option>
-                                                @elseif ($jabatan === 'STAFF PELAKSANA PANMUD GUGATAN')
-                                                    <option value="panmudgugatan">PANMUD GUGATAN</option>
-                                                @elseif ($jabatan === 'STAFF PELAKSANA PANMUD PERMOHONAN')
-                                                    <option value="panmudpermohonan">PANMUD PERMOHONAN</option>
-                                                @elseif ($jabatan === 'STAFF PELAKSANA KEPEGAWAIAN DAN ORTALA')
-                                                    <option value="kasubagortala">KASUBAG KEPEGAWAIAN DAN ORTALA</option>
-                                                @elseif ($jabatan === 'STAFF PELAKSANA PERNCANAAN, IT DAN PELAPORAN')
-                                                    <option value="kasubagit">KASUBAG PERNCANAAN, IT DAN PELAPORAN</option>
-                                                @elseif ($jabatan === 'STAFF PELAKSANA UMUM DAN KEUANGAN')
-                                                    <option value="kasubagkeuangan">KASUBAG UMUM DAN KEUANGAN</option>
-                                                @elseif ($jabatan === 'STAFF PELAKSANA PRAKOM')
-                                                    <option value="sekretaris">SEKRETARIS</option>
-                                                @endif
-                                            </select>
-                                        </div>
-
-                                        @php
-                                            $langsungKetua = in_array($jabatan, [
-                                                'KETUA', 'WAKIL KETUA', 'HAKIM UTAMA MUDA', 'HAKIM MADYA UTAMA', 'PANITERA', 'SEKRETARIS'
-                                            ]);
-                                        @endphp
-                                        @if (!$langsungKetua)
-                                            <input type="hidden" name="app_ketua" value="0">
-                                        @endif
-                                    </div>
-
-                                    <hr class="my-6">
-
-                                    {{-- Tombol Ajukan --}}
-                                    <div class="text-right">
-                                        <button type="submit" id="submitBtn"
-                                            class="bg-green-600 rounded-lg text-white px-6 py-3 hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
-                                            {{ $masihAktif ? 'disabled' : '' }}>
-                                            Ajukan Cuti
-                                        </button>
-                                    </div>
-                                </form>
+                            <div class="x_title">
+                                <h2 class="text-xl">Form Pengajuan Cuti</h2>
+                                <div class="clearfix"></div>
                             </div>
-                        </divs>
-                       @endif 
+                            <divs class="x_content">
+                                <div class="bg-white shadow-md rounded-lg px-6 py-5">
+                                    <form method="POST" action="{{ route('dashboard.user.tambah.pengajuan-cuti') }}"
+                                        id="cutiForm">
+                                        @csrf
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                            {{-- Jenis cuti --}}
+                                            <div class="form-group">
+                                                <label>Jenis cuti yang diambil</label>
+                                                <select class="form-control" name="jenis_cuti" id="jenis_cuti" required>
+                                                    <option disabled selected>-- Pilih jenis cuti --</option>
+                                                    <option value="Cuti Tahunan">Cuti Tahunan</option>
+                                                    <option value="Cuti Besar">Cuti Besar</option>
+                                                    <option value="Cuti Sakit">Cuti Sakit</option>
+                                                    @if (auth()->user()->pegawai->jenis_kelamin === 'P')
+                                                        <option value="Cuti Melahirkan">Cuti Melahirkan</option>
+                                                    @else
+                                                        <option value="Cuti Melahirkan" disabled class="bg-gray-300">Cuti
+                                                            Melahirkan</option>
+                                                    @endif
+                                                    <option value="Cuti Karena Alasan Penting">Cuti Karena Alasan Penting
+                                                    </option>
+                                                    <option value="Cuti diluar Tanggungan Negara">Cuti diluar Tanggungan
+                                                        Negara</option>
+                                                </select>
+                                            </div>
+
+                                            {{-- Alasan cuti --}}
+                                            <div class="form-group">
+                                                <label for="">Alasan Cuti</label>
+                                                <input type="text" required class="form-control"
+                                                    placeholder="Masukkan alasan cuti" name="alasan_cuti">
+                                            </div>
+
+                                            {{-- Lama cuti --}}
+                                            <div class="form-group">
+                                                <label for="">Lamanya cuti</label>
+                                                <input type="number" required class="form-control"
+                                                    placeholder="Masukan berapa lama" name="lama_cuti" id="lama_cuti"
+                                                    min="1">
+                                                <select name="ket_lamacuti" class="form-control select2 mt-2"
+                                                    id="ket_lamacuti" required>
+                                                    <option disabled selected>-- Pilih Hari, Minggu, Bulan, Tahun --
+                                                    </option>
+                                                    <option value="Hari">Hari</option>
+                                                    <option value="Minggu">Minggu</option>
+                                                    <option value="Bulan">Bulan</option>
+                                                    <option value="Tahun">Tahun</option>
+                                                </select>
+                                                <small id="max_cuti_info" class="text-muted block mt-1"></small>
+                                            </div>
+
+                                            {{-- Dari tanggal --}}
+                                            <div class="form-group">
+                                                <label for="">Dari tanggal</label>
+                                                <input type="date" required class="form-control" name="dari_tanggal"
+                                                    id="dari_tanggal" min="{{ date('Y-m-d') }}">
+                                            </div>
+
+                                            {{-- Sampai dengan --}}
+                                            <div class="form-group">
+                                                <label for="">Sampai dengan</label>
+                                                <input type="date" required class="form-control" name="sampai_dengan"
+                                                    id="sampai_dengan" disabled>
+                                                <small id="date_error" class="text-danger"></small>
+                                            </div>
+
+                                            {{-- Alamat selama cuti --}}
+                                            <div class="form-group md:col-span-2">
+                                                <label for="">Alamat selama cuti</label>
+                                                <textarea class="form-control" placeholder="Masukkan alamat lengkap selama cuti" name="alamat" required></textarea>
+                                            </div>
+
+                                            {{-- Atasan --}}
+                                            <div class="form-group md:col-span-2">
+                                                <label for="">Atasan</label>
+                                                <select class="form-control" name="atasan" readonly>
+                                                    @php
+                                                        $jabatan = auth()->user()->pegawai->jabatan->nama_jabatan;
+                                                    @endphp
+                                                    @if (in_array($jabatan, ['KETUA']))
+                                                        <option value="ketualangsung" readonly>-</option>
+                                                    @elseif (in_array($jabatan, ['WAKIL KETUA', 'HAKIM UTAMA MUDA', 'HAKIM MADYA UTAMA', 'PANITERA', 'SEKRETARIS']))
+                                                        <option value="ketua" readonly>KETUA</option>
+                                                    @elseif (in_array($jabatan, [
+                                                            'PANMUD HUKUM',
+                                                            'PANMUD GUGATAN',
+                                                            'PANMUD PERMOHONAN',
+                                                            'JURU SITA',
+                                                            'PANITERA PENGGANTI',
+                                                            'JURU SITA PENGGANTI',
+                                                        ]))
+                                                        <option value="panitera" readonly>PANITERA</option>
+                                                    @elseif (in_array($jabatan, [
+                                                            'KASUBAG KEPEGAWAIAN DAN ORTALA',
+                                                            'KASUBAG PERNCANAAN, IT DAN PELAPORAN',
+                                                            'KASUBAG UMUM DAN KEUANGAN',
+                                                        ]))
+                                                        <option value="sekretaris" readonly>SEKRETARIS</option>
+                                                    @elseif ($jabatan === 'STAFF PELAKSANA PANMUD HUKUM')
+                                                        <option value="panmudhukum" readonly>PANMUD HUKUM</option>
+                                                    @elseif ($jabatan === 'STAFF PELAKSANA PANMUD GUGATAN')
+                                                        <option value="panmudgugatan" readonly>PANMUD GUGATAN</option>
+                                                    @elseif ($jabatan === 'STAFF PELAKSANA PANMUD PERMOHONAN')
+                                                        <option value="panmudpermohonan" readonly>PANMUD PERMOHONAN</option>
+                                                    @elseif ($jabatan === 'STAFF PELAKSANA KEPEGAWAIAN DAN ORTALA')
+                                                        <option value="kasubagortala" readonly>KASUBAG KEPEGAWAIAN DAN
+                                                            ORTALA
+                                                        </option>
+                                                    @elseif ($jabatan === 'STAFF PELAKSANA PERNCANAAN, IT DAN PELAPORAN')
+                                                        <option value="kasubagit" readonly>KASUBAG PERNCANAAN, IT DAN
+                                                            PELAPORAN
+                                                        </option>
+                                                    @elseif ($jabatan === 'STAFF PELAKSANA UMUM DAN KEUANGAN')
+                                                        <option value="kasubagkeuangan" readonly>KASUBAG UMUM DAN KEUANGAN
+                                                        </option>
+                                                    @elseif ($jabatan === 'STAFF PELAKSANA PRAKOM')
+                                                        <option value="sekretaris" readonly>KASUBAG PERNCANAAN, IT DAN
+                                                            PELAPORAN</option>
+                                                    @endif
+                                                </select>
+                                            </div>
+
+                                            <hr class="my-6">
+
+                                            {{-- Tombol Ajukan --}}
+                                            <div class="text-right">
+                                                <button type="submit" id="submitBtn"
+                                                    class="bg-green-600 rounded-lg text-white px-6 py-3 hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                                                    {{ $masihAktif ? 'disabled' : '' }}>
+                                                    Ajukan Cuti
+                                                </button>
+                                            </div>
+                                    </form>
+                                </div>
+                            </divs>
+                        @endif
 
                     </div>
                 </div>
@@ -177,11 +189,11 @@
         </div>
     </div>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const lamaCutiInput = document.querySelector('input[name="lama_cuti"]');
             const submitBtn = document.querySelector('button[type="submit"]');
 
-            lamaCutiInput.addEventListener("input", function () {
+            lamaCutiInput.addEventListener("input", function() {
                 const jatah = {{ $sisaCuti }};
                 const inputVal = parseInt(this.value);
                 if (inputVal > jatah) {
@@ -194,7 +206,7 @@
         });
     </script>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const lamaCutiInput = document.querySelector('input[name="lama_cuti"]');
             const submitBtn = document.querySelector('button[type="submit"]');
             const sisaCuti = {{ $sisaCuti }};
@@ -229,12 +241,36 @@
 
             // Aturan lamanya cuti berdasarkan jenis cuti
             const cutiRules = {
-                'Cuti Tahunan': { max: 12, unit: 'Hari', text: 'Maksimal 12 Hari' },
-                'Cuti Besar': { max: 3, unit: 'Bulan', text: 'Maksimal 3 Bulan' },
-                'Cuti Sakit': { max: 14, unit: 'Hari', text: 'Maksimal 14 Hari' },
-                'Cuti Melahirkan': { max: 3, unit: 'Bulan', text: 'Maksimal 3 Bulan' },
-                'Cuti Karena Alasan Penting': { max: 2, unit: 'Hari', text: 'Maksimal 2 Hari' },
-                'Cuti diluar Tanggungan Negara': { max: 5, unit: 'Tahun', text: 'Maksimal 5 Tahun' }
+                'Cuti Tahunan': {
+                    max: 12,
+                    unit: 'Hari',
+                    text: 'Maksimal 12 Hari'
+                },
+                'Cuti Besar': {
+                    max: 3,
+                    unit: 'Bulan',
+                    text: 'Maksimal 3 Bulan'
+                },
+                'Cuti Sakit': {
+                    max: 14,
+                    unit: 'Hari',
+                    text: 'Maksimal 14 Hari'
+                },
+                'Cuti Melahirkan': {
+                    max: 3,
+                    unit: 'Bulan',
+                    text: 'Maksimal 3 Bulan'
+                },
+                'Cuti Karena Alasan Penting': {
+                    max: 2,
+                    unit: 'Hari',
+                    text: 'Maksimal 2 Hari'
+                },
+                'Cuti diluar Tanggungan Negara': {
+                    max: 5,
+                    unit: 'Tahun',
+                    text: 'Maksimal 5 Tahun'
+                }
             };
 
             // Update info maksimal cuti ketika jenis cuti berubah
@@ -243,10 +279,10 @@
                 if (cutiRules[selectedCuti]) {
                     maxCutiInfo.textContent = cutiRules[selectedCuti].text;
                     ketLamaCuti.value = cutiRules[selectedCuti].unit;
-                    
+
                     // Set max value based on cuti rules
                     lamaCuti.max = cutiRules[selectedCuti].max;
-                    
+
                     // Auto-select the unit in dropdown
                     const options = ketLamaCuti.options;
                     for (let i = 0; i < options.length; i++) {
@@ -280,7 +316,7 @@
 
                 let endDate = new Date(startDate);
 
-                switch(unit) {
+                switch (unit) {
                     case 'Hari':
                         endDate.setDate(startDate.getDate() + duration);
                         break;
@@ -298,7 +334,7 @@
                 // Format date to YYYY-MM-DD
                 const formattedDate = endDate.toISOString().split('T')[0];
                 sampaiDengan.value = formattedDate;
-                
+
                 validateDateRange();
             }
 
@@ -312,7 +348,7 @@
                 const end = new Date(sampaiDengan.value);
                 const diffTime = Math.abs(end - start);
                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                
+
                 const selectedCuti = jenisCuti.value;
                 const maxDays = getMaxDays(selectedCuti, cutiRules);
 
@@ -327,14 +363,19 @@
 
             function getMaxDays(cutiType, rules) {
                 if (!rules[cutiType]) return 0;
-                
+
                 const rule = rules[cutiType];
-                switch(rule.unit) {
-                    case 'Hari': return rule.max;
-                    case 'Minggu': return rule.max * 7;
-                    case 'Bulan': return rule.max * 30; // Approximate
-                    case 'Tahun': return rule.max * 365; // Approximate
-                    default: return 0;
+                switch (rule.unit) {
+                    case 'Hari':
+                        return rule.max;
+                    case 'Minggu':
+                        return rule.max * 7;
+                    case 'Bulan':
+                        return rule.max * 30; // Approximate
+                    case 'Tahun':
+                        return rule.max * 365; // Approximate
+                    default:
+                        return 0;
                 }
             }
 
@@ -349,7 +390,7 @@
                 // Check if dates are in the past
                 const today = new Date();
                 today.setHours(0, 0, 0, 0);
-                
+
                 const startDate = new Date(dariTanggal.value);
                 if (startDate < today) {
                     dateError.textContent = 'Tanggal cuti tidak boleh di tanggal yang sudah dilewati';

@@ -69,5 +69,8 @@ class Pegawai extends Model
         $tahun = date('Y');
         return $this->cutiHistories()->where('tahun', $tahun)->first();
     }
-
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'nip', 'nip');
+    }
 }
