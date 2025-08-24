@@ -19,6 +19,9 @@ class AuthController extends Controller
         $validatedData = $request->validated();
         $user  = User::where('nip',  $validatedData['nip'])->first();
         if ($user && $user->password === md5($validatedData['password'])) {
+            if ($user->status !== 'active') {
+                return back()->with('loginError', 'Akun Anda tidak aktif, silakan hubungi admin.');
+            }
             Auth::login($user);
             $request->session()->regenerate();
             return redirect()->intended('/dashboard');
