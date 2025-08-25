@@ -30,7 +30,7 @@
                         <tr class="bg-gray-100 text-gray-700 uppercase text-sm leading-normal">
                             <th class="p-3 border-b">No</th>
                             <th class="p-3 border-b">Notifikasi</th>
-                            <th class="p-3 border-b">Status</th>
+                            {{-- <th class="p-3 border-b">Status</th> --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -38,10 +38,9 @@
                             <tr class="hover:bg-gray-50">
                                 <td class="p-3 border-b">{{ $loop->iteration }}</td>
                                 <td class="p-3 border-b">{{ $notifikasi->pesan }}</td>
-                                <td class="p-3 border-b">
+                                {{-- <td class="p-3 border-b">
                                     {{ $notifikasi->dibaca ? 'Sudah Dibaca' : 'Belum dibaca' }}
-                                </td>
-
+                                </td> --}}
                             </tr>
                         @endforeach
                     </tbody>

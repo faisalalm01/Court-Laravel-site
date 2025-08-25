@@ -218,4 +218,57 @@
             });
         }
     });
+    document.addEventListener("DOMContentLoaded", function() {
+        function fetchNotifications() {
+            fetch("{{ route('dashboard.notifications.check') }}") // GET
+                .then(res => res.json())
+                .then(data => {
+                    const notifList = document.querySelector("#notif-dropdown ul");
+                    const badge = document.querySelector("#notif-button span");
+                    // update badge count
+                    if (data.notifCount > 0) {
+                        if (badge) {
+                            badge.textContent = data.notifCount;
+                        } else {
+                            const newBadge = document.createElement("span");
+                            newBadge.className =
+                                "absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full";
+                            newBadge.textContent = data.notifCount;
+                            document.querySelector("#notif-button").appendChild(newBadge);
+                        }
+                    } else if (badge) {
+                        badge.remove();
+                    }
+
+                    notifList.innerHTML = "";
+                    if (data.notifications.length > 0) {
+                        data.notifications.forEach(notif => {
+                            const li = document.createElement("li");
+                            li.className =
+                                "px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 flex justify-between items-start";
+                            li.innerHTML = `
+                            <div>
+                                <p class="text-sm">${notif.pesan}</p>
+                                <span class="text-xs text-gray-500 dark:text-gray-400">${notif.time}</span>
+                            </div>
+                        `;
+                            notifList.appendChild(li);
+                        });
+                    } else {
+                        notifList.innerHTML = `
+                        <li class="px-4 py-3 text-gray-500 dark:text-gray-400 text-center">
+                            Tidak ada notifikasi
+                        </li>
+                    `;
+                    }
+                })
+                .catch(err => console.error("Gagal fetch notifikasi:", err));
+        }
+
+        // jalankan pertama kali
+        fetchNotifications();
+
+        // polling tiap 15 detik
+        setInterval(fetchNotifications, 15000);
+    });
 </script>

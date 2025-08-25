@@ -108,4 +108,4 @@ Route::post('/dashboard/profile/reset-password', [ProfileController::class, 'res
 Route::get('/dashboard/user/notifikasi', [NotificationController::class, 'index'])->name('dashboard.notifications.index')->middleware('auth');
 Route::post('/dashboard/user/notifikasi/{id_notification}/read', [NotificationController::class, 'markNotifRead'])->name('dashboard.notifications.read')->middleware('auth');
 Route::post('/dashboard/user/notifikasi-read-all', [NotificationController::class, 'markAllRead'])->name('dashboard.notifications.readAll')->middleware('auth');
-    
+Route::get('/dashboard/user/notifikasi-check', [NotificationController::class, 'check'])->name('dashboard.notifications.check')->middleware('auth');

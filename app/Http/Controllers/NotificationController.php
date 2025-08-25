@@ -51,4 +51,29 @@ class NotificationController extends Controller
             'notifCount' => $notifCount
         ]);
     }
+    public function check()
+    {
+        $user = auth()->user();
+        $notifications = Notification::where('id_user', $user->id_user)
+            ->latest()
+            ->take(10)
+            ->get()
+            ->map(function ($notif) {
+                return [
+                    'id' => $notif->id_notification,
+                    'pesan' => $notif->pesan,
+                    'dibaca' => $notif->dibaca,
+                    'time' => $notif->created_at->diffForHumans()
+                ];
+            });
+
+        $notifCount = Notification::where('id_user', $user->id_user)
+            ->where('dibaca', false)
+            ->count();
+
+        return response()->json([
+            'notifications' => $notifications,
+            'notifCount' => $notifCount
+        ]);
+    }
 }
